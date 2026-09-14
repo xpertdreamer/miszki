@@ -55,4 +55,12 @@
         }                                           \
     } while (0)
 
+#define FREE_FAIL(ptr)                          \
+    do {                                        \
+        if ((ptr) == NULL) {                    \
+            ERROR("Failed to free: %s", #ptr);  \
+            return;                             \
+        }                                       \
+    } while(0)
+
 #endif
