@@ -6,8 +6,7 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <chrono>
-#include <iostream>
+#include <stdio.h>
 
 #include "conf.h"
 
@@ -48,23 +47,12 @@
         fprintf(stderr, fmt, ##__VA_ARGS__);                            \
     } while (0)
 
-
-/**
- * @def START
- * @brief Starts a timer with the given name.
- * @param name Identifier for the timer.
- */
-#define START(name)                                                            \
-  auto start_##name = std::chrono::high_resolution_clock::now();
-
-/**
- * @def END
- * @brief Stops the timer and prints the elapsed time in microseconds.
- * @param name Identifier matching the corresponding @ref START call.
- */
-#define END(name) \
-    auto end_##name = std::chrono::high_resolution_clock::now();        \
-    auto duration_##name = std::chrono::duration_cast<std::chrono::microseconds>(end_##name - start_##name).count(); \
-    std::cout << "Timer [" << #name << "] took: " << duration_##name << " microseconds\n";
+#define ALLOC_FAIL(ptr)                             \
+    do {                                            \
+        if ((ptr) == NULL) {                        \
+            ERROR("Failed to allocate: %s", #ptr);  \
+            return NULL;                            \
+        }                                           \
+    } while (0)
 
 #endif
