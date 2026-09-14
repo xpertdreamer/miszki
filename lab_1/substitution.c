@@ -66,3 +66,47 @@ build_alphabet(buffer* buf, const wchar_t* given)
         }
     }
 }
+
+void
+encrypt(buffer* buf, int shift)
+{
+    DEBUG("Call encrypt");
+    PTR_RECIEVE_FAIL_VOID(buf, encrypt);
+    if (buf->N == 0) {
+        ERROR("Alphabet is empty");
+        return;
+    }
+    for (size_t i = 0; buf->raw[i] != L'\0'; ++i) {
+        wchar_t* ok = wcschr(buf->alphabet, buf->raw[i]);
+        if (ok != NULL) {
+            size_t x = ok - buf->alphabet;
+            int y = ((int)x + shift) % buf->N;
+            buf->cypher[i] = buf->alphabet[y];
+            continue;
+        }
+        buf->cypher[i] = buf->raw[i];
+    }
+    buf->cypher[buf->size] = L'\0';
+}
+
+void
+decrypt(buffer* buf, int shift)
+{
+    DEBUG("Call decrypt");
+    PTR_RECIEVE_FAIL_VOID(buf, decrypt);
+    if (buf->cypher == NULL || buf->N == 0) {
+        ERROR("Some error occured while decrypt");
+        return;
+    }
+    for (size_t i = 0; buf->raw[i] != L'\0'; ++i) {
+        wchar_t* ok = wcschr(buf->alphabet, buf->raw[i]);
+        if (ok != NULL) {
+            int y = ok - buf->alphabet;
+            int x = (y - shift + buf->N) % buf->N ;
+            buf->cypher[i] = buf->alphabet[x];
+            continue;
+        }
+        buf->cypher[i] = buf->raw[i];
+    }
+    buf->cypher[buf->size] = L'\0';
+}
