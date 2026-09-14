@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdio.h>
 
 int main(int argc, char** argv)
 {
@@ -12,6 +13,7 @@ int main(int argc, char** argv)
             case 'a': break;
             case 'm': break;
             case 's': break;
+            default: fprintf(stderr, "Usage: %s -a <alphabet> -m <encrypt/decrypt> -s <shift>", argv[0]); return 1;
         }
     }
     return 0;
