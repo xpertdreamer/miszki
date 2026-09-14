@@ -30,5 +30,8 @@ buffer_alloc(const char *str)
 void
 buffer_free(buffer* ptr)
 {
-
+    FREE_FAIL(ptr);
+    free(ptr->raw);
+    free(ptr->cypher);
+    free(ptr);
 }
