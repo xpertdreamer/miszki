@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 buffer*
 buffer_alloc(const wchar_t *str)
@@ -17,10 +16,16 @@ buffer_alloc(const wchar_t *str)
     result = (buffer*)malloc(sizeof(buffer));
     ALLOC_FAIL(result);
     size_t len = wcslen(str);
-    result->cypher = NULL;
+    result->cypher = (wchar_t*)malloc((len + 1) * sizeof(wchar_t));
+    if (result->cypher == NULL) {
+        ERROR("Failed to allocate: cypher buffer");
+        free(result);
+        return NULL;
+    }
     result->raw = (wchar_t*)malloc((len+1)*sizeof(wchar_t));
     if (result->raw == NULL) {
         ERROR("Failed to allocate result->raw");
+        free(result->cypher);
         free(result);
         return NULL;
     }
@@ -35,8 +40,8 @@ buffer_free(buffer* ptr)
 {
     DEBUG("Call buffer_free");
     FREE_FAIL(ptr);
-    free(ptr->raw);
-    free(ptr->cypher);
+    if (ptr->raw != NULL) free(ptr->raw);
+    if (ptr->cypher != NULL) free(ptr->cypher);
     free(ptr);
 }
 
