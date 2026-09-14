@@ -29,7 +29,10 @@ List of targets:
 
 ## Laboratory Work 1
 ### References:
-1. <https://en.wikipedia.org/wiki/Substitution_cipher>
-2. [lecture](https://github.com/xpertdreamer/miszki/blob/ca7d8455ca3a5188ff0776b08f3913d2265f01e8/docs/manuals/%D0%9B%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9B%D0%B5%D0%BA%D1%86%D0%B8%D1%8F%20%E2%84%961.pptx)
-3. <https://www.opennet.ru/man.shtml?topic=getopt&category=3&russian=0>
-4. <https://stackoverflow.com/questions/8032080/how-to-convert-char-to-wchar-t>
+  - <https://en.wikipedia.org/wiki/Substitution_cipher>
+  - [lecture](https://github.com/xpertdreamer/miszki/blob/ca7d8455ca3a5188ff0776b08f3913d2265f01e8/docs/manuals/%D0%9B%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9B%D0%B5%D0%BA%D1%86%D0%B8%D1%8F%20%E2%84%961.pptx)
+  - <https://www.opennet.ru/man.shtml?topic=getopt&category=3&russian=0>
+  - <https://stackoverflow.com/questions/8032080/how-to-convert-char-to-wchar-t>
+  - <https://stackoverflow.com/questions/16931244/checking-if-output-of-a-command-contains-a-certain-string-in-a-shell-script>
+  - <https://stackoverflow.com/questions/40082346/how-to-check-if-a-file-exists-in-a-shell-script>
+  - <https://stackoverflow.com/questions/3349105/how-can-i-set-the-current-working-directory-to-the-directory-of-the-script-in-ba>
