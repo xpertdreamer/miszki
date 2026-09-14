@@ -63,4 +63,12 @@
         }                                       \
     } while(0)
 
+#define PTR_RECIEVE_FAIL_VOID(ptr, func)                    \
+    do {                                                    \
+        if ((ptr) == NULL) {                                \
+            ERROR("%s Failed: %s is NULL", #func, #ptr);    \
+            return;                                         \
+        }                                                   \
+    } while(0)
+
 #endif
