@@ -8,7 +8,9 @@
 #define DIGIT       L"0123456789"
 #define LETTER      L"абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 
-#define ALPHABET_SIZE 150
+// 4 * (31+10+33) = 296 : Linux
+// 2 * (31+10+33) = 148 : Windows
+#define ALPHABET_SIZE 296
 
 typedef struct {
     size_t size;
