@@ -24,14 +24,33 @@ buffer_alloc(const char *str)
         return NULL;
     }
     strcpy(result->raw, str);
+    result->size = len;
+    result->N = 0;
     return result;
 }
 
 void
 buffer_free(buffer* ptr)
 {
+    DEBUG("Call buffer_free");
     FREE_FAIL(ptr);
     free(ptr->raw);
     free(ptr->cypher);
     free(ptr);
+}
+
+void
+build_alphabet(buffer* buf, const char* given)
+{
+    DEBUG("Call build_alphabet");
+    PTR_RECIEVE_FAIL_VOID(buf, build_alphabet);
+    PTR_RECIEVE_FAIL_VOID(given, build_alphabet);
+    buf->N = 0;
+    memset(buf->alphabet, 0, ALPHABET_SIZE);
+    for (int i = 0; given[i] != '\0'; ++i)
+        if (have(buf->alphabet, buf->N, LETTER[i]) == true) buf->alphabet[buf->N++] = LETTER[i];
+    for (int i = 0; given[i] != '\0'; ++i)
+        if (have(buf->alphabet, buf->N, DIGIT[i]) == true) buf->alphabet[buf->N++] = DIGIT[i];
+    for (int i = 0; given[i] != '\0'; ++i)
+        if (have(buf->alphabet, buf->N, PUNCTUATION[i]) == true) buf->alphabet[buf->N++] = PUNCTUATION[i];
 }

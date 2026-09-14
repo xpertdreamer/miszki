@@ -7,10 +7,14 @@
 #define DIGIT       "0123456789"
 #define LETTER      "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 
+#define ALPHABET_SIZE 105 // russian letters = 2 bytes
+
 typedef struct {
-    char* raw;
     size_t size;
+    int N;
+    char* raw;
     char* cypher;
+    char alphabet[ALPHABET_SIZE];
 } buffer;
 
 buffer*
