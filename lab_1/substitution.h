@@ -27,7 +27,11 @@ buffer_free(buffer* ptr);
 void
 build_alphabet(buffer* buf, const wchar_t* given);
 
-// TODO: encrypt
-// TODO: decrypt
+void
+encrypt(buffer* buf, int shift);
+
+void
+decrypt(buffer* buf, int shift);
+
 
 #endif
