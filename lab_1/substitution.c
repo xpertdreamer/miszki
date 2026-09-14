@@ -53,9 +53,9 @@ build_alphabet(buffer* buf, const wchar_t* given)
     PTR_RECIEVE_FAIL_VOID(given, build_alphabet);
     buf->N = 0;
     memset(buf->alphabet, 0, sizeof(buf->alphabet));
-    for (int i = 0; given[i] != '\0'; ++i) {
+    for (int i = 0; given[i] != L'\0'; ++i) {
         wchar_t c = given[i];
-        if (wcsrchr(LETTER, c) != NULL ||
+        if (wcschr(LETTER, c) != NULL ||
             wcschr(DIGIT, c) != NULL ||
             wcschr(PUNCTUATION, c) != NULL) {
             if (wcschr(buf->alphabet, c) == NULL) {
