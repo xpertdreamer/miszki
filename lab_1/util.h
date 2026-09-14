@@ -30,8 +30,9 @@
 #define DEBUG(fmt, ...)                                                 \
     do {                                                                \
         if (DEBUG_MODE) {                                               \
-            fprintf(stdout, "%sDEBUG:%s\n", DEBUG_COLOR, RESET_COLOR);   \
+            fprintf(stdout, "%sDEBUG:%s", DEBUG_COLOR, RESET_COLOR);   \
             fprintf(stdout, fmt, ##__VA_ARGS__);                        \
+            fprintf(stdout, "\n");                                      \
         }                                                               \
     } while (0)
 
@@ -43,8 +44,9 @@
  */
 #define ERROR(fmt, ...)                                                 \
     do {                                                                \
-        fprintf(stderr, "%sERROR:%s\n", ERROR_COLOR, RESET_COLOR);       \
+        fprintf(stderr, "%sERROR:%s", ERROR_COLOR, RESET_COLOR);       \
         fprintf(stderr, fmt, ##__VA_ARGS__);                            \
+        fprintf(stdout, "\n");                                      \
     } while (0)
 
 #define ALLOC_FAIL(ptr)                             \
