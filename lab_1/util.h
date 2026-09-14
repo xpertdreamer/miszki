@@ -73,4 +73,8 @@
         }                                                   \
     } while(0)
 
+#define PRINT_WCHAR(str) do { fflush(stdout); wprintf(L"%ls\n", (str)); fflush(stdout); } while(0)
+
+#define FREE_WCHAR(ptr) do { if ((ptr) != NULL) free((ptr)); }while(0)
+
 #endif
