@@ -157,7 +157,7 @@ free_workspace(replace_table* table, replacement_buffer* buf)
     FREE_FAIL(buf);
     if (buf->processed != NULL) free(buf->processed);
     if (buf->raw != NULL) free(buf->raw);
-    free(table);
+    free(buf);
 }
 
 replacement_buffer*
