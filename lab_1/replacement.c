@@ -189,3 +189,24 @@ replace_buf_alloc(const wchar_t* str)
     result->size = len;
     return result;
 }
+
+void
+save_replace_table(replace_table* ptr, const char* path)
+{
+    DEBUG("Call save_replace_table");
+    PTR_RECIEVE_FAIL_VOID(ptr, save_replace_table);
+    size_t len = sizeof(wchar_t)*(ptr->count*2+1);
+    wchar_t* wstring = (wchar_t*)malloc(len);
+    if (wstring == NULL) {
+        ERROR("Failed to allocate wstring");
+        return;
+    }
+    for (size_t i = 0; i < ptr->count; ++i) {
+        wstring[i*2] = ptr->entries[i].from;
+        wstring[i*2+1] = ptr->entries[i].to;
+    }
+    wstring[ptr->count*2] = L'\0';
+    write_file(path, wstring);
+    FREE_WCHAR(wstring);
+    return;
+}
