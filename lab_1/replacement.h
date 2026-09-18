@@ -19,6 +19,9 @@ typedef struct {
     wchar_t* processed;
 } replacement_buffer;
 
+replacement_buffer*
+replace_buf_alloc(const wchar_t* str);
+
 replace_table*
 build_table(const char* path);
 

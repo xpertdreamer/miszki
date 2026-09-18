@@ -158,3 +158,33 @@ free_workspace(replace_table* table, replacement_buffer* buf)
     if (buf->raw != NULL) free(buf->raw);
     free(table);
 }
+
+replacement_buffer*
+replace_buf_alloc(const wchar_t* str)
+{
+    DEBUG("Call replace_buffer_alloc");
+    if (str == NULL) {
+        ERROR("Failed to allocate buffer from string %p", str);
+        return NULL;
+    }
+    replacement_buffer* result;
+    result = (replacement_buffer*)malloc(sizeof(replacement_buffer));
+    ALLOC_FAIL(result);
+    size_t len = wcslen(str);
+    result->processed = (wchar_t*)malloc((len + 1) * sizeof(wchar_t));
+    if (result->processed == NULL) {
+        ERROR("Failed to allocate: cypher buffer");
+        free(result);
+        return NULL;
+    }
+    result->raw = (wchar_t*)malloc((len+1)*sizeof(wchar_t));
+    if (result->raw == NULL) {
+        ERROR("Failed to allocate result->raw");
+        free(result->processed);
+        free(result);
+        return NULL;
+    }
+    wcscpy(result->raw, str);
+    result->size = len;
+    return result;
+}
