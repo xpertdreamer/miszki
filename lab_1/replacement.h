@@ -22,12 +22,19 @@ typedef struct {
 replace_table*
 build_table(const char* path);
 
+// TODO:
 void
 save_replace_table(replace_table* ptr, const char* path);
 
 void
+encrypt(replace_table* table, replacement_buffer* buffer);
+
+// TODO:
+void
+decrypt(replace_table* table, replacement_buffer* buffer);
+
+// TODO:
+void
 free_workspace(replace_table* table, replacement_buffer* buf);
-/* replace_table* */
-/* build_replace_table(args); */
 
 #endif
