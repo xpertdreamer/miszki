@@ -101,6 +101,7 @@ build_table(const char* path)
 void
 encrypt(replace_table* table, replacement_buffer* buffer)
 {
+    DEBUG("Call encrypt");
     PTR_RECIEVE_FAIL_VOID(table, encrypt);
     PTR_RECIEVE_FAIL_VOID(buffer, encrypt);
     size_t len = wcslen(buffer->raw), i = 0;
@@ -115,6 +116,30 @@ encrypt(replace_table* table, replacement_buffer* buffer)
             }
         }
         if (found == true) buffer->processed[i] = table->entries[j].to;
+        else buffer->processed[i] = buffer->raw[i];
+        i++;
+    } while (i < len);
+    buffer->processed[i] = L'\0';
+}
+
+void
+decrypt(replace_table* table, replacement_buffer* buffer)
+{
+    DEBUG("Call decrypt");
+    PTR_RECIEVE_FAIL_VOID(table, decrypt);
+    PTR_RECIEVE_FAIL_VOID(buffer, decrypt);
+    size_t len = wcslen(buffer->raw), i = 0;
+    do {
+        wchar_t current = buffer->raw[i];
+        bool found = false;
+        size_t j = 0;
+        for (; j < table->count; ++j) {
+            if (table->entries[j].to == current) {
+                found = true;
+                break;
+            }
+        }
+        if (found == true) buffer->processed[i] = table->entries[j].from;
         else buffer->processed[i] = buffer->raw[i];
         i++;
     } while (i < len);
