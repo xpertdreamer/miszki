@@ -16,11 +16,11 @@ typedef struct {
 typedef struct {
     size_t size;
     wchar_t* raw;
-    wchar_t* proccessed;
+    wchar_t* processed;
 } replacement_buffer;
 
 replace_table*
-build_table(const wchar_t* alphabet);
+build_table(const char* path);
 
 void
 save_replace_table(replace_table* ptr, const char* path);
