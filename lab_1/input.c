@@ -1,6 +1,7 @@
 #include "input.h"
 #include "util.h"
 
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <wchar.h>
@@ -92,4 +93,51 @@ regex_to_wchar(const wchar_t* range)
     }
     *write = L'\0';
     return result;
+}
+
+wchar_t*
+read_file(const char* path)
+{
+    FILE *fptr;
+    char* buffer = NULL;
+    size_t i, len;
+    fptr = fopen(path, "rb");
+    if (fptr == NULL) {
+        ERROR("Failed to open file");
+        return NULL;
+    }
+    if (fseek(fptr, 0L, SEEK_END) != 0) {
+        ERROR("fseek error");
+        fclose(fptr);
+        return NULL;
+    }
+    len = ftell(fptr);
+    rewind(fptr);
+    buffer = (char*)malloc(len+1);
+    if (buffer == NULL) {
+        ERROR("Failed to allocate file buffer");
+        fclose(fptr);
+        return NULL;
+    }
+    fread(buffer, 1, len, fptr);
+    fclose(fptr);
+    buffer[len] = '\0';
+    wchar_t* res = char_to_wchar(buffer);
+    free(buffer);
+    return res;
+}
+
+bool
+write_file(const char* path, const wchar_t* wstring)
+{
+    DEBUG("Call write_file");
+    FILE* fptr = fopen(path, "w");
+    if (fptr == NULL) {
+        ERROR("Failed to open file to write");
+        return false;
+    }
+    size_t len = wcslen(wstring);
+    for (size_t i = 0; i + 1 < len; i+=2) fwprintf(fptr, L"[%lc:%lc]\n", wstring[i], wstring[i+1]);
+    fclose(fptr);
+    return true;
 }
