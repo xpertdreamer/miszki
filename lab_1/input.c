@@ -71,7 +71,7 @@ regex_to_wchar(const wchar_t* range)
         return NULL;
     }
     size_t result_len = regex_size(range, range_len);
-    result = (wchar_t*)malloc(result_len);
+    result = (wchar_t*)malloc(result_len * sizeof(wchar_t));
     ALLOC_FAIL(result);
     wchar_t* write = result;
     for (size_t i = 1; i < range_len - 1; ++i) {
