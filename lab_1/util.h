@@ -73,6 +73,14 @@
         }                                                   \
     } while(0)
 
+#define PTR_RECIEVE_FAIL_PTR(ptr, func)                     \
+    do {                                                    \
+        if ((ptr) == NULL) {                                \
+            ERROR("%s Failed: %s is NULL", #func, #ptr);    \
+            return NULL;                                    \
+        }                                                   \
+    } while(0)
+
 #define PRINT_WCHAR(str) do { fflush(stdout); wprintf(L"%ls\n", (str)); fflush(stdout); } while(0)
 
 #define FREE_WCHAR(ptr) do { if ((ptr) != NULL) free((ptr)); }while(0)
