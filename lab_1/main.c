@@ -9,7 +9,14 @@
 #include <stdbool.h>
 #include <wchar.h>
 
-#define HELP(str) do { fprintf(stderr, "Usage: %s [-a <alphabet_regex>  -s <shift>] [-u <path>||-d <path>] -m <e/d> -g <source>\n", (str)); return 1; } while(0)
+#define HELP(str) do { \
+        fprintf(stderr, "Usage: %s [-a <alphabet_regex>  -s <shift>] [-u <path>||-d <path>] -m <e/d> -g <source>\n", (str)); \
+        fprintf(stderr, "\t-a\tregular expression of alphabet you want\n\t-s\tshift will be used on substition\n"); \
+        fprintf(stderr, "\t-u\tpath to upload a replacement table\n\t-d\tpath to download a replacement table\n");    \
+        fprintf(stderr, "\t-m\tmode (encrypt||decrypt)\n\t-g\tsource string to process\n"); \
+        fprintf(stderr, "Example of table file:\n\t[а:9]\n\t[н:р]\n\t...\n"); \
+        fprintf(stderr, "[x:y] where\n\tx - raw character\n\ty - replacement\n"); \
+        return 1; } while(0)
 
 int main(int argc, char** argv)
 {
