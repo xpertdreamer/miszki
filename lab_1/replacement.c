@@ -104,7 +104,7 @@ encrypt(replace_table* table, replacement_buffer* buffer)
     DEBUG("Call encrypt");
     PTR_RECIEVE_FAIL_VOID(table, encrypt);
     PTR_RECIEVE_FAIL_VOID(buffer, encrypt);
-    size_t len = wcslen(buffer->raw), i = 0;
+    size_t len = buffer->size, i = 0;
     do {
         wchar_t current = buffer->raw[i];
         bool found = false;
@@ -128,7 +128,7 @@ decrypt(replace_table* table, replacement_buffer* buffer)
     DEBUG("Call decrypt");
     PTR_RECIEVE_FAIL_VOID(table, decrypt);
     PTR_RECIEVE_FAIL_VOID(buffer, decrypt);
-    size_t len = wcslen(buffer->raw), i = 0;
+    size_t len = buffer->size, i = 0;
     do {
         wchar_t current = buffer->raw[i];
         bool found = false;
