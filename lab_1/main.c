@@ -1,3 +1,4 @@
+#include "replacement.h"
 #include "substitution.h"
 #include "input.h"
 #include "util.h"
@@ -8,7 +9,7 @@
 #include <stdbool.h>
 #include <wchar.h>
 
-#define HELP(str) do { fprintf(stderr, "Usage: %s -a <alphabet> -m <e/d> -s <shift> -g <source>\n", (str)); return 1; } while(0)
+#define HELP(str) do { fprintf(stderr, "Usage: %s [-a <alphabet_regex>  -s <shift>] [-u <path>||-d <path>] -m <e/d> -g <source>\n", (str)); return 1; } while(0)
 
 int main(int argc, char** argv)
 {
