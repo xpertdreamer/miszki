@@ -91,7 +91,7 @@ build_table(const char* path)
             break;
         }
         entry* curr = &result->entries[i];
-        if (swscanf(token, L"[%c:%c]", &curr->from, &curr->to) == 2) ++i;
+        if (swscanf(token, L"[%lc:%lc]", &curr->from, &curr->to) == 2) ++i;
         else DEBUG("Token is invalid");
     }
     result->count = i;
