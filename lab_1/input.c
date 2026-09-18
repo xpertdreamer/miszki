@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <wchar.h>
 
 mode
 match_mode(const char* arg)
@@ -38,4 +39,57 @@ char_to_wchar(const char *c)
     }
     mbstowcs(wc, c, len + 1);
     return wc;
+}
+
+static size_t
+regex_size(const wchar_t* range, size_t range_len) {
+    size_t result = 0;
+    for (size_t i = 1; i < range_len - 1; ++i) {
+        if (range[i] == L'-' && i > 1 && i < range_len - 2) {
+            wchar_t first = range[i-1];
+            wchar_t second = range[i+1];
+            if (first <= second) {
+                result += (second - first);
+            }
+            ++i;
+            continue;
+        }
+        ++result;
+    }
+    return result + 1;
+}
+
+wchar_t*
+regex_to_wchar(const wchar_t* range)
+{
+    DEBUG("Call regex_to_char");
+    wchar_t* result;
+    PTR_RECIEVE_FAIL_PTR(range, regex_to_char);
+    size_t range_len = wcslen(range);
+    if (range[0] != L'[' || range[range_len - 1] != L']') {
+        ERROR("Regex format is incorrect");
+        return NULL;
+    }
+    size_t result_len = regex_size(range, range_len);
+    result = (wchar_t*)malloc(result_len);
+    ALLOC_FAIL(result);
+    wchar_t* write = result;
+    for (size_t i = 1; i < range_len - 1; ++i) {
+        if (range[i] == L'-' && i > 1 && i < range_len - 2) {
+            wchar_t first = range[i-1];
+            wchar_t second = range[i+1];
+            if (first <= second) {
+                for (wchar_t wc = first + 1; wc <= second; wc++) {
+                    *write = wc;
+                    write++;
+                }
+            }
+            ++i;
+            continue;
+        }
+        *write = range[i];
+        ++write;
+    }
+    *write = L'\0';
+    return result;
 }

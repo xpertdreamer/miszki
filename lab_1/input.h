@@ -22,4 +22,7 @@ match_mode(const char* arg);
 wchar_t*
 char_to_wchar(const char *c);
 
+wchar_t*
+regex_to_wchar(const wchar_t* range);
+
 #endif
