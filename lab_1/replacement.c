@@ -2,6 +2,7 @@
 #include "util.h"
 #include "input.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <wchar.h>
 
@@ -99,7 +100,7 @@ build_table(const char* path)
 }
 
 void
-encrypt(replace_table* table, replacement_buffer* buffer)
+r_encrypt(replace_table* table, replacement_buffer* buffer)
 {
     DEBUG("Call encrypt");
     PTR_RECIEVE_FAIL_VOID(table, encrypt);
@@ -123,7 +124,7 @@ encrypt(replace_table* table, replacement_buffer* buffer)
 }
 
 void
-decrypt(replace_table* table, replacement_buffer* buffer)
+r_decrypt(replace_table* table, replacement_buffer* buffer)
 {
     DEBUG("Call decrypt");
     PTR_RECIEVE_FAIL_VOID(table, decrypt);

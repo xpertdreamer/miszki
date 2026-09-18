@@ -25,15 +25,14 @@ replace_buf_alloc(const wchar_t* str);
 replace_table*
 build_table(const char* path);
 
-// TODO:
 void
 save_replace_table(replace_table* ptr, const char* path);
 
 void
-encrypt(replace_table* table, replacement_buffer* buffer);
+r_encrypt(replace_table* table, replacement_buffer* buffer);
 
 void
-decrypt(replace_table* table, replacement_buffer* buffer);
+r_decrypt(replace_table* table, replacement_buffer* buffer);
 
 void
 free_workspace(replace_table* table, replacement_buffer* buf);
