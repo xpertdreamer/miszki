@@ -61,10 +61,13 @@ build_alphabet(buffer* buf, const wchar_t* given)
             if (wcschr(buf->alphabet, c) == NULL) {
                 if (buf->N < ALPHABET_SIZE - 1) {
                     buf->alphabet[buf->N++] = c;
+                    DEBUG("%lc", c);
                 }
             }
         }
     }
+    fflush(stdout);
+    fflush(stderr);
 }
 
 void

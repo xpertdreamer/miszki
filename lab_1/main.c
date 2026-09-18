@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <wchar.h>
 
-#define HELP(str) do { fprintf(stderr, "Usage: %s -a <alphabet> -m <encrypt/decrypt> -s <shift> -g <source>\n", (str)); return 1; } while(0)
+#define HELP(str) do { fprintf(stderr, "Usage: %s -a <alphabet> -m <e/d> -s <shift> -g <source>\n", (str)); return 1; } while(0)
 
 int main(int argc, char** argv)
 {
@@ -24,14 +24,24 @@ int main(int argc, char** argv)
     bool a_providen = false, m_providen = false, s_providen = false, g_providen = false;
     int opt, s;
     mode m;
-    wchar_t  *a, *g;
+    wchar_t  *a, *g, *alphabet;
     while ((opt = getopt(argc, argv, "g:a:m:s:")) != -1) {
         switch (opt) {
             case 'a': {
                 a = char_to_wchar(optarg);
                 if (a == NULL) {
                     ERROR("Failed to allocate wchar");
+                    FREE_WCHAR(a);
                     FREE_WCHAR(g);
+                    FREE_WCHAR(alphabet);
+                    return 1;
+                }
+                alphabet = regex_to_wchar(a);
+                if (alphabet == NULL) {
+                    ERROR("Failed to turn regex to wchar");
+                    FREE_WCHAR(a);
+                    FREE_WCHAR(g);
+                    FREE_WCHAR(alphabet);
                     return 1;
                 }
                 a_providen = true;
@@ -44,6 +54,7 @@ int main(int argc, char** argv)
                     ERROR("Shift cannot be negative or equal to zero");
                     FREE_WCHAR(a);
                     FREE_WCHAR(g);
+                    FREE_WCHAR(alphabet);
                     return 1;
                 }
                 s = arg;
@@ -55,6 +66,8 @@ int main(int argc, char** argv)
                 if (g == NULL) {
                     ERROR("Failed to allocate wchar");
                     FREE_WCHAR(a);
+                    FREE_WCHAR(g);
+                    FREE_WCHAR(alphabet);
                     return 1;
                 }
                 g_providen = true;
@@ -67,6 +80,7 @@ int main(int argc, char** argv)
         ERROR("Some arguments not providen");
         FREE_WCHAR(a);
         FREE_WCHAR(g);
+        FREE_WCHAR(alphabet);
         HELP(argv[0]);
     }
     buffer* buf;
@@ -75,9 +89,10 @@ int main(int argc, char** argv)
         ERROR("Failed to allocate buffer");
         FREE_WCHAR(a);
         FREE_WCHAR(g);
+        FREE_WCHAR(alphabet);
         return 1;
     }
-    build_alphabet(buf, a);
+    build_alphabet(buf, alphabet);
     switch (m) {
         case encryption: encrypt(buf, s); break;
         case decryption: decrypt(buf, s); break;
@@ -86,5 +101,6 @@ int main(int argc, char** argv)
     buffer_free(buf);
     FREE_WCHAR(a);
     FREE_WCHAR(g);
+    FREE_WCHAR(alphabet);
     return 0;
 }
