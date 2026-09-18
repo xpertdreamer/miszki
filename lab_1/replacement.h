@@ -32,7 +32,6 @@ encrypt(replace_table* table, replacement_buffer* buffer);
 void
 decrypt(replace_table* table, replacement_buffer* buffer);
 
-// TODO:
 void
 free_workspace(replace_table* table, replacement_buffer* buf);
 

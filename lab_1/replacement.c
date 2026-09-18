@@ -145,3 +145,16 @@ decrypt(replace_table* table, replacement_buffer* buffer)
     } while (i < len);
     buffer->processed[i] = L'\0';
 }
+
+void
+free_workspace(replace_table* table, replacement_buffer* buf)
+{
+    DEBUG("Call free_workspace");
+    FREE_FAIL(table);
+    if (table->entries != NULL) free(table->entries);
+    free(table);
+    FREE_FAIL(buf);
+    if (buf->processed != NULL) free(buf->processed);
+    if (buf->raw != NULL) free(buf->raw);
+    free(table);
+}
