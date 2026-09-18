@@ -36,3 +36,9 @@ List of targets:
   - <https://stackoverflow.com/questions/16931244/checking-if-output-of-a-command-contains-a-certain-string-in-a-shell-script>
   - <https://stackoverflow.com/questions/40082346/how-to-check-if-a-file-exists-in-a-shell-script>
   - <https://stackoverflow.com/questions/3349105/how-can-i-set-the-current-working-directory-to-the-directory-of-the-script-in-ba>
+  - <https://en.wikipedia.org/wiki/Cyrillic_script_in_Unicode>
+  - <http://blog.kislenko.net/show.php?id=2045>
+  - <https://stackoverflow.com/questions/64518663/reading-from-file-and-store-it-to-string-with-unknown-length-in-c>
+  - <https://www.opennet.ru/man.shtml?topic=wcstok&category=3&russian=0>
+  - <https://man7.org/linux/man-pages/man3/swscanf.3p.html>
+  - <https://stackoverflow.com/questions/9344477/how-to-print-wchar-t-array-to-file-in-64-bit-windows>
