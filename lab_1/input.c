@@ -100,7 +100,7 @@ read_file(const char* path)
 {
     FILE *fptr;
     char* buffer = NULL;
-    size_t i, len;
+    size_t len;
     fptr = fopen(path, "rb");
     if (fptr == NULL) {
         ERROR("Failed to open file");
