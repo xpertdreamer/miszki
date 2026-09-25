@@ -2,8 +2,9 @@
 
 If you wanna build on your local machine, you should have the following instruments:
 
-  - **gcc** - compiler used to build the project
+  - **gcc** - compiler used to build some laboratories
   - **make** - build automation tool 
+  - **go** - compiler used to build some laboratories
   
 Maybe, little later I`ll add container integration.
 
@@ -25,7 +26,8 @@ Remove build directory:
 
 List of targets:
 
-  - lab1 — Laboratory Work №1
+  - lab1 - Laboratory Work №1
+  - lab2 - Laboratory Work №2
 
 ## Laboratory Work 1
 ### References:
@@ -42,3 +44,9 @@ List of targets:
   - <https://www.opennet.ru/man.shtml?topic=wcstok&category=3&russian=0>
   - <https://man7.org/linux/man-pages/man3/swscanf.3p.html>
   - <https://stackoverflow.com/questions/9344477/how-to-print-wchar-t-array-to-file-in-64-bit-windows>
+
+## Laboratory Work 2
+### References
+  - <https://pkg.go.dev/log>
+  - <https://habr.com/ru/companies/otus/articles/782812/>
+  
