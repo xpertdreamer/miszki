@@ -1,9 +1,11 @@
 package util
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"runtime"
+	"time"
 )
 
 var DebugMode = "0"
@@ -37,4 +39,11 @@ func Debug(format string, a ...any) {
 
 func Error(format string, a ...any) {
 	errorLogger.Fatalf(format, a...)
+}
+
+func Measure(name string) func() {
+	var start = time.Now()
+	return func() {
+		fmt.Printf("Timer [%s] took: %v\n", name, time.Since(start))
+	}
 }
