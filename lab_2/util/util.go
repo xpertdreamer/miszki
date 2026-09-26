@@ -11,9 +11,9 @@ import (
 var DebugMode = "0"
 
 var (
-	ErrorColor string = "\033[1;31m"
-	DebugColor = "\033[1;34m"
-	ResetColor = "\033[0m"
+	errorColor string = "\033[1;31m"
+	debugColor = "\033[1;34m"
+	resetColor = "\033[0m"
 )
 
 var (
@@ -23,12 +23,12 @@ var (
 
 func init() {
 	if runtime.GOOS == "windows" {
-		ErrorColor = ""
-		DebugColor = ""
-		ResetColor = ""
+		errorColor = ""
+		debugColor = ""
+		resetColor = ""
 	}
-	debugLogger.SetPrefix(DebugColor + "DEBUG" + ResetColor + " ")
-	errorLogger.SetPrefix(ErrorColor + "ERROR" + ResetColor + " ")
+	debugLogger.SetPrefix(debugColor + "DEBUG" + resetColor + " ")
+	errorLogger.SetPrefix(errorColor + "ERROR" + resetColor + " ")
 }
 
 func Debug(format string, a ...any) {
