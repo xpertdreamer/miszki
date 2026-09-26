@@ -49,4 +49,5 @@ List of targets:
 ### References
   - <https://pkg.go.dev/log>
   - <https://habr.com/ru/companies/otus/articles/782812/>
+  - <https://stackoverflow.com/questions/24790175/when-does-the-init-function-run>
   
