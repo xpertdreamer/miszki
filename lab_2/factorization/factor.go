@@ -8,7 +8,7 @@ import (
 const trialDivisiomMinimum = 2
 
 func TrialDivision(n uint) ([]uint, error) {
-	util.Debug("Call TrialDivision")
+	util.Debug("Call [TrialDivision]\tn=%d", n)
 	defer util.Measure("TrialDivision")()
 	var result []uint
 	if n < trialDivisiomMinimum {
