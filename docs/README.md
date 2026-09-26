@@ -51,3 +51,8 @@ List of targets:
   - <https://habr.com/ru/companies/otus/articles/782812/>
   - <https://stackoverflow.com/questions/24790175/when-does-the-init-function-run>
   - <https://habr.com/ru/companies/otus/articles/833702/>
+  - <https://blog.jetbrains.com/go/2022/11/22/comprehensive-guide-to-testing-in-go/>
+  - <https://stackoverflow.com/questions/24489384/how-to-print-the-values-of-slices>
+  - <https://go.dev/doc/tutorial/handle-errors>
+  - <https://github.com/TheAlgorithms/Go/blob/master/math/prime/primecheck.go>
+  - <https://stackoverflow.com/questions/15311969/checking-the-equality-of-two-slices>
