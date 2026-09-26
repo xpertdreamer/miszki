@@ -50,4 +50,4 @@ List of targets:
   - <https://pkg.go.dev/log>
   - <https://habr.com/ru/companies/otus/articles/782812/>
   - <https://stackoverflow.com/questions/24790175/when-does-the-init-function-run>
-  
+  - <https://habr.com/ru/companies/otus/articles/833702/>
