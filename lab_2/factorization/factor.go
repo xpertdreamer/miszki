@@ -6,8 +6,12 @@ import (
 	"mizski/lab2/util"
 )
 
+// trialDivisiomMinimum is the smallest divisor candidate used in trial division.
 const trialDivisiomMinimum = 2
 
+// TrialDivision factors n using the trial division method.
+// Parameter n is the number to factorize (must be greater than 1).
+// Returns a slice of prime factors in ascending order, or an error if n is less than 2.
 func TrialDivision(n uint) ([]uint, error) {
 	util.Debug("Call [TrialDivision]\tn=%d", n)
 	defer util.Measure("TrialDivision")()
@@ -29,6 +33,9 @@ func TrialDivision(n uint) ([]uint, error) {
 	return result, nil
 }
 
+// FermatFactors finds a pair of factors of n using Fermat's factorization method.
+// Parameter n is the number to factorize.
+// Returns a slice of two factors: {2, n/2} for even n, or {a-b, a+b} for odd n where n = a^2 - b^2.
 func FermatFactors(n uint) []uint {
 	util.Debug("Call (TrialDivision)\tn=%d", n)
 	defer util.Measure("FermatFactors")()
