@@ -62,3 +62,6 @@ List of targets:
   - <https://go.dev/doc/tutorial/handle-errors>
   - <https://github.com/TheAlgorithms/Go/blob/master/math/prime/primecheck.go>
   - <https://stackoverflow.com/questions/15311969/checking-the-equality-of-two-slices>
+  - <https://pkg.go.dev/fmt>
+  - <https://stackoverflow.com/questions/10485743/contains-method-for-a-slice>
+  - <https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html>
