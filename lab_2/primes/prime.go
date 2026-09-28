@@ -76,6 +76,9 @@ func mersennNum(p uint) *big.Int {
 func PerfectTestEuclid(n *big.Int) bool {
 	util.Debug("Call PerfectTestEuclid\tnumber=%s", n.String())
 	defer util.Measure("PerfectTestEuclid")()
+	if n.Sign() <= 0 {
+		return false
+	}
 	var zero = big.NewInt(0)
 	var two = big.NewInt(2)
 	var rem = new(big.Int).Mod(n, two)
