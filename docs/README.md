@@ -65,3 +65,8 @@ List of targets:
   - <https://pkg.go.dev/fmt>
   - <https://stackoverflow.com/questions/10485743/contains-method-for-a-slice>
   - <https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html>
+  - <https://en.wikipedia.org/wiki/Perfect_number>
+  - <https://leetcode.com/problems/perfect-number/solutions/127529/perfect-number/>
+  - <https://stackoverflow.com/questions/6566835/algorithm-to-check-if-a-number-if-a-perfect-number>
+  - <https://pkg.go.dev/math/big>
+  - <https://en.wikipedia.org/wiki/List_of_Mersenne_primes_and_perfect_numbers>
