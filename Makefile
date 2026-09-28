@@ -1,4 +1,5 @@
 DEBUG ?= false
+PKG ?= lab_3
 
 clean:
 	rm -rf build/
@@ -11,5 +12,5 @@ lab2: lab_2/util/util.go lab_2/main.go
 	@mkdir -p build/lab_2
 	cd lab_2 && go build -ldflags "-X mizski/lab2/util.DebugMode=$(DEBUG)"  -o ../build/lab_2/lab2 .
 
-test2:
-	cd lab_2 && go test -v ./...
+test:
+	cd $(PKG) && go test -v ./... | grep -v 'Timer '
