@@ -1,0 +1,2 @@
+# github.com/pborman/getopt v1.1.0
+## explicit; go 1.13
