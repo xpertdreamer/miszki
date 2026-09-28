@@ -41,3 +41,22 @@ func SieveTest(n uint) bool {
 	util.Debug("(TestSieve) Sieve %v contains %d", sieve, n)
 	return true
 }
+
+func PerfectTestBruteForce(n uint) bool {
+	util.Debug("Call PerfectTestBruteForce\tnumber=%d", n)
+	defer util.Measure("PerfectTestBruteForce")()
+	if n % 2 != 0 {
+		util.Debug("(PerfectTestBruteForce) Returning false (num is odd)")
+		return false
+	}
+	var sum uint = 0;
+	for i := uint(1); i < n; i++ {
+		if n % i == 0 {
+			sum += i
+		}
+		if (sum > n) {
+			return false;
+		}
+	}
+	return sum == n
+}
