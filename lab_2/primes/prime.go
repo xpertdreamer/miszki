@@ -26,7 +26,7 @@ func buildSieve(n uint) []uint {
 	return result
 }
 
-func TestSieve(n uint) bool {
+func SieveTest(n uint) bool {
 	util.Debug("Call TestSieve\tnumber=%d", n)
 	defer util.Measure("TestSieve")()
 	if n <= 1 {
