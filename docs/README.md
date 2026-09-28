@@ -24,6 +24,12 @@ Remove build directory:
     make clean
 ```
 
+Run tests for target:
+
+``` shell
+    make test [PKG=<target>]
+```
+
 List of targets:
 
   - lab1 - Laboratory Work №1
