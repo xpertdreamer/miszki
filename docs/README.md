@@ -5,6 +5,7 @@ If you wanna build on your local machine, you should have the following instrume
   - **gcc** - compiler used to build some laboratories
   - **make** - build automation tool 
   - **go** - compiler used to build some laboratories
+  - **doc2go** - tool that generates static HTML documentation from Go code
   
 Maybe, little later I`ll add container integration.
 
@@ -44,6 +45,9 @@ cd [target] && godoc -http localhost:6060
 ```
 
 Then open in your browser following link: ``http://localhost:6060/pkg/mizski/``
+
+> [!NOTE]
+> You can also provide the ``DOCS=1`` flag after the make target, and the documentation will be generated automatically into the `docs/html` directory.
 
 ## Laboratory Work 1
 ### References:
