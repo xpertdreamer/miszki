@@ -1,6 +1,7 @@
 package primes
 
 import (
+	"math/big"
 	"mizski/lab2/util"
 	"slices"
 )
@@ -59,4 +60,38 @@ func PerfectTestBruteForce(n uint) bool {
 		}
 	}
 	return sum == n
+}
+
+func mersennNum(p uint) *big.Int {
+	var one = big.NewInt(1)
+	var two = big.NewInt(2)
+	var bigP = big.NewInt(int64(p))
+	var bigPMinus1 = big.NewInt(int64(p - 1))
+	var mersennePrime = new(big.Int).Exp(two, bigP, nil)
+	mersennePrime.Sub(mersennePrime, one)
+	multiplier := new(big.Int).Exp(two, bigPMinus1, nil)
+	return new(big.Int).Mul(multiplier, mersennePrime)
+}
+
+func PerfectTestEuclid(n *big.Int) bool {
+	util.Debug("Call PerfectTestEuclid\tnumber=%s", n.String())
+	defer util.Measure("PerfectTestEuclid")()
+	var zero = big.NewInt(0)
+	var two = big.NewInt(2)
+	var rem = new(big.Int).Mod(n, two)
+	if rem.Cmp(zero) != 0 {
+		util.Debug("(PerfectTestEuclid) Returning false (num is odd)")
+		return false
+	}
+	var primes = []uint{2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127}
+	for _, p := range primes {
+		var perf = mersennNum(p)
+		if n.Cmp(perf) == 0 {
+			return true
+		}
+		if perf.Cmp(n) > 0 {
+			break
+		}
+	}
+	return false
 }
