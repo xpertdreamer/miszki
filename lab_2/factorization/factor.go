@@ -17,20 +17,20 @@ func TrialDivision(n uint) ([]uint, error) {
 	}
 	for i := uint(trialDivisiomMinimum); i < n; i++ {
 		for n % i == 0 {
-			util.Debug("[TrialDivision] result += %d", i)
+			util.Debug("(TrialDivision) result += %d", i)
 			result = append(result, i)
 			n /= i
 		}
 	}
 	if n >= trialDivisiomMinimum {
-		util.Debug("[TrialDivision] result += %d", n)
+		util.Debug("(TrialDivision) result += %d", n)
 		result = append(result, n)
 	}
 	return result, nil
 }
 
 func FermatFactors(n uint) []uint {
-	util.Debug("Call [TrialDivision]\tn=%d", n)
+	util.Debug("Call (TrialDivision)\tn=%d", n)
 	defer util.Measure("FermatFactors")()
 	// check if an even number given
 	if (n & 0x01) == 0 {
