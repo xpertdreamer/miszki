@@ -70,3 +70,4 @@ List of targets:
   - <https://stackoverflow.com/questions/6566835/algorithm-to-check-if-a-number-if-a-perfect-number>
   - <https://pkg.go.dev/math/big>
   - <https://en.wikipedia.org/wiki/List_of_Mersenne_primes_and_perfect_numbers>
+  - <https://superuser.com/questions/296643/how-to-get-a-perfect-local-copy-of-a-web-page>
