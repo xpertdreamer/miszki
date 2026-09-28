@@ -24,7 +24,7 @@ Remove build directory:
     make clean
 ```
 
-Run tests for target:
+Run tests for target (supports *Go*-projects only):
 
 ``` shell
     make test [PKG=<target>]
