@@ -6,6 +6,9 @@ import (
 	"slices"
 )
 
+// buildSieve builds a slice of all primes up to n using the Sieve of Eratosthenes.
+// Parameter n is the upper bound (inclusive).
+// Returns a slice of prime numbers in ascending order.
 func buildSieve(n uint) []uint {
 	var sieve []bool = make([]bool, n + 1)
 	var result []uint
@@ -27,6 +30,9 @@ func buildSieve(n uint) []uint {
 	return result
 }
 
+// SieveTest checks whether n is prime using the Sieve of Eratosthenes.
+// Parameter n is the number to test.
+// Returns true if n is prime, false otherwise (including n <= 1).
 func SieveTest(n uint) bool {
 	util.Debug("Call TestSieve\tnumber=%d", n)
 	defer util.Measure("TestSieve")()
@@ -43,6 +49,9 @@ func SieveTest(n uint) bool {
 	return true
 }
 
+// PerfectTestBruteForce checks whether n is a perfect number by brute force.
+// Parameter n is the number to test.
+// Returns true if n equals the sum of its proper divisors, false otherwise.
 func PerfectTestBruteForce(n uint) bool {
 	util.Debug("Call PerfectTestBruteForce\tnumber=%d", n)
 	defer util.Measure("PerfectTestBruteForce")()
@@ -62,6 +71,9 @@ func PerfectTestBruteForce(n uint) bool {
 	return sum == n
 }
 
+// mersennNum computes the p-th even perfect number using Euclid's formula: 2^(p-1) * (2^p - 1).
+// Parameter p is the exponent of the Mersenne prime (must be prime).
+// Returns a pointer to a big.Int holding the perfect number.
 func mersennNum(p uint) *big.Int {
 	var one = big.NewInt(1)
 	var two = big.NewInt(2)
@@ -73,6 +85,9 @@ func mersennNum(p uint) *big.Int {
 	return new(big.Int).Mul(multiplier, mersennePrime)
 }
 
+// PerfectTestEuclid checks whether n is an even perfect number using Euclid's-Euler theorem.
+// Parameter n is the number to test.
+// Returns true if n equals 2^(p-1) * (2^p - 1) for some Mersenne prime exponent p, false otherwise.
 func PerfectTestEuclid(n *big.Int) bool {
 	util.Debug("Call PerfectTestEuclid\tnumber=%s", n.String())
 	defer util.Measure("PerfectTestEuclid")()
