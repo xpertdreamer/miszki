@@ -33,14 +33,14 @@ func main() {
 		os.Exit(0)
 	}
 	var inputNum = new(big.Int)
-	if _, ok := inputNum.SetString(*optNum, 10); !ok {
+	if _, ok := inputNum.SetString(*optNum, 10); !ok || optNum == nil || *optNum == "" {
 		util.Error("Failed to fetch number (%s)", *optNum)
 	}
 	switch *optAlg {
 	case td: {
 		util.Debug("Calling td")
 		if !inputNum.IsUint64() {
-			util.Error("Number is too big for Trial Division")
+			util.Error("Number is invalid for Trial Division (expected=uint)")
 		}
 		var res, err = factorization.TrialDivision(uint(inputNum.Uint64()))
 		if err != nil {
@@ -51,27 +51,41 @@ func main() {
 	}
 	case ferma: {
 		util.Debug("Calling fermat")
+		if !inputNum.IsUint64() {
+			util.Error("Number is invalid for Trial Division (expected=uint)")
+		}
 		var res = factorization.FermatFactors(uint(inputNum.Uint64()))
 		fmt.Printf("%v\n", res)
 		break;
 	}
 	case sieve: {
 		util.Debug("Calling sieve")
+		if !inputNum.IsUint64() {
+			util.Error("Number is invalid for Trial Division (expected=uint)")
+		}
 		var	res bool = primes.SieveTest(uint(inputNum.Uint64()))
 		fmt.Printf("prime? %t\n", res)
 		break;
 	}
 	case bruteforce: {
 		util.Debug("Calling bruteforce for perfect")
+		if !inputNum.IsUint64() {
+			util.Error("Number is invalid for Trial Division (expected=uint)")
+		}
 		var res bool = primes.PerfectTestBruteForce(uint(inputNum.Uint64()))
 		fmt.Printf("perfect? %t\n", res)
 		break;
 	}
 	case euclid: {
 		util.Debug("Calling Euclid-Euler method for perfect")
+		if inputNum.Sign() < 0 {
+			util.Error("Number is invalid for Trial Division (expected=positive)")
+		}
 		var res bool = primes.PerfectTestEuclid(inputNum)
 		fmt.Printf("perfect? %t\n", res)
 		break;
 	}
+	default:
+		util.Error("Unknown algorithm provided")
 	}
 }
