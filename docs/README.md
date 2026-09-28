@@ -35,6 +35,16 @@ List of targets:
   - lab1 - Laboratory Work №1
   - lab2 - Laboratory Work №2
 
+## Documentation
+
+While I'm not sure how to create static documentation using Go tools, please use dynamic documentation:
+
+``` shell
+cd [target] && godoc -http localhost:6060
+```
+
+Then open in your browser following link: ``http://localhost:6060/pkg/mizski/``
+
 ## Laboratory Work 1
 ### References:
   - <https://en.wikipedia.org/wiki/Substitution_cipher>
