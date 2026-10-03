@@ -6,10 +6,17 @@ If you wanna build on your local machine, you should have the following instrume
   - **make** - build automation tool 
   - **go** - compiler used to build some laboratories
   - **doc2go** - tool that generates static HTML documentation from Go code
-  
-Maybe, little later I`ll add container integration.
 
-Then, run the [build script](#make-commands) inside.
+Otherwise, if you have **Podman** on your machine, just run the container with the virtual environment inside:
+
+``` shell
+    podman build . -t mis:latest
+    podman run --rm -v .:/app env:latest [target to build] <-d>
+```
+
+The build script runs automatically inside the container to build the specified target. The list of all targets can be found in the [make](#make-commands) section.
+
+You can provide the `-d` flag at the end of the Podman run command to generate Doxygen/doc2go documentation.
 
 ## Make commands
 
