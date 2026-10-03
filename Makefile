@@ -13,7 +13,15 @@ lab2: lab_2/util/util.go lab_2/main.go lab_2/factorization/factor.go lab_2/prime
 	@mkdir -p build/lab_2
 	cd lab_2 && go build -mod=vendor -ldflags "-X mizski/lab2/util.DebugMode=$(DEBUG)"  -o ../build/lab_2/lab2 .
 	@if [ "$(DOCS)" == "1" ] || [ "$(DOCS)" == "true" ]; then \
-		mkdir -p docs/html/godoc ; \
+		mkdir -p docs/html/ ; \
+		cd lab_2 && doc2go -out ../docs/html/godoc ./... ; \
+	fi
+
+lab3: lab_3/util/util.go lab_2/main.go
+	@mkdir -p build/lab_3
+	cd lab_3 && go build -mod=vendor -ldflags "-X miszki/lab3/util.DebugMode=$(DEBUG)"  -o ../build/lab_3/lab3 .
+	@if [ "$(DOCS)" == "1" ] || [ "$(DOCS)" == "true" ]; then \
+		mkdir -p docs/html/ ; \
 		cd lab_2 && doc2go -out ../docs/html/godoc ./... ; \
 	fi
 
