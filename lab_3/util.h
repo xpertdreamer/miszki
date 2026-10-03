@@ -13,6 +13,7 @@
 #ifndef _WIN32
 #define ERROR_COLOR "\e[1;31m"  ///< ANSI red color for error messages.
 #define DEBUG_COLOR "\e[1;34m"  ///< ANSI blue color for debug messages.
+#define TODO_COLOR "\e[0;33m"   ///< ANSI yellow color for todo messages.
 #define RESET_COLOR "\e[0m"     ///< ANSI reset sequence.
 #else
 #define ERROR_COLOR ""          ///< Empty on Windows.
@@ -79,6 +80,11 @@
             ERROR("%s Failed: %s is NULL", #func, #ptr);    \
             return NULL;                                    \
         }                                                   \
+    } while(0)
+
+#define TODO(text)                                                      \
+    do {                                                                \
+        fprintf(stderr, "%sTODO:%s %s\n", TODO_COLOR, RESET_COLOR, (text)); \
     } while(0)
 
 #endif
