@@ -42,6 +42,7 @@ List of targets:
 
   - lab1 - Laboratory Work №1
   - lab2 - Laboratory Work №2
+  - lab3 - Laboratory Work №3
 
 ## Documentation
 
