@@ -24,9 +24,9 @@ lab2: lab_2/util/util.go lab_2/main.go lab_2/factorization/factor.go lab_2/prime
 		cd lab_2 && doc2go -out ../docs/html/godoc ./... ; \
 	fi
 
-lab3: lab_3/main.cpp
+lab3: lab_3/main.cpp lab_3/math.cpp
 	@mkdir -p build/lab_3
-	g++ -Wall -Wextra $^ -o build/lab_3/lab3
+	g++ -Wall -Wextra $^ -o build/lab_3/lab3 -DDEBUG_MODE=$(DEBUG)
 	$(call run_doxygen)
 
 test:
