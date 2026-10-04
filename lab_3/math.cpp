@@ -64,3 +64,33 @@ math::euler_sieve(u64 number)
     END(euler_sieve);
     return result;
 }
+
+std::pair<u64, std::pair<i64, i64>>
+math::extended_gcd(u64 a, u64 b) {
+    DEBUG("Call extended_gcd\ta=%lu,\tb=%lu", a, b);
+    START(extended_gcd);
+    if (a == 0) {
+        return {b, {0, 1}};
+    }
+    if (b == 0) {
+        return {a, {1, 0}};
+    }
+    i64 r_prev2 = static_cast<i64>(a);
+    i64 r_prev1 = static_cast<i64>(b);
+    // k_0 = 1,  k_1 = 0
+    i64 k_prev2 = 1, k_prev1 = 0;
+    // m_0 = 0,  m_1 = 1
+    i64 m_prev2 = 0, m_prev1 = 1;
+    while (r_prev1 != 0) {
+        i64 q = r_prev2 / r_prev1;        // q_{i-1}
+        i64 k_i = k_prev2 - q * k_prev1;  // k_i = k_{i-2} - q_{i-1} * k_{i-1}
+        i64 r_i = r_prev2 - q * r_prev1;  // r_i = r_{i-2} - q_{i-1} * r_{i-1}
+        i64 m_i = m_prev2 - q * m_prev1;  // m_i = m_{i-2} - q_{i-1} * m_{i-1}
+        // (i-2, i-1) = (i-1, i)
+        r_prev2 = r_prev1;  r_prev1 = r_i;
+        k_prev2 = k_prev1;  k_prev1 = k_i;
+        m_prev2 = m_prev1;  m_prev1 = m_i;
+    }
+    END(extended_gcd);
+    return {static_cast<u64>(r_prev2), {k_prev2, m_prev2}};
+}

@@ -2,6 +2,7 @@
 #define MATH_H
 
 #include <cstdint>
+#include <utility>
 
 /**
  * @def i64
@@ -38,6 +39,15 @@ namespace math {
     */
     u64
     euler_sieve(u64 number);
+
+    /**
+    * @brief Extended Euclid's algorithm (ax + by = gcd(x, y))
+    * @param a First unsigned integer
+    * @param b Second unsigned integer
+    * @return Signature: pair.first = greatest common divisor of a and b; pair.second.first = x; pair.second.second = y
+    */
+    std::pair<u64, std::pair<i64, i64>>
+    extended_gcd(u64 a, u64 b);
 }
 
 #endif
