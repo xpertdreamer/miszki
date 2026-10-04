@@ -66,7 +66,8 @@ math::euler_sieve(u64 number)
 }
 
 std::pair<u64, std::pair<i64, i64>>
-math::extended_gcd(u64 a, u64 b) {
+math::extended_gcd(u64 a, u64 b)
+{
     DEBUG("Call extended_gcd\ta=%lu,\tb=%lu", a, b);
     START(extended_gcd);
     if (a == 0) {
@@ -93,4 +94,32 @@ math::extended_gcd(u64 a, u64 b) {
     }
     END(extended_gcd);
     return {static_cast<u64>(r_prev2), {k_prev2, m_prev2}};
+}
+
+u64
+math::crt(const std::vector<u64>& ms, const std::vector<u64>& rs)
+{
+    DEBUG("Call math::crt\tcount=%zu", ms.size());
+    START(crt);
+    if (ms.empty() || ms.size() != rs.size()) {
+        END(crt);
+        return 0;
+    }
+    u64 M = 1;
+    for (u64 a : ms) M *= a;
+    u64 result = 0;
+    for (std::size_t i = 0; i < ms.size(); ++i) {
+        u64 a_i = ms[i];
+        u64 r_i = rs[i];
+        u64 M_i = M / a_i;
+        auto [g, km] = math::extended_gcd(M_i, a_i);
+        if (g != 1) { END(crt); return 0;}
+        auto k = km.first;
+        i64 ai = static_cast<i64>(a_i);
+        u64 N_i = static_cast<u64>(((k % ai) + ai) % ai) ;
+        u64 t = (r_i * M_i) % M;
+        result = (result + t * N_i % M) % M;
+    }
+    END(crt);
+    return result;
 }

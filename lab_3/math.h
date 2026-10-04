@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <utility>
+#include <vector>
 
 /**
  * @def i64
@@ -48,6 +49,16 @@ namespace math {
     */
     std::pair<u64, std::pair<i64, i64>>
     extended_gcd(u64 a, u64 b);
+
+    /**
+    * @brief Chinese Remainder Theorem using direct construction
+    * @details If numbers are non coprime integers returns 0
+    * @param ms moduli
+    * @param rs remainders
+    * @return x in [0; M] satisfying every congruence, or 0 when the moduli are not pairwise coprime
+    */
+    u64
+    crt(const std::vector<u64>& ms, const std::vector<u64>& rs);
 }
 
 #endif
