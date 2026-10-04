@@ -115,3 +115,8 @@ Or manually find desired html-page in ``docs/html``.
   - <https://mathworld.wolfram.com/TotientFunction.html>
   - <https://www.geeksforgeeks.org/dsa/euler-totient/>
   - <https://github.com/p-ranav/argparse>
+  - <https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm>
+  - <https://stackoverflow.com/questions/12826114/euclids-extended-algorithm-c>
+  - <https://github.com/PetarV-/Algorithms/blob/master/Mathematical%20Algorithms/Extended%20Euclidean%20Algorithm.cpp>
+  - <https://www.diva-portal.org/smash/get/diva2:530204/FULLTEXT01.pdf> (main reference-resource)
+  - <https://cp-algorithms.com/algebra/extended-euclid-algorithm.html>
