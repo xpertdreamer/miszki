@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="doc2go">
+    <link href="../../../_/css/main.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../_/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../_/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../_/icons/favicon-16x16.png">
+    <link rel="shortcut icon" href="../../../_/icons/favicon.ico"><title>factorization</title>
+</head>
+  <body>
+    <nav>
+        <a href="../..">mizski</a>/<a href="..">lab2</a>/factorization<span class="navbar-right">
+          <a href="../../..">Root</a> | <a href="#pkg-index">Index</a></span>
+      </nav>
+    <main>
+<h2 id="pkg-overview">package factorization</h2>
+
+<pre class="chroma"><span class="kn">import</span><span class="w"> </span><span class="s">&#34;mizski/lab2/factorization&#34;</span></pre>
+<h3 id="pkg-index">Index</h3>
+<ul>
+  <li><a href="#FermatFactors">func FermatFactors(n uint) []uint</a></li>
+  <li><a href="#TrialDivision">func TrialDivision(n uint) ([]uint, error)</a></li>
+  </ul><h3 id="pkg-functions">Functions</h3>
+  
+  <h4 id="FermatFactors">func FermatFactors</h4>
+  
+  <pre class="chroma"><span class="kd">func</span><span class="w"> </span><span class="nf">FermatFactors</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><a href="https://pkg.go.dev/builtin#uint"><span class="kt">uint</span></a><span class="p">)</span><span class="w"> </span><span class="p">[]</span><a href="https://pkg.go.dev/builtin#uint"><span class="kt">uint</span></a></pre>
+  <p>FermatFactors finds a pair of factors of n using Fermat&apos;s factorization method.
+Parameter n is the number to factorize.
+Returns a slice of two factors: {2, n/2} for even n, or {a-b, a+b} for odd n where n = a^2 - b^2.
+<h4 id="TrialDivision">func TrialDivision</h4>
+  
+  <pre class="chroma"><span class="kd">func</span><span class="w"> </span><span class="nf">TrialDivision</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><a href="https://pkg.go.dev/builtin#uint"><span class="kt">uint</span></a><span class="p">)</span><span class="w"> </span><span class="p">([]</span><a href="https://pkg.go.dev/builtin#uint"><span class="kt">uint</span></a><span class="p">,</span><span class="w"> </span><a href="https://pkg.go.dev/builtin#error"><span class="kt">error</span></a><span class="p">)</span></pre>
+  <p>TrialDivision factors n using the trial division method.
+Parameter n is the number to factorize (must be greater than 1).
+Returns a slice of prime factors in ascending order, or an error if n is less than 2.
+</main>
+    <hr>
+    <footer>
+      <small id="generated-by-footer">
+        Generated with <a href="https://abhinav.github.io/doc2go/">doc2go</a>
+      </small>
+    </footer>
+    <script src="../../../_/js/permalink.js"></script></body>
+</html>

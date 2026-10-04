@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="doc2go">
+    <link href="../../../_/css/main.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../_/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../_/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../_/icons/favicon-16x16.png">
+    <link rel="shortcut icon" href="../../../_/icons/favicon.ico"><title>primes</title>
+</head>
+  <body>
+    <nav>
+        <a href="../..">mizski</a>/<a href="..">lab2</a>/primes<span class="navbar-right">
+          <a href="../../..">Root</a> | <a href="#pkg-index">Index</a></span>
+      </nav>
+    <main>
+<h2 id="pkg-overview">package primes</h2>
+
+<pre class="chroma"><span class="kn">import</span><span class="w"> </span><span class="s">&#34;mizski/lab2/primes&#34;</span></pre>
+<h3 id="pkg-index">Index</h3>
+<ul>
+  <li><a href="#PerfectTestBruteForce">func PerfectTestBruteForce(n uint) bool</a></li>
+  <li><a href="#PerfectTestEuclid">func PerfectTestEuclid(n *big.Int) bool</a></li>
+  <li><a href="#SieveTest">func SieveTest(n uint) bool</a></li>
+  </ul><h3 id="pkg-functions">Functions</h3>
+  
+  <h4 id="PerfectTestBruteForce">func PerfectTestBruteForce</h4>
+  
+  <pre class="chroma"><span class="kd">func</span><span class="w"> </span><span class="nf">PerfectTestBruteForce</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><a href="https://pkg.go.dev/builtin#uint"><span class="kt">uint</span></a><span class="p">)</span><span class="w"> </span><a href="https://pkg.go.dev/builtin#bool"><span class="kt">bool</span></a></pre>
+  <p>PerfectTestBruteForce checks whether n is a perfect number by brute force.
+Parameter n is the number to test.
+Returns true if n equals the sum of its proper divisors, false otherwise.
+<h4 id="PerfectTestEuclid">func PerfectTestEuclid</h4>
+  
+  <pre class="chroma"><span class="kd">func</span><span class="w"> </span><span class="nf">PerfectTestEuclid</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="o">*</span><a href="https://pkg.go.dev/math/big"><span class="nx">big</span></a><span class="p">.</span><a href="https://pkg.go.dev/math/big#Int"><span class="nx">Int</span></a><span class="p">)</span><span class="w"> </span><a href="https://pkg.go.dev/builtin#bool"><span class="kt">bool</span></a></pre>
+  <p>PerfectTestEuclid checks whether n is an even perfect number using Euclid&apos;s-Euler theorem.
+Parameter n is the number to test.
+Returns true if n equals 2^(p-1) * (2^p - 1) for some Mersenne prime exponent p, false otherwise.
+<h4 id="SieveTest">func SieveTest</h4>
+  
+  <pre class="chroma"><span class="kd">func</span><span class="w"> </span><span class="nf">SieveTest</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><a href="https://pkg.go.dev/builtin#uint"><span class="kt">uint</span></a><span class="p">)</span><span class="w"> </span><a href="https://pkg.go.dev/builtin#bool"><span class="kt">bool</span></a></pre>
+  <p>SieveTest checks whether n is prime using the Sieve of Eratosthenes.
+Parameter n is the number to test.
+Returns true if n is prime, false otherwise (including n &lt;= 1).
+</main>
+    <hr>
+    <footer>
+      <small id="generated-by-footer">
+        Generated with <a href="https://abhinav.github.io/doc2go/">doc2go</a>
+      </small>
+    </footer>
+    <script src="../../../_/js/permalink.js"></script></body>
+</html>
