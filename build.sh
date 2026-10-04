@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
 NAME=$1
-arg=$2
+shift
 
 ARG="0"
-if [[ "$arg" ==  "-d" ]]; then
-    ARG="1"
-fi
+ARG2="0"
 
-make $NAME DOCS=$ARG
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -d)     ARG="1" ;;
+        -debug) ARG2="1" ;;
+    esac
+    shift
+done
+
+make "$NAME" DOCS="$ARG" DEBUG="$ARG2"
