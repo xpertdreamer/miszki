@@ -12,7 +12,7 @@ main(int argc, char* argv[])
 
     argparse::ArgumentParser euler_cmd("euler");
     euler_cmd.add_description("Get Euler's totient function (phi(x)) from number");
-    euler_cmd.add_argument("number") // Позиционный аргумент (без флага)
+    euler_cmd.add_argument("number")
         .scan<'u', unsigned>()
         .required();
 
@@ -81,9 +81,13 @@ main(int argc, char* argv[])
             ERROR("No equations provided for CRT");
             return 1;
         }
-        u64 result = math::crt(remainders, moduli);
-        std::cout << "Result N = " << result << std::endl;
-        return 0;
+        u64 result = math::crt(moduli, remainders);
+        if (result != 0) {
+            std::cout << "Result N = " << result << std::endl;
+            return 0;
+        }
+        ERROR("Cannot find N. The sizes of the vectors do not match, or you have incompatible numbers");
+        return 1;
     }
 
     ERROR("No action specified. Use lab3 --help for help");
