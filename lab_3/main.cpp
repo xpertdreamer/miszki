@@ -5,6 +5,7 @@
 #include <iostream>
 
 constexpr char flag_euler[] = "-e";
+constexpr char flag_euclid[] = "-g";
 
 int
 main(int argc, char* argv[])
@@ -16,6 +17,11 @@ main(int argc, char* argv[])
         .help("Get Euler's totient function (phi(x)) from number")
         .nargs(1)
         .scan<'u', unsigned>();
+
+    group.add_argument(flag_euclid, "--gcd")
+        .help("Extended Euclidian algorithm")
+        .nargs(2)
+        .scan<'u', u64>();
 
     try {
         program.parse_args(argc, argv);
@@ -30,6 +36,19 @@ main(int argc, char* argv[])
         u64 num = *e_val;
         u64 result = num < SIEVE_LIMIT ? math::euler_sieve(num) : math::euler_bruteforce(num);
         std::cout << "phi(" << num << ") = " << result << std::endl;
+        return 0;
+    }
+
+    if (program.is_used(flag_euclid)) {
+        auto v = program.get<std::vector<u64>>(flag_euclid);
+        if (v[0] > 2*10e62 || v[1] > 2*10e62) {
+            ERROR("Numbers with this size cant be processed");
+            return 1;
+        }
+        auto x = math::extended_gcd(v[0], v[1]);
+        std::cout << "gcd(" << v[0] << ", " << v[1] << ") = "
+                  << x.first << " = (" << x.second.first << " * " << v[0]
+                  << ") + (" << x.second.second  << " * " << v[1] << ")" << std::endl;
         return 0;
     }
 
