@@ -97,3 +97,13 @@ Then open in your browser following link: ``http://localhost:6060/pkg/mizski/``
   - <https://stackoverflow.com/questions/46783352/string-to-big-int-in-go>
   - <https://pkg.go.dev/github.com/pborman/getopt#section-readme>
   
+## Laboratory Work 3
+### References
+  - <http://e-maxx.ru/algo/export_euler_function>
+  - <https://en.wikipedia.org/wiki/Euler%27s_totient_function#Computing_Euler's_totient_function>
+  - <https://www.geeksforgeeks.org/dsa/eulers-totient-function/>
+  - <https://cp-algorithms.com/algebra/phi-function.html>
+  - <https://gist.github.com/JBlond/2fea43a3049b38287e5e9cefc87b2124>
+  - <https://mathworld.wolfram.com/TotientFunction.html>
+  - <https://www.geeksforgeeks.org/dsa/euler-totient/>
+  - <https://github.com/p-ranav/argparse>
