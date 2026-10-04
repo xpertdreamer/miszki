@@ -1,11 +1,23 @@
 #include "math.h"
 #include "util.h"
 
+/**
+ * @brief Anonymous namespace containing sieve utilities.
+ */
 namespace {
+    /**
+    * @struct Sieve
+    * @brief Simple array wrapper
+    */
     struct Sieve {
         bool data[SIEVE_LIMIT + 1];
     };
 
+    /**
+    * @brief Builds a sieve of Eratosthenes at compile time.
+    * Initializes the sieve by marking 0 and 1 as composite
+    * @return A fully populated @c Sieve object.
+    */
     constexpr Sieve
     build_sieve()
     {
@@ -19,6 +31,9 @@ namespace {
         return sieve;
     }
 
+    /**
+    * @brief Precomputed sieve of Eratosthenes for numbers up to @c SIEVE_LIMIT.
+    */
     constexpr Sieve COMPOSITE = build_sieve();
 }
 

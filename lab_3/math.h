@@ -6,13 +6,13 @@
 #include <vector>
 
 /**
- * @def i64
+ * @typedef i64
  * @brief Short alias for std::int64_t.
  */
 typedef std::int64_t i64;
 
 /**
- * @def u64
+ * @typedef u64
  * @brief Short alias for std::uint64_t.
  */
 typedef std::uint64_t u64;
