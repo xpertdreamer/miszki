@@ -7,13 +7,13 @@
  * @def i64
  * @brief Short alias for std::int64_t.
  */
-#define i64 std::int64_t
+typedef std::int64_t i64;
 
 /**
  * @def u64
  * @brief Short alias for std::uint64_t.
  */
-#define u64 std::uint64_t
+typedef std::uint64_t u64;
 
 /**
  * @def SIEVE_LIMIT
