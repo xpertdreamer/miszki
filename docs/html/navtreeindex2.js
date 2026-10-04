@@ -1,6 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"namespaceargparse_1_1details.html#a667e18eec0ce6f68fde84a062cbcd23b":[0,0,0,0,24],
 "namespaceargparse_1_1details.html#a801eda7dc3cab2115fee4f4073671024":[0,0,0,0,21],
 "namespaceargparse_1_1details.html#aa287475779c8a079dd9a3c4b2d5b0ce1":[0,0,0,0,29],
 "namespaceargparse_1_1details.html#ab3c364ad852c09a36702c5e75b20bf33":[0,0,0,0,35],
@@ -15,8 +14,10 @@ var NAVTREEINDEX2 =
 "namespaceargparse_1_1details.html#af1c9496e8da9220f864b82968cf7b294":[0,0,0,0,30],
 "namespaceargparse_1_1details.html#afe9069ea0a1df8d6c1481e87f416dd3b":[0,0,0,0,25],
 "namespacemath.html":[0,0,1],
-"namespacemath.html#a1cdd97563b397fef409e5c1fc04973cf":[0,0,1,0],
-"namespacemath.html#aa56376e796b75b8abd28f95a359cf289":[0,0,1,1],
+"namespacemath.html#a1cdd97563b397fef409e5c1fc04973cf":[0,0,1,1],
+"namespacemath.html#a69cbff5d5b74769e86dc1c890c159386":[0,0,1,0],
+"namespacemath.html#a6daf14d115a56ee65bb4fb830cc00bdc":[0,0,1,3],
+"namespacemath.html#aa56376e796b75b8abd28f95a359cf289":[0,0,1,2],
 "namespacemembers.html":[0,1,0],
 "namespacemembers_enum.html":[0,1,3],
 "namespacemembers_func.html":[0,1,1],

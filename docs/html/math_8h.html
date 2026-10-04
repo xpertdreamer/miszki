@@ -92,6 +92,8 @@ $(function(){initNavTree('math_8h.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="math_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -101,37 +103,26 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aa777e5139adfca31612ec04bc2b26845" id="r_aa777e5139adfca31612ec04bc2b26845"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa777e5139adfca31612ec04bc2b26845">i64</a>&#160;&#160;&#160;std::int64_t</td></tr>
-<tr class="memdesc:aa777e5139adfca31612ec04bc2b26845"><td class="mdescLeft">&#160;</td><td class="mdescRight">Short alias for std::int64_t.  <br /></td></tr>
-<tr class="memitem:a969c7c1ebb4f70581e040a3034b14ee0" id="r_a969c7c1ebb4f70581e040a3034b14ee0"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a969c7c1ebb4f70581e040a3034b14ee0">u64</a>&#160;&#160;&#160;std::uint64_t</td></tr>
-<tr class="memdesc:a969c7c1ebb4f70581e040a3034b14ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Short alias for std::uint64_t.  <br /></td></tr>
 <tr class="memitem:ac9f4c2dfa9db5291069f46747a44864e" id="r_ac9f4c2dfa9db5291069f46747a44864e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac9f4c2dfa9db5291069f46747a44864e">SIEVE_LIMIT</a>&#160;&#160;&#160;500'000</td></tr>
 <tr class="memdesc:ac9f4c2dfa9db5291069f46747a44864e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant value used to generate Sieve of Eratosthenes at compile-time.  <br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a375256ccd3daa7dbd6524e35cba2fd18" id="r_a375256ccd3daa7dbd6524e35cba2fd18"><td class="memItemLeft">typedef std::int64_t&#160;</td><td class="memItemRight"><a class="el" href="#a375256ccd3daa7dbd6524e35cba2fd18">i64</a></td></tr>
+<tr class="memitem:af6678547e24ec6e188e10cfbb8e6fce7" id="r_af6678547e24ec6e188e10cfbb8e6fce7"><td class="memItemLeft">typedef std::uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1cdd97563b397fef409e5c1fc04973cf" id="r_a1cdd97563b397fef409e5c1fc04973cf"><td class="memItemLeft"><a class="el" href="#a969c7c1ebb4f70581e040a3034b14ee0">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacemath.html#a1cdd97563b397fef409e5c1fc04973cf">math::euler_bruteforce</a> (<a class="el" href="#a969c7c1ebb4f70581e040a3034b14ee0">u64</a> number)</td></tr>
+<tr class="memitem:a1cdd97563b397fef409e5c1fc04973cf" id="r_a1cdd97563b397fef409e5c1fc04973cf"><td class="memItemLeft"><a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacemath.html#a1cdd97563b397fef409e5c1fc04973cf">math::euler_bruteforce</a> (<a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> number)</td></tr>
 <tr class="memdesc:a1cdd97563b397fef409e5c1fc04973cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes Euler's totient function (phi) using brute force.  <br /></td></tr>
-<tr class="memitem:aa56376e796b75b8abd28f95a359cf289" id="r_aa56376e796b75b8abd28f95a359cf289"><td class="memItemLeft"><a class="el" href="#a969c7c1ebb4f70581e040a3034b14ee0">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacemath.html#aa56376e796b75b8abd28f95a359cf289">math::euler_sieve</a> (<a class="el" href="#a969c7c1ebb4f70581e040a3034b14ee0">u64</a> number)</td></tr>
+<tr class="memitem:aa56376e796b75b8abd28f95a359cf289" id="r_aa56376e796b75b8abd28f95a359cf289"><td class="memItemLeft"><a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacemath.html#aa56376e796b75b8abd28f95a359cf289">math::euler_sieve</a> (<a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> number)</td></tr>
 <tr class="memdesc:aa56376e796b75b8abd28f95a359cf289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Competes Euler's totient function (phi) usign Sieve of Eratosthene.  <br /></td></tr>
+<tr class="memitem:a6daf14d115a56ee65bb4fb830cc00bdc" id="r_a6daf14d115a56ee65bb4fb830cc00bdc"><td class="memItemLeft">std::pair&lt; <a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>, std::pair&lt; <a class="el" href="#a375256ccd3daa7dbd6524e35cba2fd18">i64</a>, <a class="el" href="#a375256ccd3daa7dbd6524e35cba2fd18">i64</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacemath.html#a6daf14d115a56ee65bb4fb830cc00bdc">math::extended_gcd</a> (<a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> a, <a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> b)</td></tr>
+<tr class="memdesc:a6daf14d115a56ee65bb4fb830cc00bdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extended Euclid's algorithm (ax + by = gcd(x, y)).  <br /></td></tr>
+<tr class="memitem:a69cbff5d5b74769e86dc1c890c159386" id="r_a69cbff5d5b74769e86dc1c890c159386"><td class="memItemLeft"><a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacemath.html#a69cbff5d5b74769e86dc1c890c159386">math::crt</a> (const std::vector&lt; <a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> &gt; &amp;ms, const std::vector&lt; <a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> &gt; &amp;rs)</td></tr>
+<tr class="memdesc:a69cbff5d5b74769e86dc1c890c159386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chinese Remainder Theorem using direct construction.  <br /></td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="aa777e5139adfca31612ec04bc2b26845" name="aa777e5139adfca31612ec04bc2b26845"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa777e5139adfca31612ec04bc2b26845">&#9670;&#160;</a></span>i64</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define i64&#160;&#160;&#160;std::int64_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Short alias for std::int64_t. </p>
-
-</div>
-</div>
 <a id="ac9f4c2dfa9db5291069f46747a44864e" name="ac9f4c2dfa9db5291069f46747a44864e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9f4c2dfa9db5291069f46747a44864e">&#9670;&#160;</a></span>SIEVE_LIMIT</h2>
 
@@ -148,19 +139,32 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a969c7c1ebb4f70581e040a3034b14ee0" name="a969c7c1ebb4f70581e040a3034b14ee0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a969c7c1ebb4f70581e040a3034b14ee0">&#9670;&#160;</a></span>u64</h2>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="a375256ccd3daa7dbd6524e35cba2fd18" name="a375256ccd3daa7dbd6524e35cba2fd18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a375256ccd3daa7dbd6524e35cba2fd18">&#9670;&#160;</a></span>i64</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define u64&#160;&#160;&#160;std::uint64_t</td>
+          <td class="memname">typedef std::int64_t <a class="el" href="#a375256ccd3daa7dbd6524e35cba2fd18">i64</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Short alias for std::uint64_t. </p>
+</div>
+</div>
+<a id="af6678547e24ec6e188e10cfbb8e6fce7" name="af6678547e24ec6e188e10cfbb8e6fce7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6678547e24ec6e188e10cfbb8e6fce7">&#9670;&#160;</a></span>u64</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::uint64_t <a class="el" href="#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

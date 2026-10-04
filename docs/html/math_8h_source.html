@@ -95,27 +95,38 @@ $(function(){initNavTree('math_8h_source.html','',''); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MATH_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="math_8h.html#aa777e5139adfca31612ec04bc2b26845">   10</a></span><span class="preprocessor">#define i64 std::int64_t</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">   16</a></span><span class="preprocessor">#define u64 std::uint64_t</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="math_8h.html#ac9f4c2dfa9db5291069f46747a44864e">   22</a></span><span class="preprocessor">#define SIEVE_LIMIT 500&#39;000</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="namespacemath.html">   24</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemath.html">math</a> {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_define" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_function" href="namespacemath.html#a1cdd97563b397fef409e5c1fc04973cf">euler_bruteforce</a>(<a class="code hl_define" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a> number);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_define" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_function" href="namespacemath.html#aa56376e796b75b8abd28f95a359cf289">euler_sieve</a>(<a class="code hl_define" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a> number);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="math_8h.html#a375256ccd3daa7dbd6524e35cba2fd18">   12</a></span><span class="keyword">typedef</span> std::int64_t <a class="code hl_typedef" href="math_8h.html#a375256ccd3daa7dbd6524e35cba2fd18">i64</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">   18</a></span><span class="keyword">typedef</span> std::uint64_t <a class="code hl_typedef" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="math_8h.html#ac9f4c2dfa9db5291069f46747a44864e">   24</a></span><span class="preprocessor">#define SIEVE_LIMIT 500&#39;000</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespacemath.html">   26</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemath.html">math</a> {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_typedef" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_function" href="namespacemath.html#a1cdd97563b397fef409e5c1fc04973cf">euler_bruteforce</a>(<a class="code hl_typedef" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> number);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_typedef" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_function" href="namespacemath.html#aa56376e796b75b8abd28f95a359cf289">euler_sieve</a>(<a class="code hl_typedef" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> number);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    std::pair&lt;u64, std::pair&lt;i64, i64&gt;&gt;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_function" href="namespacemath.html#a6daf14d115a56ee65bb4fb830cc00bdc">extended_gcd</a>(<a class="code hl_typedef" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> a, <a class="code hl_typedef" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> b);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_typedef" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_function" href="namespacemath.html#a69cbff5d5b74769e86dc1c890c159386">crt</a>(<span class="keyword">const</span> std::vector&lt;u64&gt;&amp; ms, <span class="keyword">const</span> std::vector&lt;u64&gt;&amp; rs);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="amath_8h_html_a969c7c1ebb4f70581e040a3034b14ee0"><div class="ttname"><a href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a></div><div class="ttdeci">#define u64</div><div class="ttdoc">Short alias for std::uint64_t.</div><div class="ttdef"><b>Definition</b> math.h:16</div></div>
-<div class="ttc" id="anamespacemath_html"><div class="ttname"><a href="namespacemath.html">math</a></div><div class="ttdef"><b>Definition</b> math.h:24</div></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="amath_8h_html_a375256ccd3daa7dbd6524e35cba2fd18"><div class="ttname"><a href="math_8h.html#a375256ccd3daa7dbd6524e35cba2fd18">i64</a></div><div class="ttdeci">std::int64_t i64</div><div class="ttdef"><b>Definition</b> math.h:12</div></div>
+<div class="ttc" id="amath_8h_html_af6678547e24ec6e188e10cfbb8e6fce7"><div class="ttname"><a href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></div><div class="ttdeci">std::uint64_t u64</div><div class="ttdef"><b>Definition</b> math.h:18</div></div>
+<div class="ttc" id="anamespacemath_html"><div class="ttname"><a href="namespacemath.html">math</a></div><div class="ttdef"><b>Definition</b> math.h:26</div></div>
 <div class="ttc" id="anamespacemath_html_a1cdd97563b397fef409e5c1fc04973cf"><div class="ttname"><a href="namespacemath.html#a1cdd97563b397fef409e5c1fc04973cf">math::euler_bruteforce</a></div><div class="ttdeci">u64 euler_bruteforce(u64 number)</div><div class="ttdoc">Computes Euler&#39;s totient function (phi) using brute force.</div><div class="ttdef"><b>Definition</b> math.cpp:26</div></div>
+<div class="ttc" id="anamespacemath_html_a69cbff5d5b74769e86dc1c890c159386"><div class="ttname"><a href="namespacemath.html#a69cbff5d5b74769e86dc1c890c159386">math::crt</a></div><div class="ttdeci">u64 crt(const std::vector&lt; u64 &gt; &amp;ms, const std::vector&lt; u64 &gt; &amp;rs)</div><div class="ttdoc">Chinese Remainder Theorem using direct construction.</div><div class="ttdef"><b>Definition</b> math.cpp:100</div></div>
+<div class="ttc" id="anamespacemath_html_a6daf14d115a56ee65bb4fb830cc00bdc"><div class="ttname"><a href="namespacemath.html#a6daf14d115a56ee65bb4fb830cc00bdc">math::extended_gcd</a></div><div class="ttdeci">std::pair&lt; u64, std::pair&lt; i64, i64 &gt; &gt; extended_gcd(u64 a, u64 b)</div><div class="ttdoc">Extended Euclid&#39;s algorithm (ax + by = gcd(x, y)).</div><div class="ttdef"><b>Definition</b> math.cpp:69</div></div>
 <div class="ttc" id="anamespacemath_html_aa56376e796b75b8abd28f95a359cf289"><div class="ttname"><a href="namespacemath.html#aa56376e796b75b8abd28f95a359cf289">math::euler_sieve</a></div><div class="ttdeci">u64 euler_sieve(u64 number)</div><div class="ttdoc">Competes Euler&#39;s totient function (phi) usign Sieve of Eratosthene.</div><div class="ttdef"><b>Definition</b> math.cpp:44</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

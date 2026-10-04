@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mutex_5fgroup_5fit_0',['mutex_group_it',['../classargparse_1_1ArgumentParser.html#a55686df4755ba228e08791544cabcadd',1,'argparse::ArgumentParser']]]
+  ['i64_0',['i64',['../math_8h.html#a375256ccd3daa7dbd6524e35cba2fd18',1,'math.h']]]
 ];

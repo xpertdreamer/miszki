@@ -94,12 +94,47 @@ $(function(){initNavTree('namespacemath.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1cdd97563b397fef409e5c1fc04973cf" id="r_a1cdd97563b397fef409e5c1fc04973cf"><td class="memItemLeft"><a class="el" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1cdd97563b397fef409e5c1fc04973cf">euler_bruteforce</a> (<a class="el" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a> number)</td></tr>
+<tr class="memitem:a1cdd97563b397fef409e5c1fc04973cf" id="r_a1cdd97563b397fef409e5c1fc04973cf"><td class="memItemLeft"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1cdd97563b397fef409e5c1fc04973cf">euler_bruteforce</a> (<a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> number)</td></tr>
 <tr class="memdesc:a1cdd97563b397fef409e5c1fc04973cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes Euler's totient function (phi) using brute force.  <br /></td></tr>
-<tr class="memitem:aa56376e796b75b8abd28f95a359cf289" id="r_aa56376e796b75b8abd28f95a359cf289"><td class="memItemLeft"><a class="el" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa56376e796b75b8abd28f95a359cf289">euler_sieve</a> (<a class="el" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a> number)</td></tr>
+<tr class="memitem:aa56376e796b75b8abd28f95a359cf289" id="r_aa56376e796b75b8abd28f95a359cf289"><td class="memItemLeft"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa56376e796b75b8abd28f95a359cf289">euler_sieve</a> (<a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> number)</td></tr>
 <tr class="memdesc:aa56376e796b75b8abd28f95a359cf289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Competes Euler's totient function (phi) usign Sieve of Eratosthene.  <br /></td></tr>
+<tr class="memitem:a6daf14d115a56ee65bb4fb830cc00bdc" id="r_a6daf14d115a56ee65bb4fb830cc00bdc"><td class="memItemLeft">std::pair&lt; <a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>, std::pair&lt; <a class="el" href="math_8h.html#a375256ccd3daa7dbd6524e35cba2fd18">i64</a>, <a class="el" href="math_8h.html#a375256ccd3daa7dbd6524e35cba2fd18">i64</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a6daf14d115a56ee65bb4fb830cc00bdc">extended_gcd</a> (<a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> a, <a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> b)</td></tr>
+<tr class="memdesc:a6daf14d115a56ee65bb4fb830cc00bdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extended Euclid's algorithm (ax + by = gcd(x, y)).  <br /></td></tr>
+<tr class="memitem:a69cbff5d5b74769e86dc1c890c159386" id="r_a69cbff5d5b74769e86dc1c890c159386"><td class="memItemLeft"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>&#160;</td><td class="memItemRight"><a class="el" href="#a69cbff5d5b74769e86dc1c890c159386">crt</a> (const std::vector&lt; <a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> &gt; &amp;ms, const std::vector&lt; <a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> &gt; &amp;rs)</td></tr>
+<tr class="memdesc:a69cbff5d5b74769e86dc1c890c159386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chinese Remainder Theorem using direct construction.  <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a69cbff5d5b74769e86dc1c890c159386" name="a69cbff5d5b74769e86dc1c890c159386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69cbff5d5b74769e86dc1c890c159386">&#9670;&#160;</a></span>crt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> math::crt </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>ms</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Chinese Remainder Theorem using direct construction. </p>
+<p>If numbers are non coprime integers returns 0 </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ms</td><td>moduli </td></tr>
+    <tr><td class="paramname">rs</td><td>remainders </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>x in [0; M] satisfying every congruence, or 0 when the moduli are not pairwise coprime </dd></dl>
+
+</div>
+</div>
 <a id="a1cdd97563b397fef409e5c1fc04973cf" name="a1cdd97563b397fef409e5c1fc04973cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1cdd97563b397fef409e5c1fc04973cf">&#9670;&#160;</a></span>euler_bruteforce()</h2>
 
@@ -107,9 +142,9 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a> math::euler_bruteforce </td>
+          <td class="memname"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> math::euler_bruteforce </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a></td>          <td class="paramname"><span class="paramname"><em>number</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></td>          <td class="paramname"><span class="paramname"><em>number</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -133,9 +168,9 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a> math::euler_sieve </td>
+          <td class="memname"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a> math::euler_sieve </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0">u64</a></td>          <td class="paramname"><span class="paramname"><em>number</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></td>          <td class="paramname"><span class="paramname"><em>number</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -149,6 +184,37 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Euler's totient of number. </dd></dl>
+
+</div>
+</div>
+<a id="a6daf14d115a56ee65bb4fb830cc00bdc" name="a6daf14d115a56ee65bb4fb830cc00bdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6daf14d115a56ee65bb4fb830cc00bdc">&#9670;&#160;</a></span>extended_gcd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; <a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a>, std::pair&lt; <a class="el" href="math_8h.html#a375256ccd3daa7dbd6524e35cba2fd18">i64</a>, <a class="el" href="math_8h.html#a375256ccd3daa7dbd6524e35cba2fd18">i64</a> &gt; &gt; math::extended_gcd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7">u64</a></td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extended Euclid's algorithm (ax + by = gcd(x, y)). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>First unsigned integer </td></tr>
+    <tr><td class="paramname">b</td><td>Second unsigned integer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Signature: pair.first = greatest common divisor of a and b; pair.second.first = x; pair.second.second = y </dd></dl>
 
 </div>
 </div>

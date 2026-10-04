@@ -11,5 +11,6 @@ var searchData=
   ['error_8',['ERROR',['../lab__1_2util_8h.html#a15378cd15bafb3a79061424b452497aa',1,'ERROR:&#160;util.h'],['../lab__3_2util_8h.html#a15378cd15bafb3a79061424b452497aa',1,'ERROR:&#160;util.h']]],
   ['error_5fcolor_9',['ERROR_COLOR',['../lab__1_2util_8h.html#a79b638f694ebb66a5eb8b994f4139906',1,'ERROR_COLOR:&#160;util.h'],['../lab__3_2util_8h.html#a79b638f694ebb66a5eb8b994f4139906',1,'ERROR_COLOR:&#160;util.h']]],
   ['euler_5fbruteforce_10',['euler_bruteforce',['../namespacemath.html#a1cdd97563b397fef409e5c1fc04973cf',1,'math']]],
-  ['euler_5fsieve_11',['euler_sieve',['../namespacemath.html#aa56376e796b75b8abd28f95a359cf289',1,'math']]]
+  ['euler_5fsieve_11',['euler_sieve',['../namespacemath.html#aa56376e796b75b8abd28f95a359cf289',1,'math']]],
+  ['extended_5fgcd_12',['extended_gcd',['../namespacemath.html#a6daf14d115a56ee65bb4fb830cc00bdc',1,'math']]]
 ];

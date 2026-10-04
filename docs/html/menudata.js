@@ -120,7 +120,7 @@ var menudata={children:[
 {text:"r",url:"globals_func.html#index_r"},
 {text:"s",url:"globals_func.html#index_s"},
 {text:"w",url:"globals_func.html#index_w"}]},
-{text:"Variables",url:"globals_vars.html"},
+{text:"Typedefs",url:"globals_type.html"},
 {text:"Enumerations",url:"globals_enum.html"},
 {text:"Enumerator",url:"globals_eval.html"},
 {text:"Macros",url:"globals_defs.html",children:[
@@ -134,5 +134,4 @@ var menudata={children:[
 {text:"p",url:"globals_defs.html#index_p"},
 {text:"r",url:"globals_defs.html#index_r"},
 {text:"s",url:"globals_defs.html#index_s"},
-{text:"t",url:"globals_defs.html#index_t"},
-{text:"u",url:"globals_defs.html#index_u"}]}]}]}]}
+{text:"t",url:"globals_defs.html#index_t"}]}]}]}]}

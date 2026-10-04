@@ -158,7 +158,7 @@ var NAVTREEINDEX1 =
 "globals_enum.html":[2,1,3],
 "globals_eval.html":[2,1,4],
 "globals_func.html":[2,1,1],
-"globals_vars.html":[2,1,2],
+"globals_type.html":[2,1,2],
 "hierarchy.html":[1,2],
 "index.html":[],
 "input_8c.html":[2,0,0,1],
@@ -219,12 +219,11 @@ var NAVTREEINDEX1 =
 "main_8c.html#adbd94520376d69839a3eece27fe486bf":[2,0,0,3,0],
 "main_8cpp.html":[2,0,1,2],
 "main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97":[2,0,1,2,0],
-"main_8cpp.html#a71f51d98a63869339cfa8f9e9a6a3fc2":[2,0,1,2,1],
 "math_8cpp.html":[2,0,1,3],
 "math_8h.html":[2,0,1,4],
-"math_8h.html#a969c7c1ebb4f70581e040a3034b14ee0":[2,0,1,4,2],
-"math_8h.html#aa777e5139adfca31612ec04bc2b26845":[2,0,1,4,0],
-"math_8h.html#ac9f4c2dfa9db5291069f46747a44864e":[2,0,1,4,1],
+"math_8h.html#a375256ccd3daa7dbd6524e35cba2fd18":[2,0,1,4,1],
+"math_8h.html#ac9f4c2dfa9db5291069f46747a44864e":[2,0,1,4,0],
+"math_8h.html#af6678547e24ec6e188e10cfbb8e6fce7":[2,0,1,4,2],
 "math_8h_source.html":[2,0,1,4],
 "namespaceargparse.html":[0,0,0],
 "namespaceargparse.html#a172793a32b6bc1069cb87cad08e93ade":[0,0,0,3],
@@ -249,5 +248,6 @@ var NAVTREEINDEX1 =
 "namespaceargparse_1_1details.html#a4c10e073deec93add565913576fefd63":[0,0,0,0,40],
 "namespaceargparse_1_1details.html#a5238c32329ee5a2dfa4daa94cf9776c8":[0,0,0,0,34],
 "namespaceargparse_1_1details.html#a5a5ad48bac51a036838a69a5962f38bb":[0,0,0,0,33],
-"namespaceargparse_1_1details.html#a6172536c8ac4081966b283ed1b88a2f6":[0,0,0,0,23]
+"namespaceargparse_1_1details.html#a6172536c8ac4081966b283ed1b88a2f6":[0,0,0,0,23],
+"namespaceargparse_1_1details.html#a667e18eec0ce6f68fde84a062cbcd23b":[0,0,0,0,24]
 };
