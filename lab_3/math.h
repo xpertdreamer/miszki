@@ -15,6 +15,12 @@
  */
 #define u64 std::uint64_t
 
+/**
+ * @def SIEVE_LIMIT
+ * @brief Constant value used to generate Sieve of Eratosthenes at compile-time
+ */
+#define SIEVE_LIMIT 500'000
+
 namespace math {
     /**
     * @brief Computes Euler's totient function (phi) using brute force.

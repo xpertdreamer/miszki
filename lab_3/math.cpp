@@ -2,8 +2,6 @@
 #include "util.h"
 
 namespace {
-    constexpr std::size_t SIEVE_LIMIT = 500'000;
-
     struct Sieve {
         bool data[SIEVE_LIMIT + 1];
     };
