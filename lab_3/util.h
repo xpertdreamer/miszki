@@ -7,6 +7,8 @@
 #define UTIL_H
 
 #include <stdio.h>
+#include <chrono>
+#include <iostream>
 
 #include "conf.h"
 
