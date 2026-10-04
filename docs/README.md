@@ -57,6 +57,14 @@ Then open in your browser following link: ``http://localhost:6060/pkg/mizski/``
 > [!NOTE]
 > You can also provide the ``DOCS=1`` flag after the make target, and the documentation will be generated automatically into the `docs/html` directory.
 
+To open per-project inline documentation you can use icluded tool:
+
+``` shell
+./docs.sh [target]
+```
+
+Or manually find desired html-page in ``docs/html``.
+
 ## Laboratory Work 1
 ### References:
   - <https://en.wikipedia.org/wiki/Substitution_cipher>
