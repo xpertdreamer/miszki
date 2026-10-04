@@ -11,7 +11,7 @@ Otherwise, if you have **Podman** on your machine, just run the container with t
 
 ``` shell
     podman build . -t mis:latest
-    podman run --rm -v .:/app env:latest [target to build] <-d>
+    podman run --rm -v .:/app mis:latest [target to build] <-d> <-debug>
 ```
 
 The build script runs automatically inside the container to build the specified target. The list of all targets can be found in the [make](#make-commands) section.
