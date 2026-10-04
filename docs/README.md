@@ -120,3 +120,13 @@ Or manually find desired html-page in ``docs/html``.
   - <https://github.com/PetarV-/Algorithms/blob/master/Mathematical%20Algorithms/Extended%20Euclidean%20Algorithm.cpp>
   - <https://www.diva-portal.org/smash/get/diva2:530204/FULLTEXT01.pdf> (main reference-resource)
   - <https://cp-algorithms.com/algebra/extended-euclid-algorithm.html>
+  - <https://www.youtube.com/watch?v=hcY5iMwgx3w>
+  - <https://cp-algorithms.com/algebra/chinese-remainder-theorem.html>
+  - <https://scispace.com/pdf/extended-euclidean-algorithm-and-crt-algorithm-146nz5cpma.pdf>
+  - <http://e-maxx.ru/algo/chinese_theorem#0>
+  - <https://stackoverflow.com/questions/5385024/mod-in-java-produces-negative-numbers>
+  - <https://en.wikipedia.org/wiki/Chinese_remainder_theorem#Proof>
+  - <https://codeforces.com/blog/entry/61290>
+  - <https://en.wikipedia.org/wiki/Coprime_integers>
+  - <https://github.com/PabloMessina/Competitive-Programming-Material/blob/master/Mathematics/chinese_remainder_theorem.cpp>
+  - <https://www.geeksforgeeks.org/dsa/introduction-to-chinese-remainder-theorem/>
