@@ -1,5 +1,5 @@
 DEBUG ?= 0
-PKG ?= lab_3
+PKG ?= lab_2
 DOCS ?= 0
 
 define run_doxygen
