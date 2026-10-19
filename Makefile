@@ -29,7 +29,7 @@ lab3: lab_3/main.cpp lab_3/math.cpp
 	g++ -Wall -Wextra $^ -o build/lab_3/lab3 -DDEBUG_MODE=$(DEBUG)
 	$(call run_doxygen)
 
-lab5: lab_5/main.c lab_5/shell.c
+lab5: lab_5/main.c lab_5/shell.c lab_5/handlers.c
 	@mkdir -p build/lab_5
 	g++ -Wall -Wextra -Ilab_5 -g $^ -o build/lab_5/lab5 -DDEBUG_MODE=$(DEBUG)
 

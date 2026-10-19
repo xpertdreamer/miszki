@@ -6,15 +6,12 @@
 
 FILE *flog;
 
-void
-help_handler()
-{
-    fprintf(stdout, "Help\n");
-}
+extern void help_handler();
 
 int
 main(int argc, char** argv)
 {
+    // open log file section
     (void)argc;
     char path[MAX_PATH_LEN];
     get_path(argv, path);
@@ -24,10 +21,13 @@ main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
+    // shell section
     cmd cmds[1] = {{"help", "description", help_handler}};
     shell *sh = sh_create(cmds, 1);
     sh_change_prompt(sh, '>');
     while(sh_daemon(sh));
+
+    // cleanup section
     sh_destroy(sh);
     fclose(flog);
 }
