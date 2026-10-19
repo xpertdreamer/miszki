@@ -56,6 +56,7 @@ sh_execute(shell* instance, const char* name)
             return;
         }
     }
+    fprintf(stdout, "cannot find command [%s] in current instance\n", name);
 }
 
 char*

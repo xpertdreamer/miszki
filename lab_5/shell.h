@@ -4,6 +4,8 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+typedef struct Shell shell;
+
 typedef struct {
     const char* name;
     const char* description;
@@ -11,11 +13,11 @@ typedef struct {
 } cmd;
 
 // TODO: rewrite commands with hashmap
-typedef struct {
+struct Shell {
     char prompt;
     size_t commands_num;
     cmd* commands;
-} shell;
+};
 
 shell*
 sh_create(cmd* commands, size_t len);

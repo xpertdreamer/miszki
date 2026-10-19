@@ -27,7 +27,7 @@ main(int argc, char** argv)
 
     cmd cmds[1] = {{"help", "description", help_handler}};
     shell *sh = sh_create(cmds, 1);
-    sh_change_prompt(sh, '$');
+    sh_change_prompt(sh, '>');
     while(sh_daemon(sh));
     fclose(flog);
 }
