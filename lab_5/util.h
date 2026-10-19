@@ -23,6 +23,8 @@
 #define RESET_COLOR ""          ///< Empty on Windows.
 #endif
 
+#define MAX_PATH_LEN 1024
+
 /**
  * @def DEBUG
  * @brief Prints a debug message to stdout when @c DEBUG_MODE is enabled.
@@ -101,7 +103,24 @@ extern FILE *flog;
             ERROR("%s Failed: %s is NULL", #func, #ptr);    \
             return NULL;                                    \
         }                                                   \
-    } while(0)
+        } while(0)
+
+inline void
+get_path(char** argv, char* buffer)
+{
+    if (argv == NULL) {
+        ERROR("cannot get argv");
+        return;
+    }
+    char buf[MAX_PATH_LEN];
+    char* realp = realpath(argv[0], buf);
+    if (!realp) {
+        ERROR("cannot get real path");
+        exit(EXIT_FAILURE);
+    }
+    buf[strlen(buf) - 4] = '\0';
+    snprintf(buffer, MAX_PATH_LEN, "%.1000slog.log", buf);
+}
 
 /* #define MASK(str, type)                         \ */
 /*     do {                                        \ */

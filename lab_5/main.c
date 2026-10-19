@@ -1,29 +1,33 @@
 #include "util.h"
+#include "shell.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_PATH_LEN 1024
-
 FILE *flog;
+
+void
+help_handler()
+{
+    fprintf(stdout, "Help\n");
+}
 
 int
 main(int argc, char** argv)
 {
-    char buf[MAX_PATH_LEN];
-    char* realp = realpath(argv[0], buf);
-    if (!realp) {
-        ERROR("cannot get real path");
-        exit(EXIT_FAILURE);
-    }
-    buf[strlen(buf) - 4] = '\0';
     (void)argc;
     char path[MAX_PATH_LEN];
-    snprintf(path, MAX_PATH_LEN, "%.1000slog.log", buf);
+    get_path(argv, path);
     DEBUG("%s", path);
     if ((flog = fopen(path, "a")) == NULL) {
         ERROR("cannot open log file");
         exit(EXIT_FAILURE);
     }
     LOG("try");
+
+    cmd cmds[1] = {{"help", "description", help_handler}};
+    shell *sh = sh_create(cmds, 1);
+    sh_change_prompt(sh, '$');
+    while(sh_daemon(sh));
     fclose(flog);
 }
