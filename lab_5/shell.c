@@ -96,13 +96,17 @@ sh_daemon(shell* instance)
         ERROR("instance recieve fail");
         return false;
     }
-    printf("%c ", instance->prompt);
+
+    putchar(instance->prompt);
+    putchar(' ');
+
     char* input = get_input();
     if (input == NULL) {
         ERROR("error recieving input");
         return false;
     }
     sh_execute(instance, input);
+
     free(input);
     return true;
 }
