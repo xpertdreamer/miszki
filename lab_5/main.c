@@ -23,11 +23,11 @@ main(int argc, char** argv)
         ERROR("cannot open log file");
         exit(EXIT_FAILURE);
     }
-    LOG("try");
 
     cmd cmds[1] = {{"help", "description", help_handler}};
     shell *sh = sh_create(cmds, 1);
     sh_change_prompt(sh, '>');
     while(sh_daemon(sh));
+    sh_destroy(sh);
     fclose(flog);
 }
