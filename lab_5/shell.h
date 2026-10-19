@@ -4,6 +4,13 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+// Usage:
+// cmd cmds[1] = {{"help", "description", help_handler}}; // initialize vector of commands
+// shell *sh = sh_create(cmds, 1);                        // create new shell
+// sh_change_prompt(sh, '>');                             // change standard propmt if neededx
+// while(sh_daemon(sh));                                  // run daemon to listen user input and execute
+
+
 typedef struct Shell shell;
 
 typedef struct {
