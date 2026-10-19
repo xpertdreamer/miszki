@@ -23,7 +23,7 @@ sh_create(cmd* commands, size_t len)
     for (size_t i = 0; i < len; ++i) {
         sh->commands[i] = commands[i];
     }
-
+    LOG("shell created");
     return sh;
 }
 
@@ -36,6 +36,7 @@ sh_destroy(shell* instance)
         }
         free(instance);
     }
+    LOG("shell destroyed");
 }
 
 void
@@ -62,17 +63,27 @@ sh_execute(shell* instance, const char* name)
 char*
 get_input()
 {
-    char c = 64;
-    char* str = (char*)malloc(10);
-    int i = 0;
-    scanf("%c", &c);
-    while (c != 10) {
-        str[i] = c;
-        scanf("%c", &c);
-        if (i % 10 == 0) {
-            str = (char*)realloc(str, i+10);
+    size_t cap = 10;
+    size_t i = 0;
+    char* str = (char*)malloc(cap);
+    char c;
+    while (scanf("%c", &c) == 1 && c != '\n') {
+        if (i + 1 >= cap) {
+            cap += 10;
+            char* tmp = (char*)realloc(str, cap);
+            if (tmp == NULL) {
+                free(str);
+                return NULL;
+            }
+            str = tmp;
         }
+        str[i] = c;
         i++;
+    }
+
+    if (i == 0 && feof(stdin)) {
+        free(str);
+        return NULL;
     }
     str[i] = '\0';
     return str;

@@ -9,6 +9,7 @@
 // shell *sh = sh_create(cmds, 1);                        // create new shell
 // sh_change_prompt(sh, '>');                             // change standard propmt if neededx
 // while(sh_daemon(sh));                                  // run daemon to listen user input and execute
+// sh_destroy(sh);                                        // free memory on exit
 
 
 typedef struct Shell shell;
