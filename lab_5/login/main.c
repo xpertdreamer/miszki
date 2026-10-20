@@ -1,14 +1,25 @@
 #include "util.h"
 #include "account.h"
 
+#include <signal.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 
 FILE *flog;
 
+void
+handle_sigint(int sig)
+{
+    (void)sig;
+    _exit(EXIT_SUCCESS);
+}
+
 int
 main(int argc, char** argv)
 {
+    signal(SIGINT, handle_sigint);
+
     // open log file section
     (void)argc;
     char path[MAX_PATH_LEN];

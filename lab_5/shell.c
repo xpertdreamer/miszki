@@ -97,6 +97,7 @@ sh_daemon(shell* instance)
         return false;
     }
 
+    putchar('\n');
     putchar(instance->prompt);
     putchar(' ');
 
