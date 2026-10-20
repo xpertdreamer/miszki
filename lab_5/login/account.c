@@ -2,6 +2,7 @@
 #include "util.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 char*
 sh_get_input()
@@ -42,6 +43,20 @@ login_request(void)
         return NULL;
     }
     return l;
+}
+
+enum mode
+mode_request()
+{
+    fprintf(stdout, "Choose mode (0-create/1-login): ");
+    char* l = sh_get_input();
+    if (l == NULL) {
+        ERROR("failed to request input");
+        return LOGIN;
+    }
+    if (strcmp(l, "1") == 0) {
+        return LOGIN;
+    } else return CREATE;
 }
 
 char*

@@ -27,6 +27,7 @@ main(int argc, char** argv)
                    {"login", login_handler}};
     shell *sh = sh_create(cmds, 2);
     sh_change_prompt(sh, '>');
+
     while(sh_daemon(sh));
 
     // cleanup section

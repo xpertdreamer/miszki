@@ -19,6 +19,8 @@ main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
+    enum mode m = mode_request();
+
     char* login = login_request();
     if (login == NULL) {
         ERROR("failed to request user login");
@@ -38,7 +40,17 @@ main(int argc, char** argv)
         free(pass);
         fclose(flog);
     }
-    account_create(p);
+
+    switch (m) {
+        case CREATE: {
+            account_create(p);
+            break;
+        }
+        case LOGIN: {
+            // TODO: login
+            break;
+        }
+    }
 
     fclose(flog);
     free(login);

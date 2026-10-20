@@ -120,6 +120,7 @@ get_path(char** argv, char* buffer, const char* name)
     }
     buf[strlen(buf) - 5] = '\0';
     snprintf(buffer, MAX_PATH_LEN, "%.1000s%s", buf, name);
+    DEBUG("path=%s", buffer);
 }
 
 inline unsigned long
