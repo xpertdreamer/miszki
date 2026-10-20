@@ -32,7 +32,7 @@ lab3: lab_3/main.cpp lab_3/math.cpp
 lab5: lab_5/main.c lab_5/shell.c lab_5/handlers.c
 	@mkdir -p build/lab_5
 	g++ -Wall -Wextra -Ilab_5/login -g lab_5/login/main.c lab_5/login/account.c -o build/lab_5/login -DDEBUG_MODE=$(DEBUG)
-	g++ -fsanitize=address -Wall -Wextra -Ilab_5 -g $^ -o build/lab_5/lab5 -DDEBUG_MODE=$(DEBUG)
+	g++ -Wall -Wextra -Ilab_5 -g $^ -o build/lab_5/lab5 -DDEBUG_MODE=$(DEBUG)
 
 test:
 	cd $(PKG) && go test -v ./... | grep -v 'Timer '

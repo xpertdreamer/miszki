@@ -1,10 +1,20 @@
 #include "util.h"
 #include "shell.h"
 
+#include <signal.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+
 FILE *flog;
+
+void
+handle_sigint(int sig)
+{
+    (void)sig;
+    _exit(EXIT_SUCCESS);
+}
 
 extern void help_handler(void);
 extern void login_handler(void);
@@ -12,6 +22,8 @@ extern void login_handler(void);
 int
 main(int argc, char** argv)
 {
+    signal(SIGINT, handle_sigint);
+
     // open log file section
     char path[MAX_PATH_LEN];
     (void)argc;
