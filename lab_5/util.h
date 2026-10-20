@@ -106,7 +106,7 @@ extern FILE *flog;
         } while(0)
 
 inline void
-get_path(char** argv, char* buffer)
+get_path(char** argv, char* buffer, const char* name)
 {
     if (argv == NULL) {
         ERROR("cannot get argv");
@@ -119,7 +119,7 @@ get_path(char** argv, char* buffer)
         exit(EXIT_FAILURE);
     }
     buf[strlen(buf) - 4] = '\0';
-    snprintf(buffer, MAX_PATH_LEN, "%.1000slog.log", buf);
+    snprintf(buffer, MAX_PATH_LEN, "%.1000s%s", buf, name);
 }
 
 inline unsigned long

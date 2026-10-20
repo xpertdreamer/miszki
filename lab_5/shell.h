@@ -42,4 +42,7 @@ sh_execute(shell* instance, const char* name);
 bool
 sh_daemon(shell* instance);
 
+char*
+sh_get_input();
+
 #endif

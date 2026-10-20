@@ -61,7 +61,7 @@ sh_execute(shell* instance, const char* name)
 }
 
 char*
-get_input()
+sh_get_input()
 {
     size_t cap = 10;
     size_t i = 0;
@@ -100,7 +100,7 @@ sh_daemon(shell* instance)
     putchar(instance->prompt);
     putchar(' ');
 
-    char* input = get_input();
+    char* input = sh_get_input();
     if (input == NULL) {
         ERROR("error recieving input");
         return false;

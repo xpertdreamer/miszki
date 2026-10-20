@@ -13,4 +13,10 @@ pair_create(char* login, char* pass);
 void
 account_create(struct pair* p);
 
+char*
+password_request(void);
+
+char*
+login_request(void);
+
 #endif

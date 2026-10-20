@@ -6,15 +6,16 @@
 
 FILE *flog;
 
-extern void help_handler();
+extern void help_handler(void);
+extern void login_handler(void);
 
 int
 main(int argc, char** argv)
 {
     // open log file section
-    (void)argc;
     char path[MAX_PATH_LEN];
-    get_path(argv, path);
+    (void)argc;
+    get_path(argv, path, "log.log");
     DEBUG("%s", path);
     if ((flog = fopen(path, "a")) == NULL) {
         ERROR("cannot open log file");
@@ -22,8 +23,9 @@ main(int argc, char** argv)
     }
 
     // shell section
-    cmd cmds[1] = {{"help", "description", help_handler}};
-    shell *sh = sh_create(cmds, 1);
+    cmd cmds[2] = {{"help", "description", help_handler},
+                   {"login", "descrition", login_handler}};
+    shell *sh = sh_create(cmds, 2);
     sh_change_prompt(sh, '>');
     while(sh_daemon(sh));
 
