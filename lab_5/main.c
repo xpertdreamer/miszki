@@ -23,8 +23,8 @@ main(int argc, char** argv)
     }
 
     // shell section
-    cmd cmds[2] = {{"help", "description", help_handler},
-                   {"login", "descrition", login_handler}};
+    cmd cmds[2] = {{"help", help_handler},
+                   {"login", login_handler}};
     shell *sh = sh_create(cmds, 2);
     sh_change_prompt(sh, '>');
     while(sh_daemon(sh));

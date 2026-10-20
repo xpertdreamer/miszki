@@ -7,7 +7,9 @@
 void
 help_handler(void)
 {
-    fprintf(stdout, "Help\n");
+    puts("Help:");
+    puts("\thelp\tshow help message");
+    puts("\tlogin\tcall account");
 }
 
 void

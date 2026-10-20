@@ -16,7 +16,6 @@ typedef struct Shell shell;
 
 typedef struct {
     const char* name;
-    const char* description;
     void (*handler)();
 } cmd;
 
