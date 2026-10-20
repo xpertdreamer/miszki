@@ -130,3 +130,7 @@ Or manually find desired html-page in ``docs/html``.
   - <https://en.wikipedia.org/wiki/Coprime_integers>
   - <https://github.com/PabloMessina/Competitive-Programming-Material/blob/master/Mathematics/chinese_remainder_theorem.cpp>
   - <https://www.geeksforgeeks.org/dsa/introduction-to-chinese-remainder-theorem/>
+  
+## Laboratory Work 5
+  - <https://man7.org/linux/man-pages/man2/readlink.2.html>
+  - <https://www.baeldung.com/linux/c-code-execute-system-command>
