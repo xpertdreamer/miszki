@@ -14,3 +14,11 @@ pair_create(char* login, char* pass)
     p->password = pass;
     return p;
 }
+
+void
+account_create(struct pair* p)
+{
+    PTR_RECIEVE_FAIL_VOID(p, account_create);
+    unsigned long hashed = hash(p->password);
+    // TODO: save account details into file
+}

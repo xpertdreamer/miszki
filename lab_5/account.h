@@ -10,4 +10,7 @@ struct pair {
 struct pair*
 pair_create(char* login, char* pass);
 
+void
+account_create(struct pair* p);
+
 #endif

@@ -122,6 +122,17 @@ get_path(char** argv, char* buffer)
     snprintf(buffer, MAX_PATH_LEN, "%.1000slog.log", buf);
 }
 
+inline unsigned long
+hash(char* str) // djb2
+{
+    unsigned long h = 5381;
+    int c;
+    while ((c = *str++)) {
+        h = ((h << 5) + h) + c;
+    }
+    return h;
+}
+
 /* #define MASK(str, type)                         \ */
 /*     do {                                        \ */
 /*         // TODO: mask value of str depending on type \ */
