@@ -57,7 +57,8 @@ extern FILE *flog;
         fprintf(flog, "[%s] ", time_str);   \
                 fprintf(flog, fmt, ##__VA_ARGS__);  \
                 fprintf(flog, "\n");                \
-                }                                   \
+        fflush(flog);                               \
+    }                                               \
     } while(0)
 
 /**
