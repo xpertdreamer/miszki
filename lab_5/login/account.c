@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 char*
 sh_get_input()
@@ -91,7 +92,6 @@ pair_create(char* login, char* pass)
 void
 account_create(struct pair* p)
 {
-    // TODO: check if account already created
     PTR_RECIEVE_FAIL_VOID(p, account_create);
     size_t loglen = strlen(p->login);
     if (loglen > 4) {
@@ -122,4 +122,54 @@ account_create(struct pair* p)
     WRITEBIN(&hashed, sizeof(uint64_t), 1);
     fflush(fbin);
     LOG("new account created\tlogin=%s\tpass=%lu", p->login, hashed);
+}
+
+struct account*
+account_login(struct pair* p)
+{
+    PTR_RECIEVE_FAIL_PTR(p, account_login);
+    size_t loglen = strlen(p->login);
+    if (loglen > 4 || loglen == 0) {
+        ERROR("login is too long or empty");
+        return NULL;
+    }
+    if (fbin == NULL) {
+        ERROR("data corruption");
+        return NULL;
+    }
+
+    unsigned char logbuf[LOGLEN];
+    uint64_t dummy;
+    bool found = false;
+    fseek(fbin, 0, SEEK_SET);
+
+    while (fread(logbuf, sizeof(char), LOGLEN, fbin) == LOGLEN) {
+        if (fread(&dummy, sizeof(uint64_t), 1, fbin) != 1) {
+            ERROR("data corruption");
+            return NULL;
+        }
+        if (strncmp((const char*)logbuf, p->login, LOGLEN) == 0) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found == false) {
+        ERROR("account not found");
+        return NULL;
+    }
+    if (dummy != hash(p->password)) {
+        ERROR("password is incorrect");
+        return NULL;
+    }
+
+    fseek(fbin, 0, SEEK_END);
+
+    struct account* result = (struct account*)malloc(sizeof(struct account));
+    ALLOC_FAIL(result);
+    result->pair.login = p->login;
+    result->pair.password = p->password;
+    // TODO: log hostname for fun
+    LOG("new connection\tlogin=%s\tpass=%lu", result->pair.login, dummy);
+    return result;
 }

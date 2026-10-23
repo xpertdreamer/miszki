@@ -66,7 +66,14 @@ main(int argc, char** argv)
             break;
         }
         case LOGIN: {
-            // TODO: login
+            struct account* current = account_login(p);
+            if (current == NULL) {
+                free(login);
+                free(pass);
+                exit(EXIT_FAILURE);
+            }
+            (void)current;
+            // TODO: account daemon
             break;
         }
     }
