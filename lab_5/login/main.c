@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 FILE *flog;
+FILE *fbin;
 
 void
 handle_sigint(int sig)
@@ -24,9 +25,16 @@ main(int argc, char** argv)
     (void)argc;
     char path[MAX_PATH_LEN];
     get_path(argv, path, "log.log");
-    DEBUG("%s", path);
     if ((flog = fopen(path, "a")) == NULL) {
         ERROR("cannot open log file");
+        exit(EXIT_FAILURE);
+    }
+
+    // binary file section
+    char path_b[MAX_PATH_LEN];
+    get_path(argv, path_b, "details.bin");
+    if ((fbin = fopen(path_b, "a")) == NULL) {
+        ERROR("cannot open binary file to write account details");
         exit(EXIT_FAILURE);
     }
 
@@ -35,13 +43,13 @@ main(int argc, char** argv)
     char* login = login_request();
     if (login == NULL) {
         ERROR("failed to request user login");
-        fclose(flog);
+        exit(EXIT_FAILURE);
     }
     char* pass = password_request();
     if (pass == NULL) {
         ERROR("failed to request user password");
         free(login);
-        fclose(flog);
+        exit(EXIT_FAILURE);
     }
 
     struct pair* p = pair_create(login, pass);
@@ -49,7 +57,7 @@ main(int argc, char** argv)
         ERROR("failed to create pair");
         free(login);
         free(pass);
-        fclose(flog);
+        exit(EXIT_FAILURE);
     }
 
     switch (m) {
@@ -64,6 +72,8 @@ main(int argc, char** argv)
     }
 
     fclose(flog);
+    fclose(fbin);
     free(login);
     free(pass);
+    return EXIT_SUCCESS;
 }
