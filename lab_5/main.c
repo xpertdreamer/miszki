@@ -6,18 +6,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 FILE *flog;
+
+volatile sig_atomic_t run = 1;
 
 void
 handle_sigint(int sig)
 {
     (void)sig;
-    _exit(EXIT_SUCCESS);
+    run = 0;
 }
 
 extern void help_handler(void);
 extern void login_handler(void);
+extern void exit_handler(void);
 
 int
 main(int argc, char** argv)
@@ -35,12 +37,13 @@ main(int argc, char** argv)
     }
 
     // shell section
-    cmd cmds[2] = {{"help", help_handler},
-                   {"login", login_handler}};
-    shell *sh = sh_create(cmds, 2);
+    cmd cmds[3] = {{"help", help_handler},
+                   {"login", login_handler},
+                   {"exit", exit_handler}};
+    shell *sh = sh_create(cmds, 3);
     sh_change_prompt(sh, '$');
 
-    while(sh_daemon(sh));
+    while(run && sh_daemon(sh));
 
     // cleanup section
     sh_destroy(sh);

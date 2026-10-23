@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "conf.h"
 
@@ -130,12 +131,17 @@ get_path(char** argv, char* buffer, const char* name)
         return;
     }
     char buf[MAX_PATH_LEN];
-    char* realp = realpath(argv[0], buf);
-    if (!realp) {
-        ERROR("cannot get real path");
-        exit(EXIT_FAILURE);
+    // char* realp = realpath(argv[0], buf);
+    ssize_t len = readlink("/proc/self/exe", buf, MAX_PATH_LEN - 1);
+    /* if (!realp) { */
+    /*     ERROR("cannot get real path"); */
+    /*     exit(EXIT_FAILURE); */
+    /* } */
+    if (len == -1) {
+        ERROR("cant read current directory");
+        return;
     }
-    buf[strlen(buf) - 5] = '\0';
+    buf[len - 5] = '\0';
     snprintf(buffer, MAX_PATH_LEN, "%.1000s%s", buf, name);
     DEBUG("path=%s", buffer);
 }

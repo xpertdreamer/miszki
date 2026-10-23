@@ -1,8 +1,11 @@
 #include "util.h"
 
 #include <stdio.h>
+#include <signal.h>
 #include <string.h>
 #include <unistd.h>
+
+extern volatile sig_atomic_t run;
 
 void
 help_handler(void)
@@ -29,4 +32,10 @@ login_handler(void)
     }
     DEBUG("%s", path);
     system(path);
+}
+
+void
+exit_handler(void)
+{
+    run = 0;
 }

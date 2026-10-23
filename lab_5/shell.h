@@ -1,6 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+#include <signal.h>
 #include <stddef.h>
 #include <stdbool.h>
 

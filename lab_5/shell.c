@@ -66,7 +66,9 @@ sh_get_input()
     size_t cap = 10;
     size_t i = 0;
     char* str = (char*)malloc(cap);
+    if (str == NULL) return NULL;
     char c;
+
     while (scanf("%c", &c) == 1 && c != '\n') {
         if (i + 1 >= cap) {
             cap += 10;
