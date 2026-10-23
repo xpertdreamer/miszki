@@ -1,6 +1,8 @@
 #include "account.h"
 #include "util.h"
 
+#include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -83,11 +85,26 @@ pair_create(char* login, char* pass)
     return p;
 }
 
+#define LOGLEN 4
+
+// login max=4bytes, pass max=8bytes, sum=12bytes
 void
 account_create(struct pair* p)
 {
+    // TODO: check if account already created
     PTR_RECIEVE_FAIL_VOID(p, account_create);
-    unsigned long hashed = hash(p->password);
-    // TODO: save account details into file
+    size_t loglen = strlen(p->login);
+    if (loglen > 4) {
+        ERROR("login is too long");
+        return;
+    }
+
+    uint64_t hashed = hash(p->password);
+
+    char logbuf[LOGLEN] = {0};
+    memcpy(logbuf, p->login, loglen);
+
+    WRITEBIN(logbuf, sizeof(char), LOGLEN);
+    WRITEBIN(&hashed, sizeof(uint64_t), 1);
     LOG("new account created\tlogin=%s\tpass=%lu", p->login, hashed);
 }

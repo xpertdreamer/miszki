@@ -33,7 +33,7 @@ main(int argc, char** argv)
     // binary file section
     char path_b[MAX_PATH_LEN];
     get_path(argv, path_b, "details.bin");
-    if ((fbin = fopen(path_b, "a")) == NULL) {
+    if ((fbin = fopen(path_b, "ab")) == NULL) {
         ERROR("cannot open binary file to write account details");
         exit(EXIT_FAILURE);
     }

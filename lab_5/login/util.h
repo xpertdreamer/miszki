@@ -6,6 +6,7 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -24,6 +25,7 @@
 #endif
 
 #define MAX_PATH_LEN 1024
+#define MAX_DETAILS_LEN 1024
 
 /**
  * @def DEBUG
@@ -42,6 +44,7 @@
     } while (0)
 
 extern FILE *flog;
+extern FILE *fbin;
 
 #define LOG(fmt, ...)                               \
     do {                                            \
@@ -59,6 +62,20 @@ extern FILE *flog;
                 fprintf(flog, "\n");                \
                 }                                   \
     } while(0)
+
+inline char*
+mask(char* in)
+{
+    // TODO
+    return in;
+}
+
+#define WRITEBIN(ptr, size, count)                      \
+    do {                                                \
+        if((fbin) != NULL) {                            \
+            fwrite((ptr), (size), count, fbin);   \
+        }                                               \
+    } while (0)
 
 /**
  * @def ERROR
@@ -123,7 +140,7 @@ get_path(char** argv, char* buffer, const char* name)
     DEBUG("path=%s", buffer);
 }
 
-inline unsigned long
+inline uint64_t
 hash(char* str) // djb2
 {
     unsigned long h = 5381;
@@ -134,9 +151,6 @@ hash(char* str) // djb2
     return h;
 }
 
-/* #define MASK(str, type)                         \ */
-/*     do {                                        \ */
-/*         // TODO: mask value of str depending on type \ */
-/*     } while(0) */
+// TODO: sha1
 
 #endif
