@@ -16,7 +16,7 @@ help_handler(void)
 }
 
 void
-login_handler(void)
+account_handler(void)
 {
     char path[MAX_PATH_LEN];
     ssize_t len = readlink("/proc/self/exe", path, MAX_PATH_LEN - 1);
