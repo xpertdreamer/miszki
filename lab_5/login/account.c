@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <unistd.h>
+#include <limits.h>
 
 char*
 sh_get_input()
@@ -169,7 +171,9 @@ account_login(struct pair* p)
     ALLOC_FAIL(result);
     result->pair.login = p->login;
     result->pair.password = p->password;
-    // TODO: log hostname for fun
-    LOG("new connection\tlogin=%s\tpass=%lu", result->pair.login, dummy);
+
+    char hostname[HOST_NAME_MAX+1];
+    gethostname(hostname, HOST_NAME_MAX+1);
+    LOG("new connection\tlogin=%s\tpass=%lu\thostname=%s", result->pair.login, dummy, hostname);
     return result;
 }
