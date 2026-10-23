@@ -146,3 +146,4 @@ Or manually find desired html-page in ``docs/html``.
   - <https://stackoverflow.com/questions/17598572/how-to-read-write-a-binary-file/17598785>
   - <https://stackoverflow.com/questions/67813592/searching-a-string-in-a-binary-file-in-c>
   - <https://stackoverflow.com/questions/12230762/insert-characters-into-a-string-in-bash>
+  - <http://www.cse.yorku.ca/~oz/hash.html>
