@@ -99,6 +99,20 @@ account_create(struct pair* p)
         return;
     }
 
+    if (fbin != NULL) {
+        unsigned char logbuf[LOGLEN];
+        clearerr(fbin);
+        fseek(fbin, 0, SEEK_SET);
+        while (fread(logbuf, sizeof(char), LOGLEN, fbin) == LOGLEN) {
+            if (memcmp(logbuf, p->login, LOGLEN) == 0) {
+                ERROR("account already exists");
+                return;
+            }
+        }
+
+        fseek(fbin, 0, SEEK_END);
+    }
+
     uint64_t hashed = hash(p->password);
 
     char logbuf[LOGLEN] = {0};
@@ -106,5 +120,6 @@ account_create(struct pair* p)
 
     WRITEBIN(logbuf, sizeof(char), LOGLEN);
     WRITEBIN(&hashed, sizeof(uint64_t), 1);
+    fflush(fbin);
     LOG("new account created\tlogin=%s\tpass=%lu", p->login, hashed);
 }
