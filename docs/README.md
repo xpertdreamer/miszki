@@ -131,6 +131,18 @@ Or manually find desired html-page in ``docs/html``.
   - <https://github.com/PabloMessina/Competitive-Programming-Material/blob/master/Mathematics/chinese_remainder_theorem.cpp>
   - <https://www.geeksforgeeks.org/dsa/introduction-to-chinese-remainder-theorem/>
   
-## Laboratory Work 5
+## Laboratory Work 5 
+### Refereces(actually i missed most of them)
+
   - <https://man7.org/linux/man-pages/man2/readlink.2.html>
   - <https://www.baeldung.com/linux/c-code-execute-system-command>
+  - <https://www.baeldung.com/linux/c-code-execute-system-command>
+  - <https://man7.org/linux/man-pages/man2/readlink.2.html>
+  - <https://stackoverflow.com/questions/17598572/how-to-read-write-a-binary-file>
+  - <https://stackoverflow.com/questions/3209909/how-to-printf-unsigned-long-in-c>
+  - <https://stackoverflow.com/questions/5637697/what-are-some-widely-used-cryptography-hash-libraries-in-c>
+  - <https://stackoverflow.com/questions/2238107/how-to-write-a-hash-function-in-c>
+  - <https://stackoverflow.com/questions/933850/how-do-i-find-the-location-of-the-executable-in-c>
+  - <https://stackoverflow.com/questions/17598572/how-to-read-write-a-binary-file/17598785>
+  - <https://stackoverflow.com/questions/67813592/searching-a-string-in-a-binary-file-in-c>
+  - <https://stackoverflow.com/questions/12230762/insert-characters-into-a-string-in-bash>
