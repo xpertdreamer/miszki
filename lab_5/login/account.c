@@ -177,3 +177,66 @@ account_login(struct pair* p)
     LOG("new connection\tlogin=%s\tpass=%lu\thostname=%s", result->pair.login, dummy, hostname);
     return result;
 }
+
+#define PROMPT "phone/card_num/cvv>"
+
+typedef enum {
+    UNKNOWN = 0,
+    PHONENUMBER,
+    CARDNUMBER,
+    CVVCODE,
+} type;
+
+#define PNCODE "phone"
+#define CNCODE "card_num"
+#define CVCODE "cvv"
+
+type
+recognize_type(char* input)
+{
+    if (strcmp(input, PNCODE) == 0) {
+        DEBUG("'%s' is phone number", input);
+        return PHONENUMBER;
+    }
+    if (strcmp(input, CNCODE) == 0) {
+        DEBUG("'%s' is card number", input);
+        return CARDNUMBER;
+    }
+    if (strcmp(input, CVCODE) == 0) {
+        DEBUG("'%s' is CVV code", input);
+        return CVVCODE;
+    }
+    DEBUG("'%s' is unknown", input);
+    return UNKNOWN;
+}
+
+void
+account_change(struct account* account, type t)
+{
+    PTR_RECIEVE_FAIL_VOID(account, account_change);
+    // TODO: find occurence of current account in file -> change inplace, or replace with new
+}
+
+
+bool
+account_daemon(struct account* instance)
+{
+    if (instance == NULL) {
+        ERROR("account instance recieve failed");
+        return false;
+    }
+
+    putchar('\n');
+    puts(PROMPT);
+    putchar(' ');
+
+    char* input = sh_get_input();
+    if (input == NULL) {
+        ERROR("error recieving input");
+        return false;
+    }
+    type t = recognize_type(input);
+    // TODO: execute
+
+    return true;
+}

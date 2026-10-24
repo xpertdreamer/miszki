@@ -38,6 +38,7 @@ main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
+    // request section
     enum mode m = mode_request();
 
     char* login = login_request();
@@ -52,6 +53,7 @@ main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
+    // pairing section + daemon
     struct pair* p = pair_create(login, pass);
     if (p == NULL) {
         ERROR("failed to create pair");
@@ -72,8 +74,8 @@ main(int argc, char** argv)
                 free(pass);
                 exit(EXIT_FAILURE);
             }
-            (void)current;
             // TODO: account daemon
+            while (account_daemon(current));
             break;
         }
     }

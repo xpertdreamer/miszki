@@ -1,6 +1,8 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
+#include <stdbool.h>
+
 enum mode {
     CREATE = 0,
     LOGIN,
@@ -33,5 +35,8 @@ password_request(void);
 
 char*
 login_request(void);
+
+bool
+account_daemon(struct account* instance);
 
 #endif

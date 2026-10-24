@@ -43,6 +43,7 @@
 
 extern FILE *flog;
 
+// TODO: multithread?
 #define LOG(fmt, ...)                               \
     do {                                            \
     if ((flog) != NULL) {                           \
@@ -134,7 +135,7 @@ hash(char* str) // djb2
     return h;
 }
 
-/* #define MASK(str, type)                         \ */
+/* #define MASK(str)                         \ */
 /*     do {                                        \ */
 /*         // TODO: mask value of str depending on type \ */
 /*     } while(0) */
