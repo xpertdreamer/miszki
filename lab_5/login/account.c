@@ -57,11 +57,13 @@ mode_request()
     char* l = sh_get_input();
     if (l == NULL) {
         ERROR("failed to request input");
+        free(l);
         return LOGIN;
     }
     if (strcmp(l, "1") == 0) {
+        free(l);
         return LOGIN;
-    } else return CREATE;
+    } else { free(l); return CREATE; }
 }
 
 char*
@@ -88,7 +90,21 @@ pair_create(char* login, char* pass)
     return p;
 }
 
-#define LOGLEN 4
+void
+pair_destroy(struct pair* p)
+{
+    if (p != NULL) {
+        free(p);
+    }
+}
+
+void
+account_destroy(struct account* a)
+{
+    if (a != NULL) {
+        free(a);
+    }
+}
 
 // login max=4bytes, pass max=8bytes, sum=12bytes
 void
@@ -178,12 +194,6 @@ account_login(struct pair* p)
     return result;
 }
 
-// TODO: peek binary file function
-
-// TODO: change bytes in binary file function
-
-#define PROMPT "phone/card_num/cvv>\0"
-
 typedef enum {
     UNKNOWN = 0,
     PHONENUMBER,
@@ -201,10 +211,6 @@ type_to_str(type t)
         default: return "unknown";
     }
 }
-
-#define PNCODE "phone"
-#define CNCODE "card_num"
-#define CVCODE "cvv"
 
 type
 recognize_type(char* input)

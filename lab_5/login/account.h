@@ -25,10 +25,16 @@ struct pair*
 pair_create(char* login, char* pass);
 
 void
+pair_destroy(struct pair* p);
+
+void
 account_create(struct pair* p);
 
 struct account*
 account_login(struct pair* p);
+
+void
+account_destroy(struct account* a);
 
 char*
 password_request(void);

@@ -9,11 +9,13 @@
 FILE *flog;
 FILE *fbin;
 
+volatile sig_atomic_t sig_exit = 0;
+
 void
 handle_sigint(int sig)
 {
     (void)sig;
-    _exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 }
 
 int
@@ -72,10 +74,12 @@ main(int argc, char** argv)
             if (current == NULL) {
                 free(login);
                 free(pass);
+                free(p);
                 exit(EXIT_FAILURE);
             }
             // TODO: account daemon
             while (account_daemon(current));
+            account_destroy(current);
             break;
         }
     }
