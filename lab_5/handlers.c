@@ -31,6 +31,7 @@ account_handler(void)
         strcpy(slash + 1, "login");
     }
     DEBUG("%s", path);
+    // NOTE: very insecure; replace with fork?
     system(path);
 }
 
