@@ -178,7 +178,11 @@ account_login(struct pair* p)
     return result;
 }
 
-#define PROMPT "phone/card_num/cvv>"
+// TODO: peek binary file function
+
+// TODO: change bytes in binary file function
+
+#define PROMPT "phone/card_num/cvv>\0"
 
 typedef enum {
     UNKNOWN = 0,
@@ -186,6 +190,17 @@ typedef enum {
     CARDNUMBER,
     CVVCODE,
 } type;
+
+const char*
+type_to_str(type t)
+{
+    switch(t) {
+        case PHONENUMBER: return "phone number";
+        case CARDNUMBER: return "card number";
+        case CVVCODE: return "cvv code";
+        default: return "unknown";
+    }
+}
 
 #define PNCODE "phone"
 #define CNCODE "card_num"
@@ -215,6 +230,7 @@ account_change(struct account* account, type t)
 {
     PTR_RECIEVE_FAIL_VOID(account, account_change);
     // TODO: find occurence of current account in file -> change inplace, or replace with new
+
 }
 
 
@@ -236,6 +252,7 @@ account_daemon(struct account* instance)
         return false;
     }
     type t = recognize_type(input);
+    DEBUG("%s", type_to_str(t));
     // TODO: execute
 
     return true;
