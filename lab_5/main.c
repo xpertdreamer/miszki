@@ -18,7 +18,8 @@ handle_sigint(int sig)
 }
 
 extern void help_handler(void);
-extern void account_handler(void);
+extern void login_handler(void);
+extern void create_handler(void);
 extern void exit_handler(void);
 
 int
@@ -37,10 +38,11 @@ main(int argc, char** argv)
     }
 
     // shell section
-    cmd cmds[3] = {{"help", help_handler},
-                   {"account", account_handler},
+    cmd cmds[4] = {{"help", help_handler},
+                   {"create", create_handler},
+                   {"login", login_handler},
                    {"exit", exit_handler}};
-    shell *sh = sh_create(cmds, 3);
+    shell *sh = sh_create(cmds, 4);
     sh_change_prompt(sh, '$');
 
     while(run && sh_daemon(sh));

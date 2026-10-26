@@ -50,22 +50,6 @@ login_request(void)
     return l;
 }
 
-enum mode
-mode_request()
-{
-    fprintf(stdout, "Choose mode (0-create/1-login): ");
-    char* l = sh_get_input();
-    if (l == NULL) {
-        ERROR("failed to request input");
-        free(l);
-        return LOGIN;
-    }
-    if (strcmp(l, "1") == 0) {
-        free(l);
-        return LOGIN;
-    } else { free(l); return CREATE; }
-}
-
 char*
 password_request(void)
 {
@@ -231,14 +215,75 @@ recognize_type(char* input)
     return UNKNOWN;
 }
 
-void
-account_change(struct account* account, type t)
-{
-    PTR_RECIEVE_FAIL_VOID(account, account_change);
-    // TODO: find occurence of current account in file -> change inplace, or replace with new
+/* void */
+/* account_change(struct account* account, type t) */
+/* { */
+/*     PTR_RECIEVE_FAIL_VOID(account, account_change); */
+/*     // TODO: find occurence of current account in file -> change inplace, or replace with new */
 
+/* } */
+
+long
+account_find(const char* login)
+{
+    if (fbin == NULL || login == NULL) {
+        ERROR("file pointer or given string is null");
+        return NOTFOUND;
+    }
+
+    char junk[LOGLEN];
+    uint64_t dummy;
+
+    fseek(fbin, 0, SEEK_SET);
+    while(fread(junk, sizeof(char), LOGLEN, fbin) == LOGLEN) {
+        long current = ftell(fbin) - LOGLEN;
+        DEBUG("bytes read: %ld", current);
+        if (fread(&dummy, sizeof(u64), 1, fbin) != 1) {
+            break;
+        }
+        if (strncmp(login, junk, LOGLEN) == 0) {
+            DEBUG("found on %ld", current);
+            return current;
+        }
+        // TODO: skip other bytes too
+    }
+    // not found
+    ERROR("account not found");
+    return NOTFOUND;
 }
 
+// TODO: store details with account login hash as key
+// TODO: separate executable to create account
+bool
+change(type t, const char* newc, long position)
+{
+    long offset = position;
+    switch (t) {
+        case PHONENUMBER: offset += LOGLEN + PASSLEN; break;
+        case CARDNUMBER: offset += LOGLEN + PASSLEN + PHONELEN; break;
+        case CVVCODE: offset += LOGLEN + PASSLEN + PHONELEN + CARDNUMLEN; break;
+        case UNKNOWN: return false;
+    }
+    if (fseek(fbin, offset, SEEK_SET) != 0) {
+        ERROR("falied to seek to account position");
+        return false;
+    }
+    // TODO: change user data depending on type
+    return false;
+}
+
+// TODO: change bytes in binary file function
+void
+account_change(struct account* instance/*, TODO: account, data and type*/)
+{
+    // TODO: check if account, type and data are correct
+    PTR_RECIEVE_FAIL_VOID(instance, account_change);
+    long position = account_find(instance->pair.login);
+    if (position == NOTFOUND) {
+        return;
+    }
+    // TODO
+}
 
 bool
 account_daemon(struct account* instance)

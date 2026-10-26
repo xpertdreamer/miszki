@@ -18,9 +18,6 @@ struct account {
     // TODO: other information
 };
 
-enum mode
-mode_request(void);
-
 struct pair*
 pair_create(char* login, char* pass);
 

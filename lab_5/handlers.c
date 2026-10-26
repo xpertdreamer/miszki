@@ -16,8 +16,27 @@ help_handler(void)
 }
 
 void
-account_handler(void)
+create_handler(void)
 {
+    char path[MAX_PATH_LEN];
+    ssize_t len = readlink("/proc/self/exe", path, MAX_PATH_LEN - 1);
+    if (len == -1) {
+        ERROR("cant read current directory");
+        return;
+    }
+    path[len] = '\0';
+    char *slash = strrchr(path, '/');
+    if (slash && strcmp(slash + 1, "lab5") == 0 &&
+        (size_t)len + 2 <= sizeof path) {
+        strcpy(slash + 1, "create");
+    }
+    DEBUG("%s", path);
+    // NOTE: very insecure; replace with fork?
+    system(path);
+}
+
+void
+login_handler(void) {
     char path[MAX_PATH_LEN];
     ssize_t len = readlink("/proc/self/exe", path, MAX_PATH_LEN - 1);
     if (len == -1) {
