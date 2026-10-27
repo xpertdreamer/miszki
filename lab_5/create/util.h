@@ -141,7 +141,7 @@ get_path(char** argv, char* buffer, const char* name)
         ERROR("cant read current directory");
         return;
     }
-    buf[len - 5] = '\0';
+    buf[len - 6] = '\0';
     snprintf(buffer, MAX_PATH_LEN, "%.1000s%s", buf, name);
     DEBUG("path=%s", buffer);
 }
