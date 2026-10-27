@@ -147,3 +147,7 @@ Or manually find desired html-page in ``docs/html``.
   - <https://stackoverflow.com/questions/67813592/searching-a-string-in-a-binary-file-in-c>
   - <https://stackoverflow.com/questions/12230762/insert-characters-into-a-string-in-bash>
   - <http://www.cse.yorku.ca/~oz/hash.html>
+  - <https://stackoverflow.com/questions/67570417/how-to-find-a-file-in-a-directory-and-its-subdirectories-in-c-on-linux>
+  - <https://stackoverflow.com/questions/44164436/check-if-item-on-directory-is-folder-in-c>
+  - <https://stackoverflow.com/questions/7430248/creating-a-new-directory-in-c>
+  - <https://www.opennet.ru/man.shtml?topic=mkdir&category=3&russian=5>
