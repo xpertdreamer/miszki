@@ -23,9 +23,9 @@ typedef struct {
 
 struct Shell {
     const char* prompt;
-    u32 prompt_len;
     size_t num_commands;
     cmd* commands;
+    u32 prompt_len;
 };
 
 shell*
