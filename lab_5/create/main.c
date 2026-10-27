@@ -16,6 +16,8 @@
 int
 main(void)
 {
+    char* login = NULL;
+    char* pass = NULL;
     // so, kernel should automatically cleanup pointers here
     // because of it we do not need to handle SIGINT manually
 
@@ -39,15 +41,15 @@ main(void)
 
     // create logic section
     write(STDOUT_FILENO, REQUEST_LOGIN, strlen(REQUEST_LOGIN));
-    char* login = sh_get_input();
-    if (!login) {
+    login = sh_get_input();
+    if (!login || login[0] == '\n') {
         ERROR("no login");
         goto fail;
     }
     DEBUG("login=%s", login);
     write(STDOUT_FILENO, REQUEST_PASSW, strlen(REQUEST_PASSW));
-    char* pass  = sh_get_input();
-    if (!pass) {
+    pass  = sh_get_input();
+    if (!pass || pass[0] == '\n') {
         ERROR("no password");
         goto fail;
     }
