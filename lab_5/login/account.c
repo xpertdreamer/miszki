@@ -294,7 +294,7 @@ account_daemon(struct account* instance)
     }
 
     putchar('\n');
-    puts(PROMPT);
+    write(STDOUT_FILENO, PROMPT, PROMPT_LEN);
     putchar(' ');
 
     char* input = sh_get_input();

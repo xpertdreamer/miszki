@@ -2,11 +2,24 @@
 #define ACCOUNT_H
 
 #include <stdbool.h>
+#include <stdint.h>
 
-enum mode {
-    CREATE = 0,
-    LOGIN,
-};
+typedef uint64_t u64;
+
+#define LOGLEN 4
+#define PASSLEN 8
+#define PHONELEN 10
+#define CARDNUMLEN 16
+#define CVVCODELEN 3
+
+#define PNCODE "phone"
+#define CNCODE "card_num"
+#define CVCODE "cvv"
+
+#define PROMPT "phone/card_num/cvv/show>"
+#define PROMPT_LEN 25
+
+#define NOTFOUND -1
 
 struct pair {
     char* login;
@@ -15,7 +28,9 @@ struct pair {
 
 struct account {
     struct pair pair;
-    // TODO: other information
+    char phone_number[PASSLEN];
+    char card_number[CARDNUMLEN];
+    char cvv_code[CVVCODELEN];
 };
 
 struct pair*

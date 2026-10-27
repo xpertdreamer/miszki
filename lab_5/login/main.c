@@ -40,9 +40,6 @@ main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
-    // request section
-    enum mode m = mode_request();
-
     char* login = login_request();
     if (login == NULL) {
         ERROR("failed to request user login");
@@ -64,25 +61,16 @@ main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
-    switch (m) {
-        case CREATE: {
-            account_create(p);
-            break;
-        }
-        case LOGIN: {
-            struct account* current = account_login(p);
-            if (current == NULL) {
-                free(login);
-                free(pass);
-                free(p);
-                exit(EXIT_FAILURE);
-            }
-            // TODO: account daemon
-            while (account_daemon(current));
-            account_destroy(current);
-            break;
-        }
+    struct account* current = account_login(p);
+    if (current == NULL) {
+        free(login);
+        free(pass);
+        free(p);
+        exit(EXIT_FAILURE);
     }
+    // TODO: account daemon
+    while (account_daemon(current));
+    account_destroy(current);
 
     fclose(flog);
     fclose(fbin);
