@@ -63,6 +63,14 @@ do {                                                    \
     }                                                   \
 } while(0)
 
+#define FREE(...)                                                   \
+do {                                                                \
+    void *ptrs[] = { __VA_ARGS__ };                                 \
+    for (size_t i = 0; i < sizeof(ptrs) / sizeof(ptrs[0]); ++i) {  \
+        if (ptrs[i] != NULL) free(ptrs[i]);                         \
+    }                                                               \
+} while(0)
+
 #define ALLOC_FAIL(ptr)                         \
 do {                                            \
     if ((ptr) == NULL) {                        \
