@@ -33,11 +33,12 @@ main(int argc, char** argv)
 
     // binary files section
     char path_b[MAX_PATH_LEN];
-    get_path(argv, path_b, "details.bin"); // TODO: rename to pairs
+    get_path(argv, path_b, "pairs.bin");
     if ((fbin = fopen(path_b, "a+b")) == NULL) {
         ERROR("cannot open binary file to write account details");
         exit(EXIT_FAILURE);
     }
+
     /* get_path(argv, path_b, "details.bin"); */
     /* if ((fbin = fopen(path_b, "a+b")) == NULL) { */
     /*     ERROR("cannot open binary file to write account details"); */
