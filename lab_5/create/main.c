@@ -1,15 +1,11 @@
-#include "shell.h"
+#include "util.h"
 
-#include <stdlib.h>
+#include <stdio.h>
 
 int
 main(int argc, char** argv)
 {
+    DEBUG("create");
     (void)argc;
     (void)argv;
-
-    shell* sh = sh_create(NULL, 0);
-    while (sh_daemon(sh));
-    sh_destroy(sh);
-    return EXIT_SUCCESS;
 }

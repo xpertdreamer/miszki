@@ -39,10 +39,18 @@ shell: lab_5/shell/shell.c
 		build/lab_5/obj/shell.o
 
 lab5: shell
+	@cp lab_5/shell/shell.h lab_5/
+	@cp	lab_5/shell/shell.h lab_5/create/
+
 	g++ -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) \
 		-g lab_5/create/main.c \
 		-Lbuild/lab_5 -l:shell.a \
 		-o build/lab_5/create
+
+	g++ -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) \
+		-g lab_5/entrypoint.c \
+		-Lbuild/lab_5 -l:shell.a \
+		-o build/lab_5/lab5
 
 test:
 	cd $(PKG) && go test -v ./... | grep -v 'Timer '
