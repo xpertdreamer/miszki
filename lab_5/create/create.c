@@ -1,7 +1,6 @@
 #include "util.h"
 #include "create.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 
 struct pair*
