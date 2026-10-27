@@ -10,4 +10,8 @@
 #define DEBUG_MODE 0 ///<Use 1 to enable debug lines in output
 #endif
 
+#ifndef EXECUTABLE_NAME
+#define EXECUTABLE_NAME "create"
+#endif
+
 #endif

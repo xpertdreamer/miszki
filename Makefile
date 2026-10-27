@@ -38,14 +38,16 @@ shell: lab_5/shell/shell.c
 	ar rvs build/lab_5/shell.a \
 		build/lab_5/obj/shell.o
 
+CRTARGET ?= create
+
 lab5: shell
 	@cp lab_5/shell/shell.h lab_5/
 	@cp	lab_5/shell/shell.h lab_5/create/
 
-	g++ -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) \
+	g++ -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) -DEXECUTABLE_NAME=\"$(CRTARGET)\" \
 		-g lab_5/create/main.c \
 		-Lbuild/lab_5 -l:shell.a \
-		-o build/lab_5/create
+		-o build/lab_5/$(CRTARGET)
 
 	g++ -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) \
 		-g lab_5/entrypoint.c \

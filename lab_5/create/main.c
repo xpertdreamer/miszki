@@ -7,8 +7,6 @@
 #include <string.h>
 #include <limits.h>
 
-#define EXECUTABLE_NAME "create"
-
 #define REQUEST_LOGIN "Enter your login: "
 #define REQUEST_PASSW "Enter you password: "
 #define LOG_SUBDIR    "logs"
