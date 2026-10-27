@@ -56,7 +56,12 @@ sh_execute(shell* instance, const char* name)
 {
     PTR_RECIEVE_FAIL_VOID(instance, execute);
     for (size_t i = 0; i < instance->num_commands; ++i) {
-        if (strcmp(instance->commands[i].name, name) == 0) {
+        cmd cm = instance->commands[i];
+        if (cm.handler == NULL) {
+            ERROR("cannot execute this command - handler is null-pointer");
+            return;
+        }
+        if (strcmp(cm.name, name) == 0) {
             DEBUG("called %s", name);
             instance->commands[i].handler();
             return;
@@ -97,6 +102,7 @@ sh_daemon(shell* instance)
         ERROR("error recieving input");
         return false;
     }
+    input[strlen(input) - 1] = '\0';
     sh_execute(instance, input);
 
     free(input);
