@@ -68,7 +68,16 @@ sh_execute(shell* instance, const char* name)
 char*
 sh_get_input()
 {
-    return NULL;
+    char* buf = NULL;
+    size_t s = 0;
+
+    ssize_t read = getline(&buf, &s, stdin);
+    if (read == -1) {
+        ERROR("cannot recieve user input");
+        return NULL;
+    }
+
+    return buf;
 }
 
 bool
