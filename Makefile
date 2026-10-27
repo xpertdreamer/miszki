@@ -29,13 +29,17 @@ lab3: lab_3/main.cpp lab_3/math.cpp
 	g++ -Wall -Wextra $^ -o build/lab_3/lab3 -DDEBUG_MODE=$(DEBUG)
 	$(call run_doxygen)
 
-lab5: lab_5/main.c lab_5/shell.c lab_5/handlers.c
-	@mkdir -p build/lab_5
-	g++ -Wall -Wextra -Ilab_5/login -g lab_5/create/main.c lab_5/login/account.c \
-		-o build/lab_5/create -DDEBUG_MODE=$(DEBUG)
-	g++ -Wall -Wextra -Ilab_5/login -g lab_5/login/main.c lab_5/login/account.c \
-		-o build/lab_5/login -DDEBUG_MODE=$(DEBUG)
-	g++ -Wall -Wextra -Ilab_5 -g $^ -o build/lab_5/lab5 -DDEBUG_MODE=$(DEBUG)
+shell: lab_5/shell/shell.c
+	@mkdir -p build/lab_5/obj
+	g++ -Wall -Wextra -Ilab_5/shell -DDEBUG_MODE=$(DEBUG) \
+		-g -c $^ \
+		-o build/lab_5/obj/shell.o
+
+	ar rvs build/lab_5/shell.a \
+		build/lab_5/obj/shell.o
+
+lab5: shell
+
 
 test:
 	cd $(PKG) && go test -v ./... | grep -v 'Timer '
