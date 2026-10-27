@@ -23,6 +23,7 @@ main(int argc, char** argv)
     char* pass  = sh_get_input();
     DEBUG("password=%s", pass);
 
+    // NOTE: can be replace with goto
     FREE(login, pass);
     return EXIT_SUCCESS;
 }
