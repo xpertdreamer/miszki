@@ -11,7 +11,7 @@
 #endif
 
 #ifndef EXECUTABLE_NAME
-#define EXECUTABLE_NAME "create"
+#define EXECUTABLE_NAME "create" ///<Executable can be named here, or in during `make`
 #endif
 
 #endif
