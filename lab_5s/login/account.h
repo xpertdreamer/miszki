@@ -7,7 +7,7 @@
 typedef uint64_t u64;
 
 #define LOGLEN 4
-#define PASSLEN 8
+#define PASSLEN 32
 #define PHONELEN 10
 #define CARDNUMLEN 16
 #define CVVCODELEN 3

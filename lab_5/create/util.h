@@ -6,14 +6,16 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <time.h>
-#include <unistd.h>
-
 #include "conf.h"
+
+#include <linux/limits.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <string.h>
+#include <errno.h>
 
 #ifndef _WIN32
 #define ERROR_COLOR "\e[1;31m"  ///< ANSI red color for error messages.
@@ -25,9 +27,6 @@
 #define RESET_COLOR ""          ///< Empty on Windows.
 #endif
 
-#define MAX_PATH_LEN 1024
-#define MAX_DETAILS_LEN 1024
-
 /**
  * @def DEBUG
  * @brief Prints a debug message to stdout when @c DEBUG_MODE is enabled.
@@ -35,48 +34,14 @@
  * @param fmt printf-style format string.
  * @param ... Optional format arguments.
  */
-#define DEBUG(fmt, ...)                                                 \
-    do {                                                                \
-        if (DEBUG_MODE) {                                               \
-            fprintf(stderr, "%sDEBUG:%s ", DEBUG_COLOR, RESET_COLOR);   \
-            fprintf(stderr, fmt, ##__VA_ARGS__);                        \
-            fprintf(stderr, "\n");                                      \
-        }                                                               \
-    } while (0)
-
-extern FILE *flog;
-extern FILE *fbin;
-
-#define LOG(fmt, ...)                               \
-    do {                                            \
-    if ((flog) != NULL) {                           \
-        time_t rawtime;                             \
-        time(&rawtime);                             \
-        struct tm* timeinfo = localtime(&rawtime); \
-        char* time_str = asctime(timeinfo); \
-        size_t len = strlen(time_str);              \
-        if (len > 0 && time_str[len-1] == '\n') {\
-            time_str[len - 1] = '\0';                \
-        } \
-        fprintf(flog, "[%s] ", time_str);   \
-                fprintf(flog, fmt, ##__VA_ARGS__);  \
-                fprintf(flog, "\n");                \
-                }                                   \
-    } while(0)
-
-inline char*
-mask(char* in)
-{
-    // TODO
-    return in;
-}
-
-#define WRITEBIN(ptr, size, count)                      \
-    do {                                                \
-        if((fbin) != NULL) {                            \
-            fwrite((ptr), (size), count, fbin);   \
-        }                                               \
-    } while (0)
+#define DEBUG(fmt, ...)                                             \
+do {                                                                \
+    if (DEBUG_MODE) {                                               \
+        fprintf(stderr, "%sDEBUG:%s ", DEBUG_COLOR, RESET_COLOR);   \
+        fprintf(stderr, fmt, ##__VA_ARGS__);                        \
+        fprintf(stderr, "\n");                                      \
+    }                                                               \
+} while (0)
 
 /**
  * @def ERROR
@@ -84,79 +49,87 @@ mask(char* in)
  * @param fmt printf-style format string.
  * @param ... Optional format arguments.
  */
-#define ERROR(fmt, ...)                                                 \
-    do {                                                                \
-        fprintf(stderr, "%sERROR:%s ", ERROR_COLOR, RESET_COLOR);       \
-        fprintf(stderr, fmt, ##__VA_ARGS__);                            \
-        fprintf(stderr, "\n");                                      \
-    } while (0)
+#define ERROR(fmt, ...)                                         \
+do {                                                            \
+    fprintf(stderr, "%sERROR:%s ", ERROR_COLOR, RESET_COLOR);   \
+    fprintf(stderr, fmt, ##__VA_ARGS__);                        \
+    fprintf(stderr, "\n");                                      \
+} while (0)
 
-#define ALLOC_FAIL(ptr)                             \
-    do {                                            \
-        if ((ptr) == NULL) {                        \
-            ERROR("Failed to allocate: %s", #ptr);  \
-            return NULL;                            \
-        }                                           \
-    } while (0)
+#define PTR_RECIEVE_FAIL_VOID(ptr, func)                \
+do {                                                    \
+    if ((ptr) == NULL) {                                \
+        ERROR("%s Failed: %s is NULL", #func, #ptr);    \
+        return;                                         \
+    }                                                   \
+} while(0)
 
-#define FREE_FAIL(ptr)                          \
-    do {                                        \
-        if ((ptr) == NULL) {                    \
-            ERROR("Failed to free: %s", #ptr);  \
-            return;                             \
-        }                                       \
-    } while(0)
+#define PTR_RECIEVE_FAIL_PTR(ptr, func)                 \
+do {                                                    \
+    if ((ptr) == NULL) {                                \
+        ERROR("%s Failed: %s is NULL", #func, #ptr);    \
+        return NULL;                                    \
+    }                                                   \
+} while(0)
 
-#define PTR_RECIEVE_FAIL_VOID(ptr, func)                    \
-    do {                                                    \
-        if ((ptr) == NULL) {                                \
-            ERROR("%s Failed: %s is NULL", #func, #ptr);    \
-            return;                                         \
-        }                                                   \
-    } while(0)
+#define FREE(...)                                                   \
+do {                                                                \
+    void *ptrs[] = { __VA_ARGS__ };                                 \
+    for (size_t i = 0; i < sizeof(ptrs) / sizeof(ptrs[0]); ++i) {  \
+        if (ptrs[i] != NULL) free(ptrs[i]);                         \
+    }                                                               \
+} while(0)
 
-#define PTR_RECIEVE_FAIL_PTR(ptr, func)                     \
-    do {                                                    \
-        if ((ptr) == NULL) {                                \
-            ERROR("%s Failed: %s is NULL", #func, #ptr);    \
-            return NULL;                                    \
-        }                                                   \
-        } while(0)
+#define ALLOC_FAIL(ptr)                         \
+do {                                            \
+    if ((ptr) == NULL) {                        \
+        ERROR("Failed to allocate: %s", #ptr);  \
+        return NULL;                            \
+    }                                           \
+} while (0)
 
-inline void
-get_path(char** argv, char* buffer, const char* name)
+inline bool
+verify_path(const char* root, const char* name, unsigned char type)
 {
-    if (argv == NULL) {
-        ERROR("cannot get argv");
-        return;
+    if (root == NULL || name == NULL) {
+        ERROR("failed to recieve pointers [verify_path]");
+        return false;
     }
-    char buf[MAX_PATH_LEN];
-    // char* realp = realpath(argv[0], buf);
-    ssize_t len = readlink("/proc/self/exe", buf, MAX_PATH_LEN - 1);
-    /* if (!realp) { */
-    /*     ERROR("cannot get real path"); */
-    /*     exit(EXIT_FAILURE); */
-    /* } */
-    if (len == -1) {
-        ERROR("cant read current directory");
-        return;
+    DIR *dir = opendir(root);
+    if (!dir) {
+        ERROR("%d cannot open root (%s)", errno, strerror(errno));
+        return false;
     }
-    buf[len - 6] = '\0';
-    snprintf(buffer, MAX_PATH_LEN, "%.1000s%s", buf, name);
-    DEBUG("path=%s", buffer);
+    struct dirent* ent;
+    while ((ent = readdir(dir)) != NULL) {
+        if (ent->d_type == type && (strcmp(ent->d_name, name) == 0)) {
+            closedir(dir);
+            return true;
+        }
+    }
+    ERROR("cannot find given path");
+    closedir(dir);
+    return false;
 }
 
-inline uint64_t
-hash(char* str) // djb2
+inline bool
+create_subdir(const char* root, const char* name)
 {
-    unsigned long h = 5381;
-    int c;
-    while ((c = *str++)) {
-        h = ((h << 5) + h) + c;
+    if (root == NULL || name == NULL) {
+        ERROR("failed to recieve pointers [create_subdir]");
+        return false;
     }
-    return h;
-}
 
-// TODO: sha1
+    char target[PATH_MAX];
+    int len = snprintf(target, sizeof(target), "%s/%s", root, name);
+    if (len < 0 || len > (int)sizeof(target)) {
+        ERROR("failed to snprintf full path = %s + %s", root, name);
+        return false;
+    }
+    target[len] = '\0';
+
+    int status = mkdir(target, 0755);
+    return status == 0 ? true : false;
+}
 
 #endif

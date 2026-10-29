@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <limits.h>
+#include <openssl/sha.h>
 
 char*
 sh_get_input()
@@ -121,7 +122,7 @@ account_create(struct pair* p)
     memcpy(logbuf, p->login, loglen);
 
     WRITEBIN(logbuf, sizeof(char), LOGLEN);
-    WRITEBIN(&hashed, sizeof(uint64_t), 1);
+    WRITEBIN(&hashed, sizeof(u64), 1);
     fflush(fbin);
     LOG("new account created\tlogin=%s\tpass=%lu", p->login, hashed);
 }
@@ -245,7 +246,6 @@ account_find(const char* login)
             DEBUG("found on %ld", current);
             return current;
         }
-        // TODO: skip other bytes too
     }
     // not found
     ERROR("account not found");
@@ -253,7 +253,6 @@ account_find(const char* login)
 }
 
 // TODO: store details with account login hash as key
-// TODO: separate executable to create account
 bool
 change(type t, const char* newc, long position)
 {

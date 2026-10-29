@@ -7,7 +7,11 @@
 #define CONF_H
 
 #ifndef DEBUG_MODE
-#define DEBUG_MODE 1 ///<Use 1 to enable debug lines in output
+#define DEBUG_MODE 0 ///<Use 1 to enable debug lines in output
+#endif
+
+#ifndef EXECUTABLE_NAME
+#define EXECUTABLE_NAME "create" ///<Executable can be named here, or in during `make`
 #endif
 
 #endif

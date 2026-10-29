@@ -1,76 +1,63 @@
-// NOTE: find can i use same memory area in different executables
-
 #include "util.h"
-#include "account.h"
+#include "shell.h"
 
-#include <signal.h>
+#include <dirent.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <limits.h>
 
-FILE *flog;
-FILE *fbin;
-
-volatile sig_atomic_t sig_exit = 0;
-
-void
-handle_sigint(int sig)
-{
-    (void)sig;
-    exit(EXIT_SUCCESS);
-}
+#define REQUEST_LOGIN "Enter your login: "
+#define REQUEST_PASSW "Enter you password: "
+#define LOG_SUBDIR    "logs"
 
 int
-main(int argc, char** argv)
+main(void)
 {
-    signal(SIGINT, handle_sigint);
+    char* login = NULL;
+    char* pass = NULL;
+    // so, kernel should automatically cleanup pointers here
+    // because of it we do not need to handle SIGINT manually
 
-    // log file section
-    (void)argc;
-    char path[MAX_PATH_LEN];
-    get_path(argv, path, "log.log");
-    if ((flog = fopen(path, "a")) == NULL) {
-        ERROR("cannot open log file");
-        exit(EXIT_FAILURE);
+
+    // paths section
+    char current_path[PATH_MAX];
+    ssize_t len = readlink("/proc/self/exe", current_path, sizeof(current_path) - 1);
+    if (len == -1 || len >= (ssize_t)sizeof(current_path)) {
+        ERROR("cannot resolve executable path");
+        return EXIT_FAILURE;
+    }
+    size_t execlen = strlen(EXECUTABLE_NAME);
+    current_path[len - execlen] = '\0';
+    DEBUG("current executable path=%s", current_path);
+
+    bool log_exists = verify_path(current_path, LOG_SUBDIR, DT_DIR);
+    bool success;
+    if ((log_exists == false) && (success = create_subdir(current_path, LOG_SUBDIR)) == false) {
+        ERROR("cannot create log subdirectory");
     }
 
-    // binary files section
-    char path_b[MAX_PATH_LEN];
-    get_path(argv, path_b, "pairs.bin");
-    if ((fbin = fopen(path_b, "a+b")) == NULL) {
-        ERROR("cannot open binary file to write account details");
-        exit(EXIT_FAILURE);
+    // create logic section
+    write(STDOUT_FILENO, REQUEST_LOGIN, strlen(REQUEST_LOGIN));
+    login = sh_get_input();
+    if (!login || login[0] == '\n') {
+        ERROR("no login");
+        goto fail;
     }
-
-    /* get_path(argv, path_b, "details.bin"); */
-    /* if ((fbin = fopen(path_b, "a+b")) == NULL) { */
-    /*     ERROR("cannot open binary file to write account details"); */
-    /*     exit(EXIT_FAILURE); */
-    /* } */
-
-
-    char* login = login_request();
-    if (login == NULL) {
-        ERROR("failed to request user login");
-        exit(EXIT_FAILURE);
+    DEBUG("login=%s", login);
+    write(STDOUT_FILENO, REQUEST_PASSW, strlen(REQUEST_PASSW));
+    pass  = sh_get_input();
+    if (!pass || pass[0] == '\n') {
+        ERROR("no password");
+        goto fail;
     }
-    char* pass = password_request();
-    if (pass == NULL) {
-        ERROR("failed to request user password");
-        free(login);
-        exit(EXIT_FAILURE);
-    }
+    DEBUG("password=%s", pass);
 
-    struct pair* p = pair_create(login, pass);
-    if (p == NULL) {
-        ERROR("failed to create pair");
-        free(login);
-        free(pass);
-        exit(EXIT_FAILURE);
-    }
-
-    account_create(p);
-
-    fclose(flog);
-    fclose(fbin);
-    free(login);
-    free(pass);
+    // NOTE: can be replace with goto
+    FREE(login, pass);
     return EXIT_SUCCESS;
+
+fail:
+    FREE(login, pass);
+    return EXIT_FAILURE;
 }
