@@ -17,9 +17,9 @@ void
 pair_dealloc(struct pair* p);
 
 void
-pair_encrypt();
+pair_encrypt(struct pair* p);
 
 bool
-pair_write();
+pair_write(struct pair* p);
 
 #endif

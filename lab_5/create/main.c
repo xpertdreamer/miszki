@@ -1,3 +1,4 @@
+#include "create.h"
 #include "util.h"
 #include "shell.h"
 
@@ -53,11 +54,19 @@ main(void)
     }
     DEBUG("password=%s", pass);
 
+    struct pair* p = pair_alloc(login, pass);
+    if (p == NULL) {
+        ERROR("error allocating pair");
+        goto fail;
+    }
+
     // NOTE: can be replace with goto
     FREE(login, pass);
+    pair_dealloc(p);
     return EXIT_SUCCESS;
 
 fail:
     FREE(login, pass);
+    pair_dealloc(p);
     return EXIT_FAILURE;
 }
