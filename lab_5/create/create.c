@@ -18,18 +18,20 @@ pair_alloc(char* login, char* pass)
 void
 pair_dealloc(struct pair* p)
 {
-    if (p != NULL) {
-        free(p);
-    }
+    if (p == NULL) return;
+    FREE(p->password, p->login);
+    FREE(p);
 }
 
-void
+bool
 pair_encrypt(struct pair* p)
 {
     PTR_RECIEVE_FAIL_VOID(p, pair_encrypt);
 
+    return true;
 }
 
+// NOTE: use openssl to generate hex-number
 bool
 pair_write(struct pair* p)
 {

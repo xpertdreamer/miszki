@@ -12,6 +12,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+typedef enum sh_input_error {
+    CNNOT = -1,
+    EMPTY = 1,
+} sh_ierr;
+
 typedef struct Shell shell;
 
 typedef uint16_t u32;

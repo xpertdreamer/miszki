@@ -17,6 +17,7 @@ main(void)
 {
     char* login = NULL;
     char* pass = NULL;
+    struct pair* p = NULL;
     // so, kernel should automatically cleanup pointers here
     // because of it we do not need to handle SIGINT manually
 
@@ -41,7 +42,7 @@ main(void)
     // create logic section
     write(STDOUT_FILENO, REQUEST_LOGIN, strlen(REQUEST_LOGIN));
     login = sh_get_input();
-    if (!login || login[0] == '\n') {
+    if (!login) {
         ERROR("no login");
         goto fail;
     }
@@ -54,19 +55,17 @@ main(void)
     }
     DEBUG("password=%s", pass);
 
-    struct pair* p = pair_alloc(login, pass);
+    p = pair_alloc(login, pass);
     if (p == NULL) {
         ERROR("error allocating pair");
         goto fail;
     }
 
     // NOTE: can be replace with goto
-    FREE(login, pass);
     pair_dealloc(p);
     return EXIT_SUCCESS;
 
 fail:
-    FREE(login, pass);
     pair_dealloc(p);
     return EXIT_FAILURE;
 }
