@@ -38,15 +38,24 @@ shell: lab_5/shell/shell.c
 	ar rvs build/lab_5/shell.a \
 		build/lab_5/obj/shell.o
 
-CRTARGET ?= create
+crypt:
+	@mkdir -p build/lab_5
+	gcc -Wall -Wextra -Ilab_5/crypt -fPIC -shared -lcrypto \
+		lab_5/crypt/crypt.c \
+		-o build/lab_5/libmycrypt.so
 
-lab5: shell
+CRTARGET ?= create
+LIB ?= ./build/lab_5/libmycrypt.so
+
+lab5: shell crypt
 	@cp lab_5/shell/shell.h lab_5/
 	@cp	lab_5/shell/shell.h lab_5/create/
 
 	g++ -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) -DEXECUTABLE_NAME=\"$(CRTARGET)\" \
-		-g lab_5/create/main.c \
+		-DLIB=\"$(LIB)\" \
+		-g lab_5/create/main.c lab_5/create/create.c \
 		-Lbuild/lab_5 -l:shell.a \
+		-ldl \
 		-o build/lab_5/$(CRTARGET)
 
 	g++ -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) \

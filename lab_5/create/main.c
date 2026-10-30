@@ -61,6 +61,12 @@ main(void)
         goto fail;
     }
 
+    if (!pair_encrypt(p)) {
+        ERROR("failed to encrypt password");
+        goto fail;
+    }
+    DEBUG("hashed=%s : %s", p->login, p->password);
+
     // NOTE: can be replace with goto
     pair_dealloc(p);
     return EXIT_SUCCESS;
