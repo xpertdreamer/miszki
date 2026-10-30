@@ -77,10 +77,18 @@ sh_get_input()
     size_t s = 0;
 
     ssize_t read = getline(&buf, &s, stdin);
-    if (read == -1) {
-        ERROR("cannot recieve user input");
-        return NULL;
+    switch (read) {
+        case CNNOT: {
+            ERROR("cannot recieve user input");
+            return NULL;
+        }
+        case EMPTY: {
+            ERROR("input is empty");
+            return NULL;
+        }
     }
+
+    buf[read-1] = '\0';
 
     return buf;
 }
