@@ -61,7 +61,7 @@ lab5: shell crypt
 
 	gcc -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) -DEXECUTABLE_NAME=\"$(CRTARGET)\" \
 		-DLIB=\"$(LIB)\" \
-		-g lab_5/create/util.h lab_5/create/main.c lab_5/create/create.c lab_5/create/log.c \
+		-g lab_5/create/util.h lab_5/create/main.c lab_5/create/create.c lab_5/create/log.c lab_5/create/util.c \
 		-o build/lab_5/$(CRTARGET) \
 		-Lbuild/lab_5 -l:shell.a \
 		-ldl
