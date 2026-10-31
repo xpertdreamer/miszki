@@ -25,13 +25,9 @@ pair_dealloc(struct pair* p)
     FREE(p);
 }
 
-bool
-pair_encrypt(struct pair* p)
-{
-    if (p == NULL || p->login == NULL || p->password == NULL) {
-        ERROR("error revieving pair pointer to encrypt");
-        return false;
-    }
+typedef void (*handler)(char*, char[SIZE]);
+
+handler get_handler() {
     void *handle;
     void (*enc)(char*, char[SIZE]);
     char* err;
@@ -39,7 +35,7 @@ pair_encrypt(struct pair* p)
     handle = dlopen(LIB, RTLD_NOW);
     if (handle == NULL) {
         ERROR("failed to load encryption lib: %s", dlerror());
-        return false;
+        return NULL;
     }
     dlerror();
 
@@ -48,9 +44,25 @@ pair_encrypt(struct pair* p)
     if (err != NULL) {
         ERROR("%s", err);
         dlclose(handle);
+        return NULL;
+    }
+
+    return enc;
+}
+
+bool
+pair_encrypt(struct pair* p)
+{
+    if (p == NULL || p->login == NULL || p->password == NULL) {
+        ERROR("error revieving pair pointer to encrypt");
         return false;
     }
 
+    handler enc = get_handler();
+    if (enc == NULL) {
+        ERROR("cannot get handler");
+        return false;
+    }
     char pass_buf[SIZE];
     enc(p->password, pass_buf);
 
@@ -59,11 +71,9 @@ pair_encrypt(struct pair* p)
     p->password = strdup(pass_buf);
     if (p->password == NULL) {
         ERROR("failed to allocate hashed memory");
-        dlclose(handle);
         return false;
     }
 
-    dlclose(handle);
     return true;
 }
 
