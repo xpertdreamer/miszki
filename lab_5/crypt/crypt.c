@@ -14,6 +14,7 @@ bool
 get_salt(char buffer[SALTLEN+1])
 {
     int fd = open(SALTPATH, O_RDONLY);
+    (void)errno;
     if (fd == -1) {
         ERROR("%d", errno);
         return false;
