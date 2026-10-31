@@ -14,4 +14,7 @@
 #define EXECUTABLE_NAME "create" ///<Executable can be named here, or in during `make`
 #endif
 
+#define LOG_SUBDIR    "logs"
+#define DB_SUBDIR     "db"
+
 #endif

@@ -9,7 +9,9 @@
 #define LIB ""
 #endif
 
-// TODO: function to save data in binary
+#define MAX_LOGIN_LEN 32
+#define SHA256_LEN 32
+
 
 struct pair {
     char* login;
@@ -26,6 +28,6 @@ bool
 pair_encrypt(struct pair* p);
 
 bool
-pair_write(struct pair* p);
+pair_write(struct pair* p, const char* path);
 
 #endif

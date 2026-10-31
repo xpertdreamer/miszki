@@ -1,9 +1,13 @@
+#include "conf.h"
 #include "util.h"
 #include "create.h"
 
+#include <dirent.h>
 #include <stdlib.h>
 #include <dlfcn.h>
 #include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 struct pair*
 pair_alloc(char* login, char* pass)
@@ -79,11 +83,33 @@ pair_encrypt(struct pair* p)
 
 // NOTE: use openssl to generate hex-number
 bool
-pair_write(struct pair* p)
+pair_write(struct pair* p, const char* path)
 {
-    if (p == NULL) {
-        ERROR("error revieving pair pointer to write");
+    if (p == NULL || path == NULL || p->login == NULL || p->password == NULL) {
+        ERROR("error revieving pair or path pointer to write");
         return false;
     }
-    return false;
+
+    handler enc = get_handler();
+    if (enc == NULL) {
+        ERROR("cannot get handler");
+        return false;
+    }
+
+    char login_buf[SIZE];
+    char temp[PATH_MAX];
+    enc(p->login, login_buf);
+    if (get_bin_file(path, DB_SUBDIR, login_buf, temp) == false) {
+        ERROR("failed to get binary path");
+        return false;
+    }
+
+    if (verify_path(temp, "", DT_REG)) {
+        ERROR("this account already exists");
+        return false;
+    }
+
+    // TODO: save encrypted to binary
+
+    return true;
 }

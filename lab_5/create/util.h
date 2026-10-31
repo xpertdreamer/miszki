@@ -100,4 +100,9 @@ create_subdir(const char* root, const char* name);
 bool
 get_log_file(const char* path, const char* sub, char *buffer);
 
+bool
+get_bin_file(const char* path, const char* sub, const char* hashed, char* buffer);
+
+// TODO: save to binary
+
 #endif
