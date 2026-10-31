@@ -31,7 +31,7 @@ lab3: lab_3/main.cpp lab_3/math.cpp
 
 shell: lab_5/shell/shell.c
 	@mkdir -p build/lab_5/obj
-	g++ -Wall -Wextra -Ilab_5/shell -DDEBUG_MODE=$(DEBUG) \
+	gcc -Wall -Wextra -Ilab_5/shell -DDEBUG_MODE=$(DEBUG) \
 		-g -c $^ \
 		-o build/lab_5/obj/shell.o
 
@@ -59,14 +59,14 @@ lab5: shell crypt
 	@cp lab_5/shell/shell.h lab_5/
 	@cp	lab_5/shell/shell.h lab_5/create/
 
-	g++ -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) -DEXECUTABLE_NAME=\"$(CRTARGET)\" \
+	gcc -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) -DEXECUTABLE_NAME=\"$(CRTARGET)\" \
 		-DLIB=\"$(LIB)\" \
-		-g lab_5/create/main.c lab_5/create/create.c \
+		-g lab_5/create/util.h lab_5/create/main.c lab_5/create/create.c lab_5/create/log.c \
+		-o build/lab_5/$(CRTARGET) \
 		-Lbuild/lab_5 -l:shell.a \
-		-ldl \
-		-o build/lab_5/$(CRTARGET)
+		-ldl
 
-	g++ -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) \
+	gcc -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) \
 		-g lab_5/entrypoint.c \
 		-Lbuild/lab_5 -l:shell.a \
 		-o build/lab_5/lab5
