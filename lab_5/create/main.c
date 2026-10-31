@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <limits.h>
+#include "log.h"
 
 #define REQUEST_LOGIN "Enter your login: "
 #define REQUEST_PASSW "Enter you password: "
@@ -18,9 +19,12 @@ main(void)
     char* login = NULL;
     char* pass = NULL;
     struct pair* p = NULL;
+
+    char log_path[PATH_MAX];
+    FILE *flog = NULL;
+
     // so, kernel should automatically cleanup pointers here
     // because of it we do not need to handle SIGINT manually
-
 
     // paths section
     char current_path[PATH_MAX];
@@ -37,8 +41,22 @@ main(void)
     bool success;
     if ((log_exists == false) && (success = create_subdir(current_path, LOG_SUBDIR)) == false) {
         ERROR("cannot create log subdirectory");
+        goto fail;
     }
 
+    if (get_log_file(current_path, LOG_SUBDIR, log_path) == false) {
+        goto fail;
+    }
+    flog = fopen(log_path, "w");
+    if (flog != NULL) {
+        log_add_fp(flog, LOG_INFO);
+        log_set_quiet(true);
+    } else {
+        ERROR("cannot open log file");
+        goto fail;
+    }
+
+    log_info("Create procedure initialized");
     // create logic section
     write(STDOUT_FILENO, REQUEST_LOGIN, strlen(REQUEST_LOGIN));
     login = sh_get_input();
@@ -67,11 +85,16 @@ main(void)
     }
     DEBUG("hashed=%s : %s", p->login, p->password);
 
-    // NOTE: can be replace with goto
+    log_info("Create procedure ended successfuly. New user: l=%s, p=%s", p->login, p->password);
     pair_dealloc(p);
+    if (flog != NULL) fclose(flog);
     return EXIT_SUCCESS;
 
 fail:
     pair_dealloc(p);
+    if (flog != NULL) {
+        log_error("Create procedure failed!");
+        fclose(flog);
+    }
     return EXIT_FAILURE;
 }

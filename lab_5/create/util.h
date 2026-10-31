@@ -88,7 +88,7 @@ do {                                            \
     }                                           \
 } while (0)
 
-inline bool
+static inline bool
 verify_path(const char* root, const char* name, unsigned char type)
 {
     if (root == NULL || name == NULL) {
@@ -112,7 +112,7 @@ verify_path(const char* root, const char* name, unsigned char type)
     return false;
 }
 
-inline bool
+static inline bool
 create_subdir(const char* root, const char* name)
 {
     if (root == NULL || name == NULL) {
@@ -130,6 +130,36 @@ create_subdir(const char* root, const char* name)
 
     int status = mkdir(target, 0755);
     return status == 0 ? true : false;
+}
+
+#define DATE_MAX 128
+
+#include <time.h>
+
+static inline bool
+get_log_file(const char* path, const char* sub, char *buffer)
+{
+    if (path == NULL || sub == NULL) {
+        ERROR("failed to recieve pointers [create_subdir]");
+        return false;
+    }
+
+    time_t rawtime;
+    struct tm* timeinfo;
+    char temp[DATE_MAX];
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(temp, DATE_MAX, "%d-%m-%Y %H:%M:%S",timeinfo);
+
+    int len = snprintf(buffer, PATH_MAX, "%s/%s/%s", path, sub, temp);
+    if (len < 0 || len > (int)PATH_MAX) {
+        ERROR("failed to snprintf full path = %s + %s + %s", path, sub, temp);
+        return false;
+    }
+    buffer[len] = '\0';
+    DEBUG("log path:%s", buffer);
+
+    return true;
 }
 
 #endif
