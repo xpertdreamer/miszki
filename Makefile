@@ -38,10 +38,18 @@ shell: lab_5/shell/shell.c
 	ar rvs build/lab_5/shell.a \
 		build/lab_5/obj/shell.o
 
+SPATH ?= $(HOME)/secret/key
+SLEN ?= 32
+
 crypt:
+	@echo
+	@echo 'Run `openssl rand -hex 32 > ~/path/file` to generate salt'
+	@echo
 	@mkdir -p build/lab_5
 	gcc -Wall -Wextra -Ilab_5/crypt -fPIC -shared -lcrypto \
 		lab_5/crypt/crypt.c \
+		-DSALTPATH=\"$(SPATH)\" \
+		-DSALTLEN=$(SLEN) \
 		-o build/lab_5/libmycrypt.so
 
 CRTARGET ?= create
