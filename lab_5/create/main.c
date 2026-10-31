@@ -34,7 +34,7 @@ main(void)
         return EXIT_FAILURE;
     }
     size_t execlen = strlen(EXECUTABLE_NAME);
-    current_path[len - execlen] = '\0';
+    current_path[len - execlen - 1] = '\0';
     DEBUG("current executable path=%s", current_path);
 
     bool log_exists = verify_path(current_path, LOG_SUBDIR, DT_DIR);

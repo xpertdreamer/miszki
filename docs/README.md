@@ -151,3 +151,13 @@ Or manually find desired html-page in ``docs/html``.
   - <https://stackoverflow.com/questions/44164436/check-if-item-on-directory-is-folder-in-c>
   - <https://stackoverflow.com/questions/7430248/creating-a-new-directory-in-c>
   - <https://www.opennet.ru/man.shtml?topic=mkdir&category=3&russian=5>
+  - <https://stackoverflow.com/questions/2262386/generate-sha256-with-openssl-and-c>
+  - <https://stackoverflow.com/questions/40813865/c-dirent-h-and-syntax-for-getting-absolute-path>
+  - <https://stackoverflow.com/questions/1894013/how-to-use-openssl-with-gcc>
+  - <https://man7.org/linux/man-pages/man3/dlopen.3.html>
+  - <https://gist.github.com/tailriver/30bf0c943325330b7b6a>
+  - <https://stackoverflow.com/questions/33106505/read-file-line-by-line-in-c-mostly-with-syscalls>
+  - <https://www.opennet.ru/man.shtml?topic=open&category=2>
+  - <https://stackoverflow.com/questions/15753090/c-fopen-fails-for-write-with-errno-is-2>
+  - <https://github.com/rxi/log.c>
+  - <https://stackoverflow.com/questions/16357999/current-date-and-time-as-string>

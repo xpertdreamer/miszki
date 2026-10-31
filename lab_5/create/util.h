@@ -16,6 +16,9 @@
 #include <dirent.h>
 #include <string.h>
 #include <errno.h>
+#include <time.h>
+
+#define DATE_MAX 128
 
 #ifndef _WIN32
 #define ERROR_COLOR "\e[1;31m"  ///< ANSI red color for error messages.
@@ -132,10 +135,6 @@ create_subdir(const char* root, const char* name)
     return status == 0 ? true : false;
 }
 
-#define DATE_MAX 128
-
-#include <time.h>
-
 static inline bool
 get_log_file(const char* path, const char* sub, char *buffer)
 {
@@ -149,9 +148,9 @@ get_log_file(const char* path, const char* sub, char *buffer)
     char temp[DATE_MAX];
     time(&rawtime);
     timeinfo = localtime(&rawtime);
-    strftime(temp, DATE_MAX, "%d-%m-%Y %H:%M:%S",timeinfo);
+    strftime(temp, DATE_MAX, "%d-%m-%Y_%H:%M:%S",timeinfo);
 
-    int len = snprintf(buffer, PATH_MAX, "%s/%s/%s", path, sub, temp);
+    int len = snprintf(buffer, PATH_MAX, "%s/%s/%s_%s.log", path, sub, temp, EXECUTABLE_NAME);
     if (len < 0 || len > (int)PATH_MAX) {
         ERROR("failed to snprintf full path = %s + %s + %s", path, sub, temp);
         return false;
