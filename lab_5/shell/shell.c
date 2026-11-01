@@ -88,7 +88,7 @@ sh_get_input()
         }
     }
 
-    buf[read-1] = '\0';
+    buf[read - 1] = '\0';
 
     return buf;
 }
@@ -110,7 +110,6 @@ sh_daemon(shell* instance)
         ERROR("error recieving input");
         return false;
     }
-    input[strlen(input) - 1] = '\0';
     sh_execute(instance, input);
 
     free(input);
