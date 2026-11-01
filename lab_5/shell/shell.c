@@ -67,7 +67,7 @@ sh_execute(shell* instance, const char* name)
             return;
         }
     }
-    ERROR("cannot find command [%s] in current instance\n", name);
+    ERROR("cannot find command [%s] in current instance", name);
 }
 
 char*

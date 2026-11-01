@@ -4,14 +4,25 @@
 
 #include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <signal.h>
 
 #define REQUEST_LOGIN "Enter your login: "
 #define REQUEST_PASSW "Enter you password: "
-#define PROMPT "help >"
 
 extern void help_handler(void);
+extern void exit_handler(void);
+
+volatile sig_atomic_t run = 1;
+
+void
+handle_sigint(int sig)
+{
+    (void)sig;
+    run = 0;
+}
 
 int
 main(void)
@@ -81,10 +92,11 @@ main(void)
 
     // TODO: account daemon
 
-    cmd cmds[1] = {{"help", help_handler}};
-    shell *sh = sh_create(cmds, 1);
-    sh_change_prompt(sh, PROMPT);
-    while (sh_daemon(sh));
+    cmd cmds[2] = {{"help", help_handler},
+                   {"exit", exit_handler}};
+    shell *sh = sh_create(cmds, 2);
+    sh_change_prompt(sh, "$");
+    while (sh_daemon(sh) && run);
 
     log_info("Account procedure ended");
     sh_destroy(sh);
