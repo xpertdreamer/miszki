@@ -46,7 +46,6 @@ main(void)
         ERROR("cannot create db subdirectory");
         goto fail;
     }
-    // TODO: open new file binary named as hashed login to write data | check if not already exists
 
     log_exists = verify_path(current_path, LOG_SUBDIR, DT_DIR);
     if ((log_exists == false) && (success = create_subdir(current_path, LOG_SUBDIR)) == false) {

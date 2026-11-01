@@ -1,0 +1,20 @@
+/**
+ * @file conf.h
+ * @brief Compile-time configuration flags for the project.
+ */
+
+#ifndef CONF_H
+#define CONF_H
+
+#ifndef DEBUG_MODE
+#define DEBUG_MODE 0 ///<Use 1 to enable debug lines in output
+#endif
+
+#ifndef EXECUTABLE_NAME
+#define EXECUTABLE_NAME "account" ///<Executable can be named here, or in during `make`
+#endif
+
+#define LOG_SUBDIR    "logs"
+#define DB_SUBDIR     "db"
+
+#endif
