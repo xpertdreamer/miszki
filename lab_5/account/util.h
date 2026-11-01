@@ -115,6 +115,6 @@ verify_file(const char* path);
 typedef void (*handler)(char*, char[SIZE]);
 
 handler
-get_handler(void);
+get_handler(void **handle);
 
 #endif

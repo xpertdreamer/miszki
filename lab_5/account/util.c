@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-
 bool
 get_bin_file(const char* path, const char* sub, const char* hashed, char* buffer)
 {
@@ -103,8 +102,8 @@ verify_file(const char* path) {
     return (stat(path, &st) == 0);
 }
 
-handler get_handler() {
-    void *handle;
+handler
+get_handler(void **handle) {
     void (*enc)(char*, char[SIZE]);
     char* err;
 

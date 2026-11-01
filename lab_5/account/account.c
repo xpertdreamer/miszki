@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <signal.h>
+#include <dlfcn.h>
 
 #define REQUEST_LOGIN "Enter your login: "
 #define REQUEST_PASSW "Enter you password: "
@@ -28,13 +29,15 @@ handle_sigint(int sig)
 
 FILE* flog = NULL;
 FILE* fbin = NULL;
+char* login = NULL;
 
 int
 main(void)
 {
+    signal(SIGINT, handle_sigint);
+
     char log_path[PATH_MAX];
 
-    char* login = NULL;
     char* pass = NULL;
 
     // path section
@@ -94,7 +97,8 @@ main(void)
     }
     DEBUG("password=%s", pass);
 
-    handler enc = get_handler();
+    void* handle = NULL;
+    handler enc = get_handler(&handle);
     if (enc == NULL) {
         ERROR("cannot get handler");
         goto fail;
@@ -123,15 +127,19 @@ main(void)
 
     log_info("Account procedure ended");
     sh_destroy(sh);
+    if (fbin != NULL) fclose(fbin);
     if (flog != NULL) fclose(flog);
+    if (handle != NULL) dlclose(handle);
     FREE(pass, login);
     return EXIT_SUCCESS;
 
 fail:
+    FREE(pass, login);
+    if (handle != NULL) dlclose(handle);
+    if (fbin != NULL) fclose(fbin);
     if (flog != NULL) {
         log_error("Account procedure failed!");
         fclose(flog);
     }
-    FREE(pass, login);
     return EXIT_FAILURE;
 }
