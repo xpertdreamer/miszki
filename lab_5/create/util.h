@@ -103,6 +103,7 @@ get_log_file(const char* path, const char* sub, char *buffer);
 bool
 get_bin_file(const char* path, const char* sub, const char* hashed, char* buffer);
 
-// TODO: save to binary
+bool
+verify_file(const char* path);
 
 #endif

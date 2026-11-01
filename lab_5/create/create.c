@@ -105,7 +105,7 @@ pair_write(struct pair* p, const char* path)
         return false;
     }
 
-    if (verify_path(temp, "", DT_REG)) {
+    if (verify_file(temp)) {
         ERROR("this account already exists");
         return false;
     }

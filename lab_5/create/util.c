@@ -1,5 +1,6 @@
 #include "util.h"
 #include <stdio.h>
+#include <sys/stat.h>
 
 bool
 get_bin_file(const char* path, const char* sub, const char* hashed, char* buffer)
@@ -88,4 +89,14 @@ verify_path(const char* root, const char* name, unsigned char type)
     ERROR("cannot find given path");
     closedir(dir);
     return false;
+}
+
+bool
+verify_file(const char* path) {
+    if (path == NULL) {
+        ERROR("failed to recieve pointers [verify_file]");
+        return false;
+    }
+    struct stat st;
+    return (stat(path, &st) == 0);
 }
