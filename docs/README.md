@@ -161,3 +161,6 @@ Or manually find desired html-page in ``docs/html``.
   - <https://stackoverflow.com/questions/15753090/c-fopen-fails-for-write-with-errno-is-2>
   - <https://github.com/rxi/log.c>
   - <https://stackoverflow.com/questions/16357999/current-date-and-time-as-string>
+  - <http://www.cse.yorku.ca/~oz/hash.html>
+  - <https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D1%81%D0%BA%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85>
+  - lecture №7 
