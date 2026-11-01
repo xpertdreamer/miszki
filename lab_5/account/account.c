@@ -14,6 +14,8 @@
 
 extern void help_handler(void);
 extern void exit_handler(void);
+extern void change_phone_handler(void);
+extern void show_handler(void);
 
 volatile sig_atomic_t run = 1;
 
@@ -24,11 +26,13 @@ handle_sigint(int sig)
     run = 0;
 }
 
+FILE* flog = NULL;
+FILE* fbin = NULL;
+
 int
 main(void)
 {
     char log_path[PATH_MAX];
-    FILE* flog = NULL;
 
     char* login = NULL;
     char* pass = NULL;
@@ -90,17 +94,37 @@ main(void)
     }
     DEBUG("password=%s", pass);
 
-    // TODO: account daemon
+    handler enc = get_handler();
+    if (enc == NULL) {
+        ERROR("cannot get handler");
+        goto fail;
+    }
 
-    cmd cmds[2] = {{"help", help_handler},
-                   {"exit", exit_handler}};
-    shell *sh = sh_create(cmds, 2);
+    char login_buf[SIZE];
+    char bin_temp[PATH_MAX];
+    enc(login, login_buf);
+    if (get_bin_file(current_path, DB_SUBDIR, login_buf, bin_temp) == false) {
+        ERROR("cannot get bin file");
+        goto fail;
+    }
+    if (verify_file(bin_temp) == false) {
+        ERROR("account doesnt exists");
+        goto fail;
+    }
+    fbin = fopen(bin_temp, "r+b");
+
+    cmd cmds[4] = {{"help", help_handler},
+                   {"exit", exit_handler},
+                   {"show", show_handler},
+                   {"chphone", change_phone_handler}};
+    shell *sh = sh_create(cmds, 4);
     sh_change_prompt(sh, "$");
     while (sh_daemon(sh) && run);
 
     log_info("Account procedure ended");
     sh_destroy(sh);
     if (flog != NULL) fclose(flog);
+    FREE(pass, login);
     return EXIT_SUCCESS;
 
 fail:
@@ -108,5 +132,6 @@ fail:
         log_error("Account procedure failed!");
         fclose(flog);
     }
+    FREE(pass, login);
     return EXIT_FAILURE;
 }

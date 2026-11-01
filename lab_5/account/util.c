@@ -1,6 +1,8 @@
 #include "util.h"
+#include <dlfcn.h>
 #include <stdio.h>
 #include <sys/stat.h>
+
 
 bool
 get_bin_file(const char* path, const char* sub, const char* hashed, char* buffer)
@@ -99,4 +101,27 @@ verify_file(const char* path) {
     }
     struct stat st;
     return (stat(path, &st) == 0);
+}
+
+handler get_handler() {
+    void *handle;
+    void (*enc)(char*, char[SIZE]);
+    char* err;
+
+    handle = dlopen(LIB, RTLD_NOW);
+    if (handle == NULL) {
+        ERROR("failed to load encryption lib: %s", dlerror());
+        return NULL;
+    }
+    dlerror();
+
+    enc = (void (*)(char*, char[SIZE])) dlsym(handle, "encrypt");
+    err = dlerror();
+    if (err != NULL) {
+        ERROR("%s", err);
+        dlclose(handle);
+        return NULL;
+    }
+
+    return enc;
 }

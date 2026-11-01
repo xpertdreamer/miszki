@@ -106,4 +106,15 @@ get_bin_file(const char* path, const char* sub, const char* hashed, char* buffer
 bool
 verify_file(const char* path);
 
+#define SIZE 65
+
+#ifndef LIB
+#define LIB ""
+#endif
+
+typedef void (*handler)(char*, char[SIZE]);
+
+handler
+get_handler(void);
+
 #endif
