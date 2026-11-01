@@ -33,6 +33,8 @@ FILE* flog = NULL;
 FILE* fbin = NULL;
 char* login = NULL;
 
+// TODO: data masking & fuzzing
+
 int
 main(void)
 {
