@@ -9,6 +9,9 @@
 
 #define REQUEST_LOGIN "Enter your login: "
 #define REQUEST_PASSW "Enter you password: "
+#define PROMPT "help >"
+
+extern void help_handler(void);
 
 int
 main(void)
@@ -76,9 +79,15 @@ main(void)
     }
     DEBUG("password=%s", pass);
 
+    // TODO: account daemon
 
+    cmd cmds[1] = {{"help", help_handler}};
+    shell *sh = sh_create(cmds, 1);
+    sh_change_prompt(sh, PROMPT);
+    while (sh_daemon(sh));
 
     log_info("Account procedure ended");
+    sh_destroy(sh);
     if (flog != NULL) fclose(flog);
     return EXIT_SUCCESS;
 

@@ -63,7 +63,7 @@ lab5: shell crypt
 
 	gcc -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) -DEXECUTABLE_NAME=\"$(ACTARGET)\" \
 		-DLIB=\"$(LIB)\" \
-		-g lab_5/account/account.c lab_5/account/log.c lab_5/account/util.c \
+		-g lab_5/account/account.c lab_5/account/log.c lab_5/account/util.c lab_5/account/handler.c\
 		-o build/lab_5/$(ACTARGET) \
 		-Lbuild/lab_5 -l:shell.a \
 		-ldl
