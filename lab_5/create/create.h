@@ -9,8 +9,7 @@
 #define LIB ""
 #endif
 
-#define MAX_LOGIN_LEN 32
-#define SHA256_LEN 32
+#define SHA256_LEN 64
 
 
 struct pair {

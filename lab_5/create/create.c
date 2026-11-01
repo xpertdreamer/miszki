@@ -3,6 +3,7 @@
 #include "create.h"
 
 #include <dirent.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <dlfcn.h>
 #include <string.h>
@@ -109,7 +110,13 @@ pair_write(struct pair* p, const char* path)
         return false;
     }
 
-    // TODO: save encrypted to binary
+    FILE *fptr = fopen(temp, "wb");
+    if (fptr == NULL) {
+        ERROR("cannot open db file to write");
+        return false;
+    }
+
+    fwrite(p->password, 1, SHA256_LEN, fptr);
 
     return true;
 }
