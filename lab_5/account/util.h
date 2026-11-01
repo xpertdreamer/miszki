@@ -103,6 +103,9 @@ get_log_file(const char* path, const char* sub, char *buffer);
 bool
 get_bin_file(const char* path, const char* sub, const char* hashed, char* buffer);
 
+char*
+mask(const char* str, char mask, size_t keep);
+
 bool
 verify_file(const char* path);
 

@@ -22,6 +22,10 @@
 #define CN_SIZE 16
 #define CV_SIZE 3
 
+#define KEEP_PH 3
+#define KEEP_CN 3
+#define KEEP_CV 1
+
 extern volatile sig_atomic_t run;
 
 extern char* login;
@@ -144,8 +148,15 @@ change_phone_handler(void)
         return;
     }
     fwrite(ph, 1, PH_SIZE, fbin);
-    log_info("Phone changed: %s", ph);
-    FREE(ph);
+
+    char* masked = mask(ph, '*', KEEP_PH);
+    if (masked == NULL) {
+        ERROR("failed to mask phone");
+        FREE(ph);
+        return;
+    }
+    log_info("Phone changed: %s", masked);
+    FREE(ph, masked);
 }
 
 void
@@ -175,8 +186,15 @@ change_card_handler(void)
         return;        
     }
     fwrite(cn, 1, CN_SIZE, fbin);
-    log_info("Card number changed: %s", cn);
-    FREE(cn);
+
+    char* masked = mask(cn, '*', KEEP_CN);
+    if (masked == NULL) {
+        ERROR("failed to mask card number");
+        FREE(cn);
+        return;
+    }
+    log_info("Card number changed: %s", masked);
+    FREE(cn, masked);
 }
 
 void
@@ -206,6 +224,13 @@ change_cvv_handler(void)
         return;
     }
     fwrite(cv, 1, CN_SIZE, fbin);
-    log_info("CVV changed: %s", cv);
-    FREE(cv);
+
+    char* masked = mask(cv, '*', KEEP_CV);
+    if (masked == NULL) {
+        ERROR("failed to mask cvv");
+        FREE(cv);
+        return;
+    }
+    log_info("CVV changed: %s", masked);
+    FREE(cv, masked);
 }

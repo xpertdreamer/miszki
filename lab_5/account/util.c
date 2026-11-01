@@ -124,3 +124,16 @@ get_handler(void **handle) {
 
     return enc;
 }
+
+char*
+mask(const char* str, char mask, size_t keep)
+{
+    size_t len = strlen(str);
+    if (len == 0) return NULL;
+    char *output = (char*)malloc(len + 1);
+    ALLOC_FAIL(output);
+    strncpy(output, str, len);
+    memset(output, mask, len - keep);
+    output[len] = '\0';
+    return output;
+}
