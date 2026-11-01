@@ -76,7 +76,7 @@ lab5: shell crypt
 		-ldl
 
 	gcc -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) \
-		-g lab_5/entrypoint.c \
+		-g lab_5/entrypoint.c lab_5/handler.c lab_5/util.c \
 		-Lbuild/lab_5 -l:shell.a \
 		-o build/lab_5/lab5
 
