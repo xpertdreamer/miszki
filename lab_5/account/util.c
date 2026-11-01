@@ -137,3 +137,27 @@ mask(const char* str, char mask, size_t keep)
     output[len] = '\0';
     return output;
 }
+
+#define FUZZ_LEN 32
+
+static unsigned long
+djb2(const char* input, int salt)
+{
+    unsigned long hash = 5381 ^ salt;
+    int c;
+    while((c = *input++)) {
+        hash = ((hash << 5) + hash) + c;
+    }
+    return hash;
+}
+
+char*
+fuzz(const char* input, int x)
+{
+    char* output = (char*)malloc(FUZZ_LEN);
+    ALLOC_FAIL(output);
+    snprintf(output, FUZZ_LEN, "user_%08ld", djb2(input, 5));
+
+
+    return output;
+}

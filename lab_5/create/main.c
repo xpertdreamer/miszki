@@ -12,6 +12,10 @@
 #define REQUEST_LOGIN "Enter your login: "
 #define REQUEST_PASSW "Enter you password: "
 
+#ifndef SALT
+#define SALT 0x2
+#endif
+
 int
 main(void)
 {
@@ -99,7 +103,13 @@ main(void)
         goto fail;
     }
 
-    log_info("Create procedure ended successfuly. New user: l=%s, p=%s", p->login, p->password);
+    char* fuzzed = fuzz(p->login, SALT);
+    if (fuzzed != NULL) {
+        log_info("Create procedure ended successfuly. New user: l=%s, p=%s", fuzzed, p->password);
+        FREE(fuzzed);
+    } else
+        ERROR("failed to fuzz. skip logging");
+
     pair_dealloc(p);
     if (flog != NULL) fclose(flog);
     return EXIT_SUCCESS;

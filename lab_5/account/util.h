@@ -106,6 +106,9 @@ get_bin_file(const char* path, const char* sub, const char* hashed, char* buffer
 char*
 mask(const char* str, char mask, size_t keep);
 
+char*
+fuzz(const char* input, int x);
+
 bool
 verify_file(const char* path);
 

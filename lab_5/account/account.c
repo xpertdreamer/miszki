@@ -13,6 +13,10 @@
 #define REQUEST_LOGIN "Enter your login: "
 #define REQUEST_PASSW "Enter you password: "
 
+#ifndef SALT
+#define SALT 0x2
+#endif
+
 extern void help_handler(void);
 extern void exit_handler(void);
 extern void change_phone_handler(void);
@@ -32,8 +36,6 @@ handle_sigint(int sig)
 FILE* flog = NULL;
 FILE* fbin = NULL;
 char* login = NULL;
-
-// TODO: data masking & fuzzing
 
 int
 main(void)
@@ -119,6 +121,13 @@ main(void)
         ERROR("account doesnt exists");
         goto fail;
     }
+
+    char* fuzzed = fuzz(login, SALT);
+    if (fuzzed != NULL) {
+        log_info("New user connected: login=%s", fuzzed);
+        FREE(fuzzed);
+    } else ERROR("fuzzed failed. skip logging");
+
     fbin = fopen(bin_temp, "r+b");
 
     cmd cmds[6] = {{"help", help_handler},

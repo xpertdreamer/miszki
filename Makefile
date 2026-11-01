@@ -55,6 +55,7 @@ crypt:
 CRTARGET ?= create
 ACTARGET ?= account
 LIB ?= ./build/lab_5/libmycrypt.so
+SALT ?= 0x2
 
 lab5: shell crypt
 	@cp lab_5/shell/shell.h lab_5/
@@ -63,6 +64,7 @@ lab5: shell crypt
 
 	gcc -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) -DEXECUTABLE_NAME=\"$(ACTARGET)\" \
 		-DLIB=\"$(LIB)\" \
+		-DSALT=$(SALT) \
 		-g lab_5/account/account.c lab_5/account/log.c lab_5/account/util.c lab_5/account/handler.c\
 		-o build/lab_5/$(ACTARGET) \
 		-Lbuild/lab_5 -l:shell.a \
@@ -70,6 +72,7 @@ lab5: shell crypt
 
 	gcc -Wall -Wextra -Ilab_5 -DDEBUG_MODE=$(DEBUG) -DEXECUTABLE_NAME=\"$(CRTARGET)\" \
 		-DLIB=\"$(LIB)\" \
+		-DSALT=$(SALT) \
 		-g lab_5/create/main.c lab_5/create/create.c lab_5/create/log.c lab_5/create/util.c \
 		-o build/lab_5/$(CRTARGET) \
 		-Lbuild/lab_5 -l:shell.a \

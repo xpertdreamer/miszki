@@ -106,4 +106,7 @@ get_bin_file(const char* path, const char* sub, const char* hashed, char* buffer
 bool
 verify_file(const char* path);
 
+char*
+fuzz(const char* input, int x);
+
 #endif
