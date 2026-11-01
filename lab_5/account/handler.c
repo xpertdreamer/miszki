@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
+#include <regex.h>
 
 #define SHOW_LOGIN "Login: "
 #define SHOW_PHONE "Phone number: "
@@ -14,6 +15,8 @@
 #define REQST_PHONE "Enter new phone number (8...): "
 #define REQST_CVVCD "Enter new cvv (3 digits): "
 #define REQST_CARDN "Enter new card number (16 digits): "
+
+#define PATTERN "^[0-9]+$"
 
 #define PH_SIZE 11
 #define CN_SIZE 16
@@ -85,6 +88,35 @@ show_handler(void)
     write(STDOUT_FILENO, cv, CV_SIZE);
 }
 
+bool
+verify_numbers(const char* input)
+{
+    regex_t reg;
+    int comp;
+
+    comp = regcomp(&reg, PATTERN, REG_EXTENDED);
+    if (comp) {
+        ERROR("couldn`t compile regex");
+        return false;
+    }
+
+    comp = regexec(&reg, input, 0, NULL, 0);
+    if (!comp) {
+        DEBUG("%s matched", input);
+        regfree(&reg);
+        return true;
+    } else if (comp == REG_NOMATCH ) {
+        DEBUG("%s doesn`t matched", input);
+    } else {
+        char msg[100];
+        regerror(comp, &reg, msg, sizeof(msg));
+        ERROR("regex failed: %s", msg);
+    }
+
+    regfree(&reg);
+    return false;
+}
+
 void
 change_phone_handler(void)
 {
@@ -101,6 +133,11 @@ change_phone_handler(void)
         return;
     }
     DEBUG("new phone=%s", ph);
+    if (verify_numbers(ph) == false) {
+        ERROR("invalid input");
+        FREE(ph);
+        return;
+    }
 
     if (fseek(fbin, SIZE-1, SEEK_SET) != 0) {
         ERROR("cannot find number section");
@@ -127,6 +164,11 @@ change_card_handler(void)
         return;
     }
     DEBUG("new card number=%s", cn);
+    if (verify_numbers(cn) == false) {
+        ERROR("invalid input");
+        FREE(cn);
+        return;
+    }
 
     if (fseek(fbin, SIZE-1+PH_SIZE, SEEK_SET) != 0) {
         ERROR("cannot find card number section|insert phone number");
@@ -153,6 +195,12 @@ change_cvv_handler(void)
         return;
     }
     DEBUG("new cvv=%s", cv);
+    if (verify_numbers(cv) == false) {
+        ERROR("invalid input");
+        FREE(cv);
+        return;
+    }
+
     if (fseek(fbin, SIZE-1+PH_SIZE+CN_SIZE, SEEK_SET) != 0) {
         ERROR("cannot find cvv section|insert card number");
         return;
