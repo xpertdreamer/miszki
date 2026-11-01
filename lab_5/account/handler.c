@@ -33,6 +33,8 @@ help_handler(void)
     puts("\texit - leave from this account");
     puts("\tshow - show current information");
     puts("\tchphone - change phone number");
+    puts("\tchcard - change card number");
+    puts("\tchcvv - change cvv code");
 }
 
 void
@@ -159,5 +161,3 @@ change_cvv_handler(void)
     log_info("CVV changed: %s", cv);
     FREE(cv);
 }
-
-// TODO: bank card number & cvv changing
