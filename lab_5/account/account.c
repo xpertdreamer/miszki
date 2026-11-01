@@ -16,6 +16,8 @@
 extern void help_handler(void);
 extern void exit_handler(void);
 extern void change_phone_handler(void);
+extern void change_card_handler(void);
+extern void change_cvv_handler(void);
 extern void show_handler(void);
 
 volatile sig_atomic_t run = 1;
@@ -117,11 +119,13 @@ main(void)
     }
     fbin = fopen(bin_temp, "r+b");
 
-    cmd cmds[4] = {{"help", help_handler},
+    cmd cmds[6] = {{"help", help_handler},
                    {"exit", exit_handler},
                    {"show", show_handler},
-                   {"chphone", change_phone_handler}};
-    shell *sh = sh_create(cmds, 4);
+                   {"chphone", change_phone_handler},
+                   {"chcard", change_card_handler},
+                   {"chcvv", change_cvv_handler}};
+    shell *sh = sh_create(cmds, 6);
     sh_change_prompt(sh, "$");
     while (sh_daemon(sh) && run);
 

@@ -100,10 +100,64 @@ change_phone_handler(void)
     }
     DEBUG("new phone=%s", ph);
 
-    fseek(fbin, SIZE-1, SEEK_SET);
+    if (fseek(fbin, SIZE-1, SEEK_SET) != 0) {
+        ERROR("cannot find number section");
+        return;
+    }
     fwrite(ph, 1, PH_SIZE, fbin);
     log_info("Phone changed: %s", ph);
     FREE(ph);
+}
+
+void
+change_card_handler(void)
+{
+    log_info("Change car number called");
+    if (fbin == NULL) {
+        ERROR("cannot change card number, file is not opened");
+        log_error("Change card number failed");
+        return;
+    }
+    write(STDOUT_FILENO, REQST_CARDN, strlen(REQST_CARDN));
+    char* cn = sh_get_input();
+    if (!cn || strlen(cn) != CN_SIZE) {
+        ERROR("no card number");
+        return;
+    }
+    DEBUG("new card number=%s", cn);
+
+    if (fseek(fbin, SIZE-1+PH_SIZE, SEEK_SET) != 0) {
+        ERROR("cannot find card number section|insert phone number");
+        return;        
+    }
+    fwrite(cn, 1, CN_SIZE, fbin);
+    log_info("Card number changed: %s", cn);
+    FREE(cn);
+}
+
+void
+change_cvv_handler(void)
+{
+    log_info("Change cvv called");
+    if (fbin == NULL) {
+        ERROR("cannot change cvv, file is not opened");
+        log_error("Change cvv failed");
+        return;
+    }
+    write(STDOUT_FILENO, REQST_CVVCD, strlen(REQST_CVVCD));
+    char* cv = sh_get_input();
+    if (!cv || strlen(cv) != CV_SIZE) {
+        ERROR("no cvv");
+        return;
+    }
+    DEBUG("new cvv=%s", cv);
+    if (fseek(fbin, SIZE-1+PH_SIZE+CN_SIZE, SEEK_SET) != 0) {
+        ERROR("cannot find cvv section|insert card number");
+        return;
+    }
+    fwrite(cv, 1, CN_SIZE, fbin);
+    log_info("CVV changed: %s", cv);
+    FREE(cv);
 }
 
 // TODO: bank card number & cvv changing
