@@ -32,8 +32,8 @@ pair_dealloc(struct pair* p)
 
 typedef void (*handler)(char*, char[SIZE]);
 
-handler get_handler() {
-    void *handle;
+handler
+get_handler(void** handle) {
     void (*enc)(char*, char[SIZE]);
     char* err;
 
@@ -63,9 +63,11 @@ pair_encrypt(struct pair* p)
         return false;
     }
 
-    handler enc = get_handler();
+    void *handle = NULL;
+    handler enc = get_handler(&handle);
     if (enc == NULL) {
         ERROR("cannot get handler");
+        if (handle != NULL) dlclose(handle);
         return false;
     }
     char pass_buf[SIZE];
@@ -76,11 +78,17 @@ pair_encrypt(struct pair* p)
     p->password = strdup(pass_buf);
     if (p->password == NULL) {
         ERROR("failed to allocate hashed memory");
+        if (handle != NULL) dlclose(handle);
         return false;
     }
 
+    if (handle != NULL) dlclose(handle);
     return true;
 }
+
+#define PH_SIZE 11
+#define CN_SIZE 16
+#define CV_SIZE 3
 
 // NOTE: use openssl to generate hex-number
 bool
@@ -91,9 +99,11 @@ pair_write(struct pair* p, const char* path)
         return false;
     }
 
-    handler enc = get_handler();
+    void *handle;
+    handler enc = get_handler(&handle);
     if (enc == NULL) {
         ERROR("cannot get handler");
+        if (handle != NULL) dlclose(handle);
         return false;
     }
 
@@ -102,11 +112,13 @@ pair_write(struct pair* p, const char* path)
     enc(p->login, login_buf);
     if (get_bin_file(path, DB_SUBDIR, login_buf, temp) == false) {
         ERROR("failed to get binary path");
+        if (handle != NULL) dlclose(handle);
         return false;
     }
 
     if (verify_file(temp)) {
         ERROR("this account already exists");
+        if (handle != NULL) dlclose(handle);
         return false;
     }
 
@@ -114,11 +126,16 @@ pair_write(struct pair* p, const char* path)
     FILE *fptr = fopen(temp, "wb");
     if (fptr == NULL) {
         ERROR("cannot open db file to write");
+        if (handle != NULL) dlclose(handle);
         return false;
     }
 
+    char initial_data[PH_SIZE+CN_SIZE+CV_SIZE] = {0};
     fwrite(p->password, 1, SHA256_LEN, fptr);
+    fwrite(initial_data, sizeof(char), PH_SIZE+CN_SIZE+CV_SIZE, fptr);
+
 
     fclose(fptr);
+    if (handle != NULL) dlclose(handle);
     return true;
 }
