@@ -110,6 +110,7 @@ pair_write(struct pair* p, const char* path)
         return false;
     }
 
+    // TODO: replace with syscall
     FILE *fptr = fopen(temp, "wb");
     if (fptr == NULL) {
         ERROR("cannot open db file to write");
@@ -118,5 +119,6 @@ pair_write(struct pair* p, const char* path)
 
     fwrite(p->password, 1, SHA256_LEN, fptr);
 
+    fclose(fptr);
     return true;
 }
